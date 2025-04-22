@@ -13,6 +13,15 @@
         android:theme="@style/Theme.HusermenApp"
         tools:targetApi="31">
         <activity
+            android:name=".Inventory"
+            android:exported="false" />
+        <activity
+            android:name=".SignupForm"
+            android:exported="false" />
+        <activity
+            android:name=".Signup"
+            android:exported="false" />
+        <activity
             android:name=".Login"
             android:exported="false" />
         <activity

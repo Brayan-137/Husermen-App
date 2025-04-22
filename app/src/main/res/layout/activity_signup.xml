@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Login"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    tools:context=".Signup">
 
     <!-- Logo -->
     <TextView
@@ -20,13 +20,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ingresa a tu cuenta"
+        android:text="Registra una cuenta"
         android:textAlignment="center" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Escribe tu correo y contraseña para ingresar a la aplicación."
+        android:text="Escribe tu correo para ingresar a la aplicación."
         android:textAlignment="center" />
 
     <!-- Email Input  -->
@@ -37,30 +37,12 @@
         android:hint="email@domain.com"
         android:inputType="textEmailAddress" />
 
-    <!-- Password Input -->
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password123#"
-        android:inputType="textPassword" />
-
-    <!-- Login Button -->
+    <!-- SignupForm Button -->
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnSignupForm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Continuar" />
 
-    <!-- Other Login Options -->
-
-    <!-- Signup Button -->
-    <Button
-        android:id="@+id/btnSignup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="En caso de que no tengas cuenta regístrate."
-        android:background="@android:color/transparent"
-        android:textColor="@color/black" />
-
+    <!-- Other Signup Options -->
 </LinearLayout>
