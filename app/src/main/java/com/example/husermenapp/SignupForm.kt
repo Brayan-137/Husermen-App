@@ -1,6 +1,7 @@
 package com.example.husermenapp
 
 import android.R
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Spinner
@@ -65,6 +66,8 @@ class SignupForm : AppCompatActivity() {
                 Toast.makeText(this, "Usuario $names creado exitosamente.", Toast.LENGTH_SHORT).show()
 
                 authResult.user?.uid?.let { addUserToDatabase(it, names, lastNames, phone, email, userType) }
+                finish()
+                startActivity(Intent(this, Login::class.java))
             }
             .addOnFailureListener { e ->
                 val errorMessage = when (e) {
