@@ -1,20 +1,36 @@
 package com.example.husermenapp
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.os.bundleOf
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
+import com.example.husermenapp.SearchViewFragment.Companion.MODEL_REFERENCE_NAME_BUNDLE
+import com.example.husermenapp.databinding.ActivityInventoryBinding
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class Inventory : AppCompatActivity() {
+    private lateinit var binding: ActivityInventoryBinding
+    private val itemsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("items")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_inventory)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        binding = ActivityInventoryBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setupSearchView(savedInstanceState)
+    }
+
+    private fun setupSearchView(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) { // Se ejecuta solamente cuando la actividad es nueva
+            val bundle = bundleOf(
+                MODEL_REFERENCE_NAME_BUNDLE to "items"
+            )
+            supportFragmentManager.commit {
+                setReorderingAllowed(true)
+                add<SearchViewFragment>(R.id.fragmentContainerSearchView, args = bundle)
+            }
         }
     }
 }

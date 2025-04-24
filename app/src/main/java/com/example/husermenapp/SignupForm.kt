@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase
 class SignupForm : AppCompatActivity() {
     private lateinit var binding: ActivitySignupFormBinding
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val database: DatabaseReference = FirebaseDatabase.getInstance().getReference()
+    private val usersRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("users")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,6 +91,6 @@ class SignupForm : AppCompatActivity() {
         userType: String
     ) {
         val user = User(uid, names, lastNames, phone, email, userType)
-        database.child("users").child(uid).setValue(user)
+        usersRef.child(uid).setValue(user)
     }
 }

@@ -41,7 +41,9 @@ class Login : AppCompatActivity() {
             .addOnSuccessListener {
                 Toast.makeText(this, "Se ha iniciado sesión exitosamente.", Toast.LENGTH_SHORT).show()
                 finish()
-                startActivity(Intent(this, Inventory::class.java))
+                val inventoryIntent = Intent(this, Inventory::class.java)
+                inventoryIntent.putExtra("user", auth.currentUser)
+                startActivity(inventoryIntent)
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Credenciales inválidas. Inténtelo de nuevo, por favor.", Toast.LENGTH_LONG).show()
