@@ -41,7 +41,7 @@ class Login : AppCompatActivity() {
             .addOnSuccessListener {
                 Toast.makeText(this, "Se ha iniciado sesión exitosamente.", Toast.LENGTH_SHORT).show()
                 finish()
-                val inventoryIntent = Intent(this, Inventory::class.java)
+                val inventoryIntent = Intent(this, MainActivity::class.java)
                 inventoryIntent.putExtra("user", auth.currentUser)
                 startActivity(inventoryIntent)
             }

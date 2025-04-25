@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Inventario"
+        android:id="@+id/inventorySection"
+        android:icon="@drawable/ic_inventory"/>
+    <item android:title="Top Ventas"
+        android:id="@+id/topSellsSection"
+        android:icon="@drawable/ic_chart"/>
+    <item android:title="Mercado Libre"
+        android:id="@+id/mercadoLibreSection"
+        android:icon="@drawable/ic_add"/>
+    <item android:title="Tutoriales"
+        android:id="@+id/tutorialsSection"
+        android:icon="@drawable/ic_book"/>
+    <item android:title="Usuario"
+        android:id="@+id/usersOptionsSection"
+        android:icon="@drawable/ic_add"/>
+</menu>
