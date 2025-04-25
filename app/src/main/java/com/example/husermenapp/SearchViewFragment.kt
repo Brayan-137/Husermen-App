@@ -76,7 +76,7 @@ class SearchViewFragment : Fragment() {
 
 
     companion object {
-        const val MODEL_REFERENCE_NAME_BUNDLE = "items"
+        const val MODEL_REFERENCE_NAME_BUNDLE = ""
 
 //        @JvmStatic
 //        fun newInstance(param2: String) =

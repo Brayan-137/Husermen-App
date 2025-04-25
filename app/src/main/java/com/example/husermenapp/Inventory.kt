@@ -1,5 +1,6 @@
 package com.example.husermenapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -25,8 +26,24 @@ class Inventory : AppCompatActivity() {
         binding = ActivityInventoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.btnAddItem.setOnClickListener{ handleClickBtnAddItem() }
+
         initSearchView(savedInstanceState)
+        initBottomMenu(savedInstanceState)
         initRecyclerView()
+    }
+
+    private fun initBottomMenu(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) { // Se ejecuta solamente cuando la actividad es nueva
+            supportFragmentManager.commit {
+                setReorderingAllowed(true)
+                add<BottomMenuFragment>(R.id.fragmentContainerBottomMenu)
+            }
+        }
+    }
+
+    private fun handleClickBtnAddItem() {
+        startActivity(Intent(this, CreateItem::class.java))
     }
 
     private fun initRecyclerView() {
@@ -39,7 +56,7 @@ class Inventory : AppCompatActivity() {
     }
 
     private fun getItems(callback: (List<Item>) -> Unit) {
-        itemsRef.addListenerForSingleValueEvent(object: ValueEventListener {
+        itemsRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val items = snapshot.children.mapNotNull { it.getValue(Item::class.java) }
                 println("Tamaño de la lista: ${items.size}")
