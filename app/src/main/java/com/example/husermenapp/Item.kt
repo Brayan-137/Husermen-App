@@ -1,8 +1,8 @@
 package com.example.husermenapp
 
 data class Item(
-    private var name: String,
-    private var description: String,
-    private var price: Int,
-    private var stock: Int
+    var name: String? = null,
+    var description: String? = null,
+    var price: Int = 0,
+    var stock: Int = 0
 )

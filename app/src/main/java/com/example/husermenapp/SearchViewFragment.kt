@@ -51,19 +51,19 @@ class SearchViewFragment : Fragment() {
         override fun onQueryTextSubmit(query: String?): Boolean {
             modelRef.orderByChild("name").startAt(query).endAt(query + "\uf8ff")
                 .addValueEventListener(object: ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    override fun onDataChange(snapshot: DataSnapshot) {
                         val filteredArray = ArrayList<Item>()
 
-                        dataSnapshot.children.forEach{ snapshot ->
-                            val item = snapshot.getValue(Item::class.java)
+                        snapshot.children.forEach{ itemRef ->
+                            val item = itemRef.getValue(Item::class.java)
                             item?.let { filteredArray.add(it) }
                         }
 
                         TODO("Manejar que hacer con los datos optenidos (Mostrarlos en pantalla)")
                     }
 
-                    override fun onCancelled(databaseError: DatabaseError) {
-                        Log.w("Firebase", "Error al consultar los datos.", databaseError.toException())
+                    override fun onCancelled(error: DatabaseError) {
+                        Log.w("Firebase", "Error al consultar los datos.", error.toException())
                     }
                 })
             return true
