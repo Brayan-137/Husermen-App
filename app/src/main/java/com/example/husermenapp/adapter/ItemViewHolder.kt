@@ -11,7 +11,7 @@ class ItemViewHolder(itemLayout: View): RecyclerView.ViewHolder(itemLayout) {
 
     fun render(item: Item) {
         binding.apply {
-            tvName.text = item.name
+            tvName.text = item.name?.replaceFirstChar { it.uppercaseChar() }
             tvDescription.text = item.description
             tvPrice.text = item.price.toString()
             tvStock.text = item.stock.toString()

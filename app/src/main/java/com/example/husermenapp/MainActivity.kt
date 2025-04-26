@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.husermenapp.databinding.ActivityMainBinding
+import java.util.UUID
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

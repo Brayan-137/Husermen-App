@@ -26,12 +26,12 @@ class InventoryFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val itemsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("items")
+    private lateinit var searchViewFragment: SearchViewFragment
+    private lateinit var fullItemsList: List<Item>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        arguments?.let {
-//        }
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,14 +77,31 @@ class InventoryFragment : Fragment() {
             adapter = ItemAdapter(emptyList())
         }
 
-        getItems { (binding.recyclerItems.adapter as? ItemAdapter)?.updateItems(it) }
+        getItems {
+            fullItemsList = it
+            updateItemsRecyclerView(fullItemsList)
+        }
+    }
+
+    private fun updateItemsRecyclerView(newItemList: List<Item>) {
+        Log.d("RecyclerView", "Actualizando lista...")
+        if (searchViewFragment.isSearching && newItemList.isEmpty()) {
+            binding.tvResultsMessage.visibility = View.VISIBLE
+            binding.recyclerItems.visibility = View.GONE
+        } else {
+            binding.tvResultsMessage.visibility = View.GONE
+            binding.recyclerItems.visibility = View.VISIBLE
+
+            // Solo se mostrará la lista en caso de que esté visible
+            val tempNewItemList = newItemList.ifEmpty { fullItemsList }
+            (binding.recyclerItems.adapter as? ItemAdapter)?.updateItems(tempNewItemList)
+        }
     }
 
     private fun getItems(callback: (List<Item>) -> Unit) {
         itemsRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val items = snapshot.children.mapNotNull { it.getValue(Item::class.java) }
-                println("Tamaño de la lista: ${items.size}")
                 callback(items)
             }
 
@@ -100,9 +117,17 @@ class InventoryFragment : Fragment() {
             val bundle = bundleOf(
                 MODEL_REFERENCE_NAME_BUNDLE to "items"
             )
-            childFragmentManager.commit {
+
+            searchViewFragment = SearchViewFragment()
+            searchViewFragment.apply {
+                setUpdateItemsRecyclerView(::updateItemsRecyclerView)
+                arguments = bundle
+            }
+
+            childFragmentManager.beginTransaction().apply {
                 setReorderingAllowed(true)
-                replace<SearchViewFragment>(R.id.fragmentContainerSearchView, args = bundle)
+                replace(R.id.fragmentContainerSearchView, searchViewFragment)
+                commit()
             }
         }
     }

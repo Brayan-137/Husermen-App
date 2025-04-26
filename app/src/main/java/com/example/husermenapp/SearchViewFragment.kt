@@ -19,6 +19,8 @@ class SearchViewFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var modelRef: DatabaseReference
+    private var updateItemsRecylerView: ((newListItems: List<Item>) -> Unit)? = null
+    var isSearching: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,32 +50,46 @@ class SearchViewFragment : Fragment() {
     }
 
     private fun handleQuerySearchView(): SearchView.OnQueryTextListener = object: SearchView.OnQueryTextListener {
-        override fun onQueryTextSubmit(query: String?): Boolean {
-            modelRef.orderByChild("name").startAt(query).endAt(query + "\uf8ff")
-                .addValueEventListener(object: ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val filteredArray = ArrayList<Item>()
-
-                        snapshot.children.forEach{ itemRef ->
-                            val item = itemRef.getValue(Item::class.java)
-                            item?.let { filteredArray.add(it) }
-                        }
-
-                        TODO("Manejar que hacer con los datos optenidos (Mostrarlos en pantalla)")
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-                        Log.w("Firebase", "Error al consultar los datos.", error.toException())
-                    }
-                })
+        override fun onQueryTextSubmit(query: String): Boolean {
+            firebaseSearch(query)
+            binding.searchViewFragment.clearFocus()
             return true
         }
 
         override fun onQueryTextChange(newText: String?): Boolean {
+            if (newText?.isEmpty() == true) {
+                isSearching = false
+                updateItemsRecylerView?.let { it(listOf()) }
+            } else {
+                isSearching = true
+                firebaseSearch(newText!!)
+            }
             return true
         }
     }
 
+    private fun firebaseSearch(query: String) {
+        val formatedQuery = query.lowercase()
+
+        modelRef.orderByChild("name").startAt(formatedQuery).endAt(formatedQuery + "\uf8ff")
+            .addValueEventListener(object: ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val filteredArray = ArrayList<Item>()
+
+                    snapshot.children.forEach{ itemRef ->
+                        val item = itemRef.getValue(Item::class.java)
+                        item?.let { filteredArray.add(it) }
+                    }
+
+                    Log.d("Busqueda", "Se encontraron ${filteredArray.size} coincidencias")
+                    updateItemsRecylerView?.let { it(filteredArray) }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.w("Firebase", "Error al consultar los datos.", error.toException())
+                }
+            })
+    }
 
     companion object {
         const val MODEL_REFERENCE_NAME_BUNDLE = ""
@@ -86,4 +102,6 @@ class SearchViewFragment : Fragment() {
 //                }
 //            }
     }
+
+    val setUpdateItemsRecyclerView = { updateItemsRecyclerView: (newListItems: List<Item>) -> Unit -> this.updateItemsRecylerView = updateItemsRecyclerView }
 }
