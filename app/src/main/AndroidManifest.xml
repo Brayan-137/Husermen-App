@@ -22,19 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MercadoLibre"
-            android:exported="false" />
-        <activity
-            android:name=".TopVentas"
-            android:exported="false" />
-        <activity
-            android:name=".Tutorials"
-            android:exported="false" />
-        <activity
-            android:name=".CreateItem"
-            android:exported="false" />
-        <activity
-            android:name=".Inventory"
+            android:name=".ProductActivity"
             android:exported="false" />
         <activity
             android:name=".SignupForm"

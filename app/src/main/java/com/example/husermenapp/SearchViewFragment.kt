@@ -25,7 +25,7 @@ class SearchViewFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            val modelRefName = it.getString(MODEL_REFERENCE_NAME_BUNDLE).toString()
+            val modelRefName = it.getString("items").toString()
             modelRef = FirebaseDatabase.getInstance().getReference(modelRefName)
         }
     }
@@ -64,6 +64,7 @@ class SearchViewFragment : Fragment() {
                 isSearching = true
                 firebaseSearch(newText!!)
             }
+
             return true
         }
     }
@@ -89,18 +90,6 @@ class SearchViewFragment : Fragment() {
                     Log.w("Firebase", "Error al consultar los datos.", error.toException())
                 }
             })
-    }
-
-    companion object {
-        const val MODEL_REFERENCE_NAME_BUNDLE = ""
-
-//        @JvmStatic
-//        fun newInstance(param2: String) =
-//            SearchViewFragment().apply {
-//                arguments = Bundle().apply {
-//                    putString(FILTER_LIST_BUNDLE, param2)
-//                }
-//            }
     }
 
     val setUpdateItemsRecyclerView = { updateItemsRecyclerView: (newListItems: List<Item>) -> Unit -> this.updateItemsRecylerView = updateItemsRecyclerView }
