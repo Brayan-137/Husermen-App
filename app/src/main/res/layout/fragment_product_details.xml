@@ -7,11 +7,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/btnEditProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_edit"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar"/>
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnEditProduct"
         app:layout_constraintBottom_toTopOf="@id/btnSellsInformation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -27,41 +44,40 @@
                 app:layout_constraintBottom_toTopOf="@id/ivPicture"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintVertical_chainStyle="spread"
                 tools:text="Nombre" />
 
             <ImageView
                 android:id="@+id/ivPicture"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/tvDescriptionValue"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_max="250dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvName"
-                tools:background="@color/black"
-                tools:layout_height="200dp"
-                tools:layout_width="200dp" />
+                tools:background="@tools:sample/backgrounds/scenic" />
 
             <TextView
                 android:id="@+id/tvDescriptionLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Descripción:"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBaseline_toBaselineOf="@id/tvDescriptionValue"
                 app:layout_constraintEnd_toStartOf="@id/tvDescriptionValue"
-                app:layout_constraintTop_toBottomOf="@id/ivPicture"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/tvDescriptionValue"
                 android:layout_width="wrap_content"
-                app:layout_constraintWidth_max="320dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@id/tvDescriptionLabel"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/tvCategoryValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvDescriptionLabel"
                 app:layout_constraintTop_toBottomOf="@id/ivPicture"
-                tools:text="@tools:sample/lorem/random" />
+                app:layout_constraintWidth_max="320dp"
+                tools:text="Una resistente mesa de roble, símbolo de durabilidad y elegancia. Sus vetas naturales y acabado cálido la convierten en el centro perfecto para cualquier espacio." />
 
             <TextView
                 android:id="@+id/tvCategoryLabel"
@@ -114,27 +130,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tvStockValue"
-                app:layout_constraintTop_toBottomOf="@id/tvPriceValue"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/tvPriceValue" />
 
             <TextView
                 android:id="@+id/tvStockValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="0"
+                app:layout_constraintBaseline_toBaselineOf="@id/btnRemoveStock"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btnAddStock"
-                app:layout_constraintBaseline_toBaselineOf="@id/btnRemoveStock"
-                />
+                tools:text="0" />
 
             <Button
                 android:id="@+id/btnAddStock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="+"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBaseline_toBaselineOf="@id/tvStockValue"/>
+                app:layout_constraintBaseline_toBaselineOf="@id/tvStockValue"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
