@@ -1,6 +1,5 @@
 package com.example.husermenapp
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.husermenapp.adapter.ItemAdapter
 import com.example.husermenapp.databinding.FragmentInventoryBinding
@@ -52,8 +52,15 @@ class InventoryFragment : Fragment() {
         initSearchView(savedInstanceState)
         initRecyclerView()
 
+        // Going to previous activity when back is pressed
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            if (parentFragmentManager.backStackEntryCount > 0) {
+                parentFragmentManager.popBackStack()
+            } else {
+                requireActivity().finish()
+            }
+        }
     }
-
 
     private fun handleClickBtnAddItem() {
         startActivity(Intent(requireActivity(), ProductActivity::class.java))
@@ -72,7 +79,6 @@ class InventoryFragment : Fragment() {
     }
 
     private fun updateItemsRecyclerView(newItemList: List<Item>) {
-        Log.d("RecyclerView", "Actualizando lista...")
         if (searchViewFragment.isSearching && newItemList.isEmpty()) {
             binding.tvResultsMessage.visibility = View.VISIBLE
             binding.recyclerItems.visibility = View.GONE
@@ -80,7 +86,7 @@ class InventoryFragment : Fragment() {
             binding.tvResultsMessage.visibility = View.GONE
             binding.recyclerItems.visibility = View.VISIBLE
 
-            // Solo se mostrará la lista en caso de que esté visible
+            // List will be shown if it is visible
             val tempNewItemList = newItemList.ifEmpty { fullItemsList }
             (binding.recyclerItems.adapter as? ItemAdapter)?.updateItems(tempNewItemList)
         }
@@ -89,7 +95,9 @@ class InventoryFragment : Fragment() {
     private fun getItems(callback: (List<Item>) -> Unit) {
         itemsRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val items = snapshot.children.mapNotNull { it.getValue(Item::class.java) }
+                val items = snapshot.children.mapNotNull {
+                    it.getValue(Item::class.java)?.apply { key = it.key }
+                }
                 callback(items)
             }
 

@@ -31,13 +31,18 @@ class MainActivity : AppCompatActivity() {
                 else -> InventoryFragment()
             }
 
-            replaceFragment(supportFragmentManager, R.id.sectionsFragmentsContainer, nextFragment)
+            replaceFragment(
+                supportFragmentManager,
+                R.id.sectionsFragmentsContainer,
+                nextFragment,
+                isAddToBackStack = nextFragment != inventoryFragment
+            )
             true
         }
     }
 
 
-    val handleClickItemDetails: (Item) -> Unit = { item ->
+    private val handleClickItemDetails: (Item) -> Unit = { item ->
         val itemDetailsIntent = Intent(this, ProductActivity::class.java)
         itemDetailsIntent.putExtra("selectedProduct", item)
         this.startActivity(itemDetailsIntent)

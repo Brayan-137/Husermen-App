@@ -5,10 +5,23 @@ import androidx.fragment.app.FragmentManager
 
 object FragmentUtils {
 
-    fun replaceFragment(manager: FragmentManager, containerViewId: Int, fragment: Fragment) {
+    fun replaceFragment(
+        manager: FragmentManager,
+        containerViewId: Int,
+        fragment: Fragment,
+        isAddToBackStack: Boolean = true,
+    ) {
         val fragmentTransition = manager.beginTransaction()
-        fragmentTransition.replace(containerViewId, fragment)
+            .replace(containerViewId, fragment)
+
+        if (isAddToBackStack) {
+            fragmentTransition.addToBackStack(null)
+        }
+
         fragmentTransition.commit()
     }
 
+    fun applyTextViewFormat(value: String): String {
+        return value.replaceFirstChar { it.uppercaseChar() }
+    }
 }
