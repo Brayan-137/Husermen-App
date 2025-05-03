@@ -99,7 +99,7 @@
                 android:layout_width="0dp"
                 app:layout_constraintWidth_max="320dp"
                 android:layout_height="wrap_content"
-                android:textAlignment="textStart"
+                android:gravity="top"
                 android:hint="Una resistente mesa de roble, símbolo de durabilidad y elegancia. Sus vetas naturales y acabado cálido la convierten en el centro perfecto para cualquier espacio."
                 app:layout_constraintStart_toEndOf="@id/tvDescriptionLabel"
                 app:layout_constraintEnd_toEndOf="parent"

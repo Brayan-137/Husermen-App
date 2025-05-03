@@ -15,11 +15,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportFragmentManager.addOnBackStackChangedListener { handleBackStackChanged() }
+
         val inventoryFragment = InventoryFragment().apply {
             setHandleClickItemDetails(handleClickItemDetails)
         }
 
-        replaceFragment(supportFragmentManager, R.id.sectionsFragmentsContainer, inventoryFragment)
+        replaceFragment(supportFragmentManager, R.id.sectionsFragmentsContainer, inventoryFragment, false)
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             val nextFragment: Fragment = when (it.itemId) {
@@ -38,6 +40,17 @@ class MainActivity : AppCompatActivity() {
                 isAddToBackStack = nextFragment != inventoryFragment
             )
             true
+        }
+    }
+
+    private fun handleBackStackChanged() {
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.sectionsFragmentsContainer)
+
+        when (currentFragment) {
+            is InventoryFragment -> binding.bottomNavigationView.menu.findItem(R.id.inventorySection).isChecked = true
+            is TopSellsFragment -> binding.bottomNavigationView.menu.findItem(R.id.topSellsSection).isChecked = true
+            is MercadoLibreFragment -> binding.bottomNavigationView.menu.findItem(R.id.mercadoLibreSection).isChecked = true
+            is TutorialsFragment -> binding.bottomNavigationView.menu.findItem(R.id.tutorialsSection).isChecked = true
         }
     }
 

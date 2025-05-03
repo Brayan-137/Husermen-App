@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import com.example.husermenapp.FragmentUtils.applyTextViewFormat
 import com.example.husermenapp.databinding.FragmentEditProductBinding
 import com.google.firebase.database.DatabaseReference
@@ -34,6 +35,16 @@ class EditProductFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentEditProductBinding.inflate(inflater, container, false)
+
+        // When onBack is pressed product is not created and user is redirect to mainActivity
+        if (isCreatingNewProduct) {
+            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finish()
+                }
+            })
+        }
+
         return binding.root
     }
 
