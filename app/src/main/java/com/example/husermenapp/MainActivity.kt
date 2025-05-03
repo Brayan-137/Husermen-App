@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     private val handleClickItemDetails: (Item) -> Unit = { item ->
         val itemDetailsIntent = Intent(this, ProductActivity::class.java)
         itemDetailsIntent.putExtra("selectedProduct", item)

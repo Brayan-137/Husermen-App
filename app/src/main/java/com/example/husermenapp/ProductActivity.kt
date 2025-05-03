@@ -19,18 +19,21 @@ class ProductActivity : AppCompatActivity() {
         binding = ActivityProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val selectedProduct = intent.getSerializableExtra("selectedProduct", Item::class.java)
-
-        productDetailsFragment = setupProductDetailsFragment(selectedProduct)
+        productDetailsFragment = setupProductDetailsFragment()
 
         replaceFragment(supportFragmentManager, R.id.productFragmentsContainer, productDetailsFragment, false) // Por qué el ID es diferente según use R.id o binding
 
     }
 
-    private fun setupProductDetailsFragment(selectedProduct: Item?): ProductDetailsFragment {
+    private fun setupProductDetailsFragment(): ProductDetailsFragment {
         val productDetailsFragment = ProductDetailsFragment()
         val argsProductDetailsFragment = Bundle()
+
+        val selectedProduct = intent.getSerializableExtra("selectedProduct", Item::class.java)
+        val isCreatingNewProduct = intent.getBooleanExtra("isCreatingNewProduct", false)
+
         argsProductDetailsFragment.putSerializable("selectedProduct", selectedProduct)
+        argsProductDetailsFragment.putBoolean("isCreatingNewProduct", isCreatingNewProduct)
         productDetailsFragment.arguments = argsProductDetailsFragment
 
         return productDetailsFragment

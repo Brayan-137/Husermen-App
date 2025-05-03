@@ -1,7 +1,7 @@
 package com.example.husermenapp
 
 import android.os.Bundle
-import android.util.Log
+import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,11 +19,13 @@ class EditProductFragment : Fragment() {
 
     private val productsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("items")
     private var product: Item? = null
+    private var isCreatingNewProduct: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             product = it.getSerializable("selectedProduct", Item::class.java)
+            isCreatingNewProduct = it.getBoolean("isCreatingNewProduct", false)
         }
     }
 
@@ -43,7 +45,7 @@ class EditProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        product?.let {
+        if (!isCreatingNewProduct) product?.let {
             binding.etName.setText(applyTextViewFormat(it.name.toString()))
             binding.etDescriptionValue.setText(it.description)
             binding.etCategoryValue.setText(applyTextViewFormat(it.category.toString()))
@@ -64,8 +66,37 @@ class EditProductFragment : Fragment() {
     private fun handleClickBtnSaveProduct() {
         if (product == null) return
 
-        if (product?.key == null) {
+        val currentValues = mapOf(
+            "name" to checkField(binding.etName.text)?.lowercase(),
+            "description" to checkField(binding.etDescriptionValue.text),
+            "category" to checkField(binding.etCategoryValue.text)?.lowercase(),
+            "price" to checkField(binding.etPriceValue.text)?.toIntOrNull(),
+            "stock" to checkField(binding.etStockValue.text)?.toIntOrNull()
+        )
+
+        for ((key, value) in currentValues) {
+            if (value == null) {
+                when (key) {
+                    "price" -> Toast.makeText(requireContext(), "El precio debe ser un número. Por favor, verifique el valor e intentelo nuevamente.", Toast.LENGTH_LONG).show()
+                    "stock" -> Toast.makeText(requireContext(), "El stock debe ser un número. Por favor, verifique el valor e intentelo nuevamente.", Toast.LENGTH_SHORT).show()
+                    else -> Toast.makeText(requireContext(), "Todos los campos deben estar completos.", Toast.LENGTH_SHORT).show()
+                }
+                return
+            }
+        }
+
+        if (isCreatingNewProduct) {
             // Registering a new product
+            product?.key?.let {
+                productsRef.child(it).updateChildren(currentValues)
+                    .addOnSuccessListener {
+                        Toast.makeText(requireContext(), "Producto registrado correctamente.", Toast.LENGTH_SHORT).show()
+                        parentFragmentManager.popBackStack()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(requireContext(), "Ocurrió un problema al registrar el producto. Por favor, verifica tu conexión y vuelve a intentarlo.", Toast.LENGTH_LONG).show()
+                    }
+            }
         } else {
             // Updating the product's information
             val oldValues = product?.let {
@@ -78,14 +109,6 @@ class EditProductFragment : Fragment() {
                 )
             }
 
-            val currentValues = mapOf(
-                "name" to binding.etName.text.toString(),
-                "description" to binding.etDescriptionValue.text.toString(),
-                "category" to binding.etCategoryValue.text.toString(),
-                "price" to binding.etPriceValue.text.toString().toIntOrNull(),
-                "stock" to binding.etStockValue.text.toString().toIntOrNull()
-            )
-
             val newInformation = currentValues.filter { (key, currentValue) ->
                 oldValues?.get(key) != currentValue
             }
@@ -95,6 +118,7 @@ class EditProductFragment : Fragment() {
                     productsRef.child(it).updateChildren(newInformation)
                         .addOnSuccessListener {
                             Toast.makeText(requireContext(), "Información actualizada correctamente.", Toast.LENGTH_SHORT).show()
+                            parentFragmentManager.popBackStack()
                         }
                         .addOnFailureListener {
                             Toast.makeText(requireContext(), "Ocurrió un problema al actualizar la información. Por favor, verifica tu conexión y vuelve a intentarlo.", Toast.LENGTH_LONG).show()
@@ -102,5 +126,9 @@ class EditProductFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun checkField(text: Editable?): String? {
+        return if (text.isNullOrBlank()) null else text.toString()
     }
 }

@@ -19,11 +19,15 @@ class ProductDetailsFragment : Fragment() {
 
     private val productsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("items")
     private var product: Item? = null
+    private var isCreatingNewProduct: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             product = it.getSerializable("selectedProduct", Item::class.java)
+            isCreatingNewProduct = it.getBoolean("isCreatingNewProduct", false)
+
+            if (isCreatingNewProduct) handleClickBtnEditProduct()
         }
     }
 
@@ -55,11 +59,13 @@ class ProductDetailsFragment : Fragment() {
                 requireActivity().finish()
             }
         }
+
+        // TODO: deshabilitar el botón de información ventas a menos que este vinculado a un producto de mercado libre
     }
 
     private fun setupTextViews() {
         product?.let {
-            binding.tvName.text = it.name
+            binding.tvName.text = applyTextViewFormat(it.name.toString())
             binding.tvDescriptionValue.text = it.description
             binding.tvCategoryValue.text = applyTextViewFormat(it.category.toString())
             binding.tvPriceValue.text = it.price.toString()
@@ -97,6 +103,7 @@ class ProductDetailsFragment : Fragment() {
         val editProductFragment = EditProductFragment()
         val argsEditProductFragment = Bundle()
         argsEditProductFragment.putSerializable("selectedProduct", selectedProduct)
+        argsEditProductFragment.putBoolean("isCreatingNewProduct", isCreatingNewProduct)
 
         editProductFragment.arguments = argsEditProductFragment
 

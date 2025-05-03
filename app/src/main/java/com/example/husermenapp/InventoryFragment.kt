@@ -21,7 +21,7 @@ class InventoryFragment : Fragment() {
     private var _binding: FragmentInventoryBinding? = null
     private val binding get() = _binding!!
 
-    private val itemsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("items")
+    private val productsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("items")
     private lateinit var searchViewFragment: SearchViewFragment
     private lateinit var fullItemsList: List<Item>
 
@@ -47,7 +47,7 @@ class InventoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnAddItem.setOnClickListener{ handleClickBtnAddItem() }
+        binding.btnAddItem.setOnClickListener{ handleClickBtnAddProduct() }
 
         initSearchView(savedInstanceState)
         initRecyclerView()
@@ -62,8 +62,13 @@ class InventoryFragment : Fragment() {
         }
     }
 
-    private fun handleClickBtnAddItem() {
-        startActivity(Intent(requireActivity(), ProductActivity::class.java))
+    private fun handleClickBtnAddProduct() {
+        val createProductIntent = Intent(requireActivity(), ProductActivity::class.java)
+        val newProductRef = productsRef.push()
+        val newProduct = Item(newProductRef.key.toString())
+        createProductIntent.putExtra("selectedProduct", newProduct)
+        createProductIntent.putExtra("isCreatingNewProduct", true)
+        startActivity(createProductIntent)
     }
 
     private fun initRecyclerView() {
@@ -93,7 +98,7 @@ class InventoryFragment : Fragment() {
     }
 
     private fun getItems(callback: (List<Item>) -> Unit) {
-        itemsRef.addValueEventListener(object: ValueEventListener {
+        productsRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val items = snapshot.children.mapNotNull {
                     it.getValue(Item::class.java)?.apply { key = it.key }

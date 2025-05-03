@@ -9,8 +9,4 @@ data class Item(
     var category: String? = null,
     var price: Int = 0,
     var stock: Int = 0,
-): Serializable {
-    init {
-        name = name?.lowercase()
-    }
-}
+): Serializable
