@@ -49,8 +49,9 @@ class InventoryFragment : Fragment() {
 
         binding.btnAddItem.setOnClickListener{ handleClickBtnAddProduct() }
 
-        initSearchView(savedInstanceState)
-        initRecyclerView()
+        setupSearchView(savedInstanceState)
+        setupCategoryFilter(savedInstanceState)
+        setupRecyclerView()
 
         // Going to previous activity when back is pressed
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
@@ -58,6 +59,25 @@ class InventoryFragment : Fragment() {
                 parentFragmentManager.popBackStack()
             } else {
                 requireActivity().finish()
+            }
+        }
+    }
+
+    private fun setupCategoryFilter(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            val argsCategoryFilterFragment = Bundle()
+            argsCategoryFilterFragment.putString("items", "items")
+
+            val categoryFilterFragment = CategoryFilterFragment()
+            categoryFilterFragment.apply {
+                setUpdateItemsRecyclerView(::updateItemsRecyclerView)
+                arguments = argsCategoryFilterFragment
+            }
+
+            childFragmentManager.beginTransaction().apply {
+                setReorderingAllowed(true)
+                replace(R.id.fragmentContainerFilters, categoryFilterFragment)
+                commit()
             }
         }
     }
@@ -71,7 +91,7 @@ class InventoryFragment : Fragment() {
         startActivity(createProductIntent)
     }
 
-    private fun initRecyclerView() {
+    private fun setupRecyclerView() {
         binding.recyclerItems.apply {
             layoutManager = LinearLayoutManager(binding.recyclerItems.context)
             adapter = ItemAdapter(emptyList(), handleClickItemDetails!!)
@@ -113,7 +133,7 @@ class InventoryFragment : Fragment() {
         })
     }
 
-    private fun initSearchView(savedInstanceState: Bundle?) {
+    private fun setupSearchView(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) { // Se ejecuta solamente cuando la actividad es nueva
             val argsSearchViewFragment = Bundle()
             argsSearchViewFragment.putString("items", "items")

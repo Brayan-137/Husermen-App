@@ -14,8 +14,9 @@ import com.google.firebase.database.ValueEventListener
 
 open class BaseFilterFragment : Fragment() {
 
-    private lateinit var modelRef: DatabaseReference
+    protected lateinit var modelRef: DatabaseReference
     protected var updateItemsRecylerView: ((newListItems: List<Item>) -> Unit)? = null
+    var isSearching: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +28,10 @@ open class BaseFilterFragment : Fragment() {
 
     val setUpdateItemsRecyclerView = { updateItemsRecyclerView: (newListItems: List<Item>) -> Unit -> this.updateItemsRecylerView = updateItemsRecyclerView }
 
-    protected fun firebaseSearch(query: String) {
+    protected fun firebaseSearch(query: String, property: String) {
         val formatedQuery = query.lowercase()
 
-        modelRef.orderByChild("name").startAt(formatedQuery).endAt(formatedQuery + "\uf8ff")
+        modelRef.orderByChild(property).startAt(formatedQuery).endAt(formatedQuery + "\uf8ff")
             .addValueEventListener(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val filteredArray = ArrayList<Item>()

@@ -17,8 +17,7 @@ import com.google.firebase.database.ValueEventListener
 class SearchViewFragment : BaseFilterFragment() {
     private var _binding: FragmentSearchViewBinding? = null
     private val binding get() = _binding!!
-
-    var isSearching: Boolean = false
+    private val property = "name"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +40,7 @@ class SearchViewFragment : BaseFilterFragment() {
 
     private fun handleQuerySearchView(): SearchView.OnQueryTextListener = object: SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String): Boolean {
-            firebaseSearch(query)
+            firebaseSearch(query, property)
             binding.searchViewFragment.clearFocus()
             return true
         }
@@ -52,7 +51,7 @@ class SearchViewFragment : BaseFilterFragment() {
                 updateItemsRecylerView?.let { it(listOf()) }
             } else {
                 isSearching = true
-                firebaseSearch(newText!!)
+                firebaseSearch(newText!!, property)
             }
 
             return true
