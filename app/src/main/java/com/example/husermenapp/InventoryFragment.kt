@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.husermenapp.adapter.ItemAdapter
+import com.example.husermenapp.adapters.ItemAdapter
 import com.example.husermenapp.databinding.FragmentInventoryBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -92,8 +92,8 @@ class InventoryFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        binding.recyclerItems.apply {
-            layoutManager = LinearLayoutManager(binding.recyclerItems.context)
+        binding.recyclerViewItems.apply {
+            layoutManager = LinearLayoutManager(binding.recyclerViewItems.context)
             adapter = ItemAdapter(emptyList(), handleClickItemDetails!!)
         }
 
@@ -106,14 +106,14 @@ class InventoryFragment : Fragment() {
     private fun updateItemsRecyclerView(newItemList: List<Item>) {
         if (searchViewFragment.isSearching && newItemList.isEmpty()) {
             binding.tvResultsMessage.visibility = View.VISIBLE
-            binding.recyclerItems.visibility = View.GONE
+            binding.recyclerViewItems.visibility = View.GONE
         } else {
             binding.tvResultsMessage.visibility = View.GONE
-            binding.recyclerItems.visibility = View.VISIBLE
+            binding.recyclerViewItems.visibility = View.VISIBLE
 
             // List will be shown if it is visible
             val tempNewItemList = newItemList.ifEmpty { fullItemsList }
-            (binding.recyclerItems.adapter as? ItemAdapter)?.updateItems(tempNewItemList)
+            (binding.recyclerViewItems.adapter as? ItemAdapter)?.updateItems(tempNewItemList)
         }
     }
 

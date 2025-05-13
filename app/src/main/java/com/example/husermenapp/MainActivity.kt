@@ -17,9 +17,8 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.addOnBackStackChangedListener { handleBackStackChanged() }
 
-        val inventoryFragment = InventoryFragment().apply {
-            setHandleClickItemDetails(handleClickItemDetails)
-        }
+        val inventoryFragment = InventoryFragment().apply { setHandleClickItemDetails(handleClickProductsDetails) }
+        val tutorialsFragment = TutorialsFragment().apply { setHandleClickItemDetails(handleClickTutorialsDetails) }
 
         replaceFragment(supportFragmentManager, R.id.sectionsFragmentsContainer, inventoryFragment, false)
 
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.inventorySection -> inventoryFragment
                 R.id.topSellsSection -> TopSellsFragment()
                 R.id.mercadoLibreSection -> MercadoLibreFragment()
-                R.id.tutorialsSection -> TutorialsFragment()
+                R.id.tutorialsSection -> tutorialsFragment
                 R.id.usersOptionsSection -> UserOptionsFragment()
                 else -> InventoryFragment()
             }
@@ -54,7 +53,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private val handleClickItemDetails: (Item) -> Unit = { item ->
+    private val handleClickProductsDetails: (Item) -> Unit = { item ->
+        val itemDetailsIntent = Intent(this, ProductActivity::class.java)
+        itemDetailsIntent.putExtra("selectedProduct", item)
+        this.startActivity(itemDetailsIntent)
+    }
+
+    private val handleClickTutorialsDetails: (Item) -> Unit = { item ->
         val itemDetailsIntent = Intent(this, ProductActivity::class.java)
         itemDetailsIntent.putExtra("selectedProduct", item)
         this.startActivity(itemDetailsIntent)
