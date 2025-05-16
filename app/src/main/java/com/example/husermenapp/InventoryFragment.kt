@@ -21,7 +21,8 @@ class InventoryFragment : Fragment() {
     private var _binding: FragmentInventoryBinding? = null
     private val binding get() = _binding!!
 
-    private val productsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("items")
+    private val modelRef: String = "items"
+    private val productsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference(modelRef)
     private lateinit var searchViewFragment: SearchViewFragment
     private lateinit var fullItemsList: List<Item>
 
@@ -49,9 +50,9 @@ class InventoryFragment : Fragment() {
 
         binding.btnAddItem.setOnClickListener{ handleClickBtnAddProduct() }
 
+        setupRecyclerView()
         setupSearchView(savedInstanceState)
         setupCategoryFilter(savedInstanceState)
-        setupRecyclerView()
 
         // Going to previous activity when back is pressed
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
@@ -66,7 +67,7 @@ class InventoryFragment : Fragment() {
     private fun setupCategoryFilter(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             val argsCategoryFilterFragment = Bundle()
-            argsCategoryFilterFragment.putString("items", "items")
+            argsCategoryFilterFragment.putString("items", modelRef)
 
             val categoryFilterFragment = CategoryFilterFragment()
             categoryFilterFragment.apply {
@@ -136,7 +137,7 @@ class InventoryFragment : Fragment() {
     private fun setupSearchView(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) { // Se ejecuta solamente cuando la actividad es nueva
             val argsSearchViewFragment = Bundle()
-            argsSearchViewFragment.putString("items", "items")
+            argsSearchViewFragment.putString("items", modelRef)
 
             searchViewFragment = SearchViewFragment()
             searchViewFragment.apply {
