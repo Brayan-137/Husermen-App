@@ -12,25 +12,25 @@
         app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
-        android:id="@+id/tvTopic"
+        android:id="@+id/tvPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tvName"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
-        android:id="@+id/tvDescription"
+        android:id="@+id/tvStock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvTopic"
+        app:layout_constraintTop_toBottomOf="@id/tvPrice"
         app:layout_constraintStart_toStartOf="parent"/>
 
-
     <TextView
-        android:id="@+id/tvType"
+        android:id="@+id/tvStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvDescription"
+        app:layout_constraintTop_toBottomOf="@id/tvStock"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

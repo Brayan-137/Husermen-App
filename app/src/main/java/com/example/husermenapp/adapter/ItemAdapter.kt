@@ -20,7 +20,7 @@ class ItemAdapter(private var itemList: List<Item>, private var handleClickItemD
     override fun getItemCount(): Int = itemList.size
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.render(itemList[position], handleClickItemDetails)
+        holder.render(itemList[position])
     }
 
     fun updateItems(newItemList: List<Item>) {
@@ -32,7 +32,7 @@ class ItemAdapter(private var itemList: List<Item>, private var handleClickItemD
     inner class ItemViewHolder(itemLayout: View): RecyclerView.ViewHolder(itemLayout) {
         val binding = ItemInvetoryBinding.bind(itemLayout)
 
-        fun render(item: Item, handleClickItemDetails: (Item) -> Unit) {
+        fun render(item: Item) {
             binding.apply {
                 tvName.text = applyTextViewFormat(item.name.toString())
                 tvDescription.text = item.description

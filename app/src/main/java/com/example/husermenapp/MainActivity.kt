@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         val inventoryFragment = InventoryFragment().apply { setHandleClickItemDetails(handleClickItemDetails) }
         val tutorialFragment = TutorialsFragment().apply { setHandleClickItemDetails(handleClickTutorialDetails) }
+        val mercadoLibreFragment = MercadoLibreFragment().apply { setHandleClickItemDetails(handleClickMCProductDetails) }
 
         replaceFragment(supportFragmentManager, R.id.sectionsFragmentsContainer, inventoryFragment, false)
 
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
             val nextFragment: Fragment = when (it.itemId) {
                 R.id.inventorySection -> inventoryFragment
                 R.id.topSellsSection -> TopSellsFragment()
-                R.id.mercadoLibreSection -> MercadoLibreFragment()
+                R.id.mercadoLibreSection -> mercadoLibreFragment
                 R.id.tutorialsSection -> tutorialFragment
                 R.id.usersOptionsSection -> UserOptionsFragment()
                 else -> InventoryFragment()
@@ -62,6 +63,12 @@ class MainActivity : AppCompatActivity() {
     private val handleClickTutorialDetails: (Tutorial) -> Unit = { tutorial ->
         val itemDetailsIntent = Intent(this, TutorialActivity::class.java)
         itemDetailsIntent.putExtra("selectedTutorial", tutorial)
+        this.startActivity(itemDetailsIntent)
+    }
+
+    private val handleClickMCProductDetails: (MCProduct) -> Unit = { mcProduct ->
+        val itemDetailsIntent = Intent(this, MCProduct::class.java)
+        itemDetailsIntent.putExtra("seletedMCProduct", mcProduct)
         this.startActivity(itemDetailsIntent)
     }
 
