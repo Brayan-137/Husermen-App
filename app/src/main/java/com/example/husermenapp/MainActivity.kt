@@ -9,11 +9,11 @@ import com.example.husermenapp.databinding.ActivityMainBinding
 import com.example.husermenapp.dataclasses.MCProduct
 import com.example.husermenapp.dataclasses.Product
 import com.example.husermenapp.dataclasses.Tutorial
-import com.example.husermenapp.fragments.InventoryFragment
-import com.example.husermenapp.fragments.MercadoLibreFragment
-import com.example.husermenapp.fragments.TopSellsFragment
-import com.example.husermenapp.fragments.TutorialsFragment
-import com.example.husermenapp.fragments.UserOptionsFragment
+import com.example.husermenapp.fragments.SectionInventoryFragment
+import com.example.husermenapp.fragments.SectionMercadoLibreFragment
+import com.example.husermenapp.fragments.SectionTopSellsFragment
+import com.example.husermenapp.fragments.SectionTutorialsFragment
+import com.example.husermenapp.fragments.SectionUserOptionsFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -25,27 +25,27 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.addOnBackStackChangedListener { handleBackStackChanged() }
 
-        val inventoryFragment = InventoryFragment().apply { setHandleClickItemDetails(handleClickItemDetails) }
-        val tutorialFragment = TutorialsFragment().apply { setHandleClickItemDetails(handleClickTutorialDetails) }
-        val mercadoLibreFragment = MercadoLibreFragment().apply { setHandleClickItemDetails(handleClickMCProductDetails) }
+        val sectionInventoryFragment = SectionInventoryFragment().apply { setHandleClickItemDetails(handleClickItemDetails) }
+        val tutorialFragment = SectionTutorialsFragment().apply { setHandleClickItemDetails(handleClickTutorialDetails) }
+        val sectionMercadoLibreFragment = SectionMercadoLibreFragment().apply { setHandleClickItemDetails(handleClickMCProductDetails) }
 
-        replaceFragment(supportFragmentManager, R.id.sectionsFragmentsContainer, inventoryFragment, false)
+        replaceFragment(supportFragmentManager, R.id.sectionsFragmentsContainer, sectionInventoryFragment, false)
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             val nextFragment: Fragment = when (it.itemId) {
-                R.id.inventorySection -> inventoryFragment
-                R.id.topSellsSection -> TopSellsFragment()
-                R.id.mercadoLibreSection -> mercadoLibreFragment
+                R.id.inventorySection -> sectionInventoryFragment
+                R.id.topSellsSection -> SectionTopSellsFragment()
+                R.id.mercadoLibreSection -> sectionMercadoLibreFragment
                 R.id.tutorialsSection -> tutorialFragment
-                R.id.usersOptionsSection -> UserOptionsFragment()
-                else -> InventoryFragment()
+                R.id.usersOptionsSection -> SectionUserOptionsFragment()
+                else -> SectionInventoryFragment()
             }
 
             replaceFragment(
                 supportFragmentManager,
                 R.id.sectionsFragmentsContainer,
                 nextFragment,
-                isAddToBackStack = nextFragment != inventoryFragment
+                isAddToBackStack = nextFragment != sectionInventoryFragment
             )
             true
         }
@@ -55,10 +55,10 @@ class MainActivity : AppCompatActivity() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.sectionsFragmentsContainer)
 
         when (currentFragment) {
-            is InventoryFragment -> binding.bottomNavigationView.menu.findItem(R.id.inventorySection).isChecked = true
-            is TopSellsFragment -> binding.bottomNavigationView.menu.findItem(R.id.topSellsSection).isChecked = true
-            is MercadoLibreFragment -> binding.bottomNavigationView.menu.findItem(R.id.mercadoLibreSection).isChecked = true
-            is TutorialsFragment -> binding.bottomNavigationView.menu.findItem(R.id.tutorialsSection).isChecked = true
+            is SectionInventoryFragment -> binding.bottomNavigationView.menu.findItem(R.id.inventorySection).isChecked = true
+            is SectionTopSellsFragment -> binding.bottomNavigationView.menu.findItem(R.id.topSellsSection).isChecked = true
+            is SectionMercadoLibreFragment -> binding.bottomNavigationView.menu.findItem(R.id.mercadoLibreSection).isChecked = true
+            is SectionTutorialsFragment -> binding.bottomNavigationView.menu.findItem(R.id.tutorialsSection).isChecked = true
         }
     }
 

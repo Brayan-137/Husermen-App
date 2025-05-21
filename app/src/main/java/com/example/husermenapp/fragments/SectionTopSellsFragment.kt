@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.husermenapp.databinding.FragmentTopSellsBinding
 
-class TopSellsFragment : Fragment() {
+class SectionTopSellsFragment : Fragment() {
     private var _binding: FragmentTopSellsBinding? = null
     private val binding get() = _binding!!
 

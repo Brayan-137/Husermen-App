@@ -20,7 +20,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class InventoryFragment : Fragment() {
+class SectionInventoryFragment : Fragment() {
     private var _binding: FragmentInventoryBinding? = null
     private val binding get() = _binding!!
 
@@ -72,15 +72,15 @@ class InventoryFragment : Fragment() {
             val argsCategoryFilterFragment = Bundle()
             argsCategoryFilterFragment.putString("items", modelRef)
 
-            val categoryFilterFragment = CategoryFilterFragment()
-            categoryFilterFragment.apply {
+            val filterCategoryFragment = FilterCategoryFragment()
+            filterCategoryFragment.apply {
                 setUpdateItemsRecyclerView(::updateItemsRecyclerView)
                 arguments = argsCategoryFilterFragment
             }
 
             childFragmentManager.beginTransaction().apply {
                 setReorderingAllowed(true)
-                replace(R.id.fragmentContainerFilters, categoryFilterFragment)
+                replace(R.id.fragmentContainerFilters, filterCategoryFragment)
                 commit()
             }
         }

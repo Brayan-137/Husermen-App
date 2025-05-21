@@ -15,7 +15,7 @@ import com.example.husermenapp.fragments.basefragments.BaseItemDetailsFragment
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class TutorialDetailsFragment : BaseItemDetailsFragment<FragmentTutorialDetailsBinding, Tutorial>() {
+class DetailsTutorialFragment : BaseItemDetailsFragment<FragmentTutorialDetailsBinding, Tutorial>() {
     override fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?

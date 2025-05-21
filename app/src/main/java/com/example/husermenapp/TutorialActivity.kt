@@ -5,26 +5,26 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.husermenapp.fragments.FragmentUtils.replaceFragment
 import com.example.husermenapp.databinding.ActivityTutorialBinding
 import com.example.husermenapp.dataclasses.Tutorial
-import com.example.husermenapp.fragments.TutorialDetailsFragment
+import com.example.husermenapp.fragments.DetailsTutorialFragment
 
 class TutorialActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTutorialBinding
 
-    private lateinit var tutorialDetailsFragment: TutorialDetailsFragment
+    private lateinit var detailsTutorialFragment: DetailsTutorialFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTutorialBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        tutorialDetailsFragment = setupTutorialDetailsFragment()
+        detailsTutorialFragment = setupTutorialDetailsFragment()
 
-        replaceFragment(supportFragmentManager, R.id.tutorialFragmentsContainer, tutorialDetailsFragment, false) // Por qué el ID es diferente según use R.id o binding
+        replaceFragment(supportFragmentManager, R.id.tutorialFragmentsContainer, detailsTutorialFragment, false) // Por qué el ID es diferente según use R.id o binding
 
     }
 
-    private fun setupTutorialDetailsFragment(): TutorialDetailsFragment {
-        val tutorialDetailsFragment = TutorialDetailsFragment()
+    private fun setupTutorialDetailsFragment(): DetailsTutorialFragment {
+        val detailsTutorialFragment = DetailsTutorialFragment()
         val argsTutorialDetailsFragment = Bundle()
 
         val selectedTutorial = intent.getSerializableExtra("selectedTutorial", Tutorial::class.java)
@@ -32,8 +32,8 @@ class TutorialActivity : AppCompatActivity() {
 
         argsTutorialDetailsFragment.putSerializable("selectedTutorial", selectedTutorial)
         argsTutorialDetailsFragment.putBoolean("isCreatingNewTutorial", isCreatingNewTutorial)
-        tutorialDetailsFragment.arguments = argsTutorialDetailsFragment
+        detailsTutorialFragment.arguments = argsTutorialDetailsFragment
 
-        return tutorialDetailsFragment
+        return detailsTutorialFragment
     }
 }

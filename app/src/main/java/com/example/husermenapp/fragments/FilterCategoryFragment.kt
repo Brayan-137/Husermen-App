@@ -14,7 +14,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
-class CategoryFilterFragment : BaseFilterFragment() {
+class FilterCategoryFragment : BaseFilterFragment() {
     private var _binding: FragmentCategoryFilterBinding? = null
     private val binding get() = _binding!!
     private val property = "category"

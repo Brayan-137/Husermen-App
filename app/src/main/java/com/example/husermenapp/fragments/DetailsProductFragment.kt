@@ -15,7 +15,7 @@ import com.example.husermenapp.fragments.FragmentUtils.replaceFragment
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class ProductDetailsFragment : Fragment() {
+class DetailsProductFragment : Fragment() {
     private var _binding: FragmentProductDetailsBinding? = null
     val binding get() = _binding!!
 
