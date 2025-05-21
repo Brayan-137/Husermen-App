@@ -51,4 +51,14 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation ("androidx.fragment:fragment-ktx:1.8.6")
+
+    // API calls
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0") // Convertidor de JSON con Gson
+
+    // Parse JSON
+    implementation("com.google.code.gson:gson:2.10.1")
+
+    // Show images from URL
+    implementation("io.coil-kt:coil:2.6.0")
 }
