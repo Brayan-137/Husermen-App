@@ -2,8 +2,10 @@ package com.example.husermenapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.husermenapp.FragmentUtils.replaceFragment
+import com.example.husermenapp.fragments.FragmentUtils.replaceFragment
 import com.example.husermenapp.databinding.ActivityTutorialBinding
+import com.example.husermenapp.dataclasses.Tutorial
+import com.example.husermenapp.fragments.TutorialDetailsFragment
 
 class TutorialActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTutorialBinding

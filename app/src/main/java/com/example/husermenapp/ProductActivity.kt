@@ -2,8 +2,10 @@ package com.example.husermenapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.husermenapp.FragmentUtils.replaceFragment
+import com.example.husermenapp.fragments.FragmentUtils.replaceFragment
 import com.example.husermenapp.databinding.ActivityProductBinding
+import com.example.husermenapp.dataclasses.Product
+import com.example.husermenapp.fragments.ProductDetailsFragment
 
 class ProductActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductBinding

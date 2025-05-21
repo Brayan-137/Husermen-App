@@ -1,4 +1,4 @@
-package com.example.husermenapp
+package com.example.husermenapp.dataclasses
 
 import java.io.Serializable
 

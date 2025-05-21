@@ -4,8 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.husermenapp.FragmentUtils.replaceFragment
+import com.example.husermenapp.fragments.FragmentUtils.replaceFragment
 import com.example.husermenapp.databinding.ActivityMainBinding
+import com.example.husermenapp.dataclasses.MCProduct
+import com.example.husermenapp.dataclasses.Product
+import com.example.husermenapp.dataclasses.Tutorial
+import com.example.husermenapp.fragments.InventoryFragment
+import com.example.husermenapp.fragments.MercadoLibreFragment
+import com.example.husermenapp.fragments.TopSellsFragment
+import com.example.husermenapp.fragments.TutorialsFragment
+import com.example.husermenapp.fragments.UserOptionsFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

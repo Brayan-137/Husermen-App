@@ -1,18 +1,18 @@
-package com.example.husermenapp
+package com.example.husermenapp.fragments
 
 import android.os.Bundle
 import android.text.Editable
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import com.example.husermenapp.FragmentUtils.applyTextViewFormat
+import androidx.fragment.app.Fragment
 import com.example.husermenapp.databinding.FragmentEditProductBinding
+import com.example.husermenapp.dataclasses.Product
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-
+import com.example.husermenapp.fragments.FragmentUtils.applyTextViewFormat
 
 class EditProductFragment : Fragment() {
     private var _binding: FragmentEditProductBinding?= null
@@ -88,9 +88,21 @@ class EditProductFragment : Fragment() {
         for ((key, value) in currentValues) {
             if (value == null) {
                 when (key) {
-                    "price" -> Toast.makeText(requireContext(), "El precio debe ser un número. Por favor, verifique el valor e intentelo nuevamente.", Toast.LENGTH_LONG).show()
-                    "stock" -> Toast.makeText(requireContext(), "El stock debe ser un número. Por favor, verifique el valor e intentelo nuevamente.", Toast.LENGTH_SHORT).show()
-                    else -> Toast.makeText(requireContext(), "Todos los campos deben estar completos.", Toast.LENGTH_SHORT).show()
+                    "price" -> Toast.makeText(
+                        requireContext(),
+                        "El precio debe ser un número. Por favor, verifique el valor e intentelo nuevamente.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    "stock" -> Toast.makeText(
+                        requireContext(),
+                        "El stock debe ser un número. Por favor, verifique el valor e intentelo nuevamente.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    else -> Toast.makeText(
+                        requireContext(),
+                        "Todos los campos deben estar completos.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 return
             }
@@ -101,11 +113,19 @@ class EditProductFragment : Fragment() {
             product?.key?.let {
                 productsRef.child(it).updateChildren(currentValues)
                     .addOnSuccessListener {
-                        Toast.makeText(requireContext(), "Producto registrado correctamente.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Producto registrado correctamente.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         parentFragmentManager.popBackStack()
                     }
                     .addOnFailureListener {
-                        Toast.makeText(requireContext(), "Ocurrió un problema al registrar el producto. Por favor, verifica tu conexión y vuelve a intentarlo.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Ocurrió un problema al registrar el producto. Por favor, verifica tu conexión y vuelve a intentarlo.",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
             }
         } else {
@@ -128,11 +148,19 @@ class EditProductFragment : Fragment() {
                 product?.key?.let {
                     productsRef.child(it).updateChildren(newInformation)
                         .addOnSuccessListener {
-                            Toast.makeText(requireContext(), "Información actualizada correctamente.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                requireContext(),
+                                "Información actualizada correctamente.",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             parentFragmentManager.popBackStack()
                         }
                         .addOnFailureListener {
-                            Toast.makeText(requireContext(), "Ocurrió un problema al actualizar la información. Por favor, verifica tu conexión y vuelve a intentarlo.", Toast.LENGTH_LONG).show()
+                            Toast.makeText(
+                                requireContext(),
+                                "Ocurrió un problema al actualizar la información. Por favor, verifica tu conexión y vuelve a intentarlo.",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                 }
             }

@@ -1,12 +1,14 @@
-package com.example.husermenapp
+package com.example.husermenapp.fragments
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.husermenapp.FragmentUtils.applyTextViewFormat
 import com.example.husermenapp.databinding.FragmentCategoryFilterBinding
+import com.example.husermenapp.dataclasses.Product
+import com.example.husermenapp.fragments.FragmentUtils.applyTextViewFormat
+import com.example.husermenapp.fragments.basefragments.BaseFilterFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -46,7 +48,8 @@ class CategoryFilterFragment : BaseFilterFragment() {
         getCategories {
             it.forEach { it1 -> binding.tabLayoutCategory.addTab(binding.tabLayoutCategory.newTab().setText(it1)) }
 
-            binding.tabLayoutCategory.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
+            binding.tabLayoutCategory.addOnTabSelectedListener(object:
+                TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     isSearching = true
                     firebaseSearch(tab?.text.toString(), property)

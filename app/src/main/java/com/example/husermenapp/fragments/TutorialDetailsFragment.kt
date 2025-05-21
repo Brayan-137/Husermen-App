@@ -1,15 +1,17 @@
-package com.example.husermenapp
+package com.example.husermenapp.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.husermenapp.FragmentUtils.applyTextViewFormat
-import com.example.husermenapp.FragmentUtils.replaceFragment
+import androidx.fragment.app.Fragment
+import com.example.husermenapp.R
 import com.example.husermenapp.databinding.FragmentTutorialDetailsBinding
-import com.example.husermenapp.databinding.FragmentTutorialsBinding
+import com.example.husermenapp.dataclasses.Tutorial
+import com.example.husermenapp.fragments.FragmentUtils.applyTextViewFormat
+import com.example.husermenapp.fragments.FragmentUtils.replaceFragment
+import com.example.husermenapp.fragments.basefragments.BaseItemDetailsFragment
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
@@ -79,6 +81,7 @@ class TutorialDetailsFragment : BaseItemDetailsFragment<FragmentTutorialDetailsB
 
     private fun handleClickBtnEditTutorial() {
         val editTutorialFragment = setupEditItemFragment(tutorial)
-        replaceFragment(requireActivity().supportFragmentManager, R.id.tutorialFragmentsContainer, editTutorialFragment)
+        replaceFragment(requireActivity().supportFragmentManager,
+            R.id.tutorialFragmentsContainer, editTutorialFragment)
     }
 }

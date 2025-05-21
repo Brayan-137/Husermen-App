@@ -1,16 +1,19 @@
-package com.example.husermenapp
+package com.example.husermenapp.fragments
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.husermenapp.adapter.ProductAdapter
+import com.example.husermenapp.ProductActivity
+import com.example.husermenapp.R
+import com.example.husermenapp.adapters.ProductAdapter
 import com.example.husermenapp.databinding.FragmentInventoryBinding
+import com.example.husermenapp.dataclasses.Product
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference

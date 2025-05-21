@@ -1,12 +1,12 @@
-package com.example.husermenapp.adapter
+package com.example.husermenapp.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.husermenapp.FragmentUtils.applyTextViewFormat
-import com.example.husermenapp.Product
+import com.example.husermenapp.fragments.FragmentUtils.applyTextViewFormat
+import com.example.husermenapp.dataclasses.Product
 import com.example.husermenapp.R
 import com.example.husermenapp.databinding.ItemInvetoryBinding
 

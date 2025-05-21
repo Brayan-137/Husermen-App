@@ -1,4 +1,4 @@
-package com.example.husermenapp
+package com.example.husermenapp.dataclasses
 
 data class User(
     val uid: String,
