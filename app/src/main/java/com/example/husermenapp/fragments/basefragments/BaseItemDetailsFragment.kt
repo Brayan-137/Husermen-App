@@ -57,7 +57,7 @@ abstract class BaseItemDetailsFragment<VB: ViewBinding, T: Any> : Fragment() {
         // TODO: deshabilitar el botón de información ventas a menos que este vinculado a un producto de mercado libre
     }
 
-    protected fun <T: Serializable>  setupEditItemFragment(selectedItem: T?): Fragment {
+    open protected fun <T: Serializable>  setupEditItemFragment(selectedItem: T?): Fragment {
         val editItemFragment = EditItemFragment()
         val argsEditItemFragment = Bundle()
         val capitalizedModelRef = applyTextViewFormat(modelRef)

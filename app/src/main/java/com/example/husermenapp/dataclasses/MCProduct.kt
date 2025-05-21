@@ -7,5 +7,8 @@ data class MCProduct (
     var name: String? = null,
     var price: Int? = null,
     var stock: Int? = null,
-    var status: String? = null
+    var status: String? = null,
+    var category: String? = null,
+    var localProductKey: String? = null,
+    var topSells: Int? = null,
 ): Serializable

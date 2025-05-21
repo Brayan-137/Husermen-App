@@ -26,7 +26,7 @@ open class BaseFilterFragment : Fragment() {
 
     val setUpdateItemsRecyclerView = { updateItemsRecyclerView: (newListProducts: List<Product>) -> Unit -> this.updateItemsRecylerView = updateItemsRecyclerView }
 
-    protected fun firebaseSearch(query: String, property: String) {
+    fun firebaseSearch(query: String, property: String) {
         val formatedQuery = query.lowercase()
 
         modelRef.orderByChild(property).startAt(formatedQuery).endAt(formatedQuery + "\uf8ff")

@@ -14,6 +14,9 @@
         android:theme="@style/Theme.HusermenApp"
         tools:targetApi="31">
         <activity
+            android:name=".MCProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".TutorialActivity"
             android:exported="false" />
         <activity

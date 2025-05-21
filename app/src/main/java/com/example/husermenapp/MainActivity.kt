@@ -2,6 +2,7 @@ package com.example.husermenapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.husermenapp.fragments.FragmentUtils.replaceFragment
@@ -75,8 +76,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val handleClickMCProductDetails: (MCProduct) -> Unit = { mcProduct ->
-        val itemDetailsIntent = Intent(this, MCProduct::class.java)
-        itemDetailsIntent.putExtra("seletedMCProduct", mcProduct)
+        val itemDetailsIntent = Intent(this, MCProductActivity::class.java)
+        itemDetailsIntent.putExtra("selectedMCProduct", mcProduct)
         this.startActivity(itemDetailsIntent)
     }
 
