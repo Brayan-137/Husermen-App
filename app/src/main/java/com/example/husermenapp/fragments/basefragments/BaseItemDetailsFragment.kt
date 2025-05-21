@@ -61,8 +61,8 @@ abstract class BaseItemDetailsFragment<VB: ViewBinding, T: Any> : Fragment() {
         val editItemFragment = EditItemFragment()
         val argsEditItemFragment = Bundle()
         val capitalizedModelRef = applyTextViewFormat(modelRef)
-        argsEditItemFragment.putSerializable("selected$capitalizedModelRef", selectedItem)
-        argsEditItemFragment.putBoolean("isCreatingNew$capitalizedModelRef", isCreatingNewItem)
+        argsEditItemFragment.putSerializable("selected${capitalizedModelRef.dropLast(1)}", selectedItem)
+        argsEditItemFragment.putBoolean("isCreatingNew${capitalizedModelRef.dropLast(1)}", isCreatingNewItem)
 
         editItemFragment.arguments = argsEditItemFragment
 

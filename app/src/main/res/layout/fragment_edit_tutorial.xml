@@ -1,14 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.EditTutorialFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <LinearLayout
+        android:id="@+id/btnDeleteTutorial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnSaveTutorial"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_delete"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Eliminar"/>
+    </LinearLayout>
 
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/btnSaveTutorial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_save"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guardar"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/btnSaveTutorial"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBaseline_toBaselineOf="@id/etName"
+                tools:text="Nombre:" />
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Como utilizar Instagram para.."
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tvDescriptionLabel"
+                app:layout_constraintStart_toStartOf="@id/etDescriptionValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/tvDescriptionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descripción:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/etDescriptionValue"
+                app:layout_constraintTop_toTopOf="@id/etDescriptionValue"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+
+            <EditText
+                android:id="@+id/etDescriptionValue"
+                android:layout_width="0dp"
+                app:layout_constraintWidth_max="320dp"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:hint="Este tutorial te enseñará a realizar una tarea paso a paso dentro de la aplicación.
+Aprenderás a interactuar con las funciones principales, completar formularios, y guardar tus cambios correctamente."
+                app:layout_constraintStart_toEndOf="@id/tvDescriptionLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/etTopicValue"
+                app:layout_constraintTop_toBottomOf="@id/etName"/>
+
+            <TextView
+                android:id="@+id/tvTopicLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tema:"
+                app:layout_constraintBaseline_toBaselineOf="@id/etTopicValue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+
+            <EditText
+                android:id="@+id/etTopicValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
+                android:hint="Instagram"
+                app:layout_constraintBottom_toTopOf="@id/etTypeValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/etDescriptionValue"
+                app:layout_constraintTop_toBottomOf="@id/etDescriptionValue"
+                />
+
+            <TextView
+                android:id="@+id/tvTypeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tipo:"
+                app:layout_constraintBaseline_toBaselineOf="@id/etTypeValue"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/etTypeValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
+                android:hint="Guía paso a paso"
+                app:layout_constraintBottom_toTopOf="@id/linearLayoutContentContainer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/etDescriptionValue"
+                app:layout_constraintTop_toBottomOf="@id/etTopicValue" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutContentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/etTypeValue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Contenido de la guía:"/>
+
+                <EditText
+                    android:id="@+id/etContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:hint="Este tutorial te guiará paso a paso. Asegúrate de leer bien cada instrucción antes de continuar.
+Si ves un botón resaltado o una sección marcada, probablemente es el siguiente lugar donde debes hacer clic o escribir algo."
+                    />
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
