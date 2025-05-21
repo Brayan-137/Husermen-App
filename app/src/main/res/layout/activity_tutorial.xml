@@ -7,4 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".TutorialActivity">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/tutorialFragmentsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

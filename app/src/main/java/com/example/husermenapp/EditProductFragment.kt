@@ -19,13 +19,13 @@ class EditProductFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val productsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("items")
-    private var product: Item? = null
+    private var product: Product? = null
     private var isCreatingNewProduct: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            product = it.getSerializable("selectedProduct", Item::class.java)
+            product = it.getSerializable("selectedProduct", Product::class.java)
             isCreatingNewProduct = it.getBoolean("isCreatingNewProduct", false)
         }
     }

@@ -18,13 +18,13 @@ class ProductDetailsFragment : Fragment() {
     val binding get() = _binding!!
 
     private val productsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("items")
-    private var product: Item? = null
+    private var product: Product? = null
     private var isCreatingNewProduct: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            product = it.getSerializable("selectedProduct", Item::class.java)
+            product = it.getSerializable("selectedProduct", Product::class.java)
             isCreatingNewProduct = it.getBoolean("isCreatingNewProduct", false)
 
             if (isCreatingNewProduct) handleClickBtnEditProduct()
@@ -80,7 +80,7 @@ class ProductDetailsFragment : Fragment() {
             productsRef.child(it1).get()
                 .addOnSuccessListener { dataSnapshot ->
                     if (dataSnapshot.exists()) {
-                        product = dataSnapshot.getValue(Item::class.java)
+                        product = dataSnapshot.getValue(Product::class.java)
                         product?.key = dataSnapshot.key
 
                         setupTextViews()
@@ -95,11 +95,11 @@ class ProductDetailsFragment : Fragment() {
     }
 
     private fun handleClickBtnEditProduct() {
-        val editProductFragment: EditProductFragment = setupEditProductFragment(product)
+        val editProductFragment = setupEditProductFragment(product)
         replaceFragment(requireActivity().supportFragmentManager, R.id.productFragmentsContainer, editProductFragment)
     }
 
-    private fun setupEditProductFragment(selectedProduct: Item?): EditProductFragment {
+    private fun setupEditProductFragment(selectedProduct: Product?): Fragment {
         val editProductFragment = EditProductFragment()
         val argsEditProductFragment = Bundle()
         argsEditProductFragment.putSerializable("selectedProduct", selectedProduct)

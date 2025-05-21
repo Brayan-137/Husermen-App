@@ -60,7 +60,7 @@ class TutorialsFragment : Fragment() {
     private fun handleClickBtnAddTutorial() {
         val createTutorialIntent = Intent(requireActivity(), TutorialActivity::class.java)
         val newTutorialRef = tutorialsRef.push()
-        val newTutorial = Item(newTutorialRef.key.toString())
+        val newTutorial = Tutorial(newTutorialRef.key.toString())
         createTutorialIntent.putExtra("selectedTutorial", newTutorial)
         createTutorialIntent.putExtra("isCreatingNewTutorial", true)
         startActivity(createTutorialIntent)

@@ -1,12 +1,8 @@
 package com.example.husermenapp
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.example.husermenapp.FragmentUtils.replaceFragment
-import com.example.husermenapp.databinding.ActivityMainBinding
 import com.example.husermenapp.databinding.ActivityProductBinding
 
 class ProductActivity : AppCompatActivity() {
@@ -29,7 +25,7 @@ class ProductActivity : AppCompatActivity() {
         val productDetailsFragment = ProductDetailsFragment()
         val argsProductDetailsFragment = Bundle()
 
-        val selectedProduct = intent.getSerializableExtra("selectedProduct", Item::class.java)
+        val selectedProduct = intent.getSerializableExtra("selectedProduct", Product::class.java)
         val isCreatingNewProduct = intent.getBooleanExtra("isCreatingNewProduct", false)
 
         argsProductDetailsFragment.putSerializable("selectedProduct", selectedProduct)

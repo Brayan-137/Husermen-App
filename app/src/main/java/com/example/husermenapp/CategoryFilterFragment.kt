@@ -2,7 +2,6 @@ package com.example.husermenapp
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,7 +69,7 @@ class CategoryFilterFragment : BaseFilterFragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val categories = mutableSetOf<String>()
                 snapshot.children.forEach {
-                    it.getValue(Item::class.java)?.category?.let { it1 ->
+                    it.getValue(Product::class.java)?.category?.let { it1 ->
                         applyTextViewFormat(categories.add(it1).toString())
                     }
                 }

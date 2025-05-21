@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.husermenapp.adapter.ItemAdapter
+import com.example.husermenapp.adapter.ProductAdapter
 import com.example.husermenapp.databinding.FragmentInventoryBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -24,9 +24,9 @@ class InventoryFragment : Fragment() {
     private val modelRef: String = "items"
     private val productsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference(modelRef)
     private lateinit var searchViewFragment: SearchViewFragment
-    private lateinit var fullItemsList: List<Item>
+    private lateinit var fullItemsList: List<Product>
 
-    private var handleClickItemDetails: ((Item) -> Unit)? = null
+    private var handleClickItemDetails: ((Product) -> Unit)? = null
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
@@ -86,7 +86,7 @@ class InventoryFragment : Fragment() {
     private fun handleClickBtnAddProduct() {
         val createProductIntent = Intent(requireActivity(), ProductActivity::class.java)
         val newProductRef = productsRef.push()
-        val newProduct = Item(newProductRef.key.toString())
+        val newProduct = Product(newProductRef.key.toString())
         createProductIntent.putExtra("selectedProduct", newProduct)
         createProductIntent.putExtra("isCreatingNewProduct", true)
         startActivity(createProductIntent)
@@ -95,7 +95,7 @@ class InventoryFragment : Fragment() {
     private fun setupRecyclerView() {
         binding.recyclerItems.apply {
             layoutManager = LinearLayoutManager(binding.recyclerItems.context)
-            adapter = ItemAdapter(emptyList(), handleClickItemDetails!!)
+            adapter = ProductAdapter(emptyList(), handleClickItemDetails!!)
         }
 
         getItems {
@@ -104,8 +104,8 @@ class InventoryFragment : Fragment() {
         }
     }
 
-    private fun updateItemsRecyclerView(newItemList: List<Item>) {
-        if (searchViewFragment.isSearching && newItemList.isEmpty()) {
+    private fun updateItemsRecyclerView(newProductList: List<Product>) {
+        if (searchViewFragment.isSearching && newProductList.isEmpty()) {
             binding.tvResultsMessage.visibility = View.VISIBLE
             binding.recyclerItems.visibility = View.GONE
         } else {
@@ -113,18 +113,18 @@ class InventoryFragment : Fragment() {
             binding.recyclerItems.visibility = View.VISIBLE
 
             // List will be shown if it is visible
-            val tempNewItemList = newItemList.ifEmpty { fullItemsList }
-            (binding.recyclerItems.adapter as? ItemAdapter)?.updateItems(tempNewItemList)
+            val tempNewItemList = newProductList.ifEmpty { fullItemsList }
+            (binding.recyclerItems.adapter as? ProductAdapter)?.updateItems(tempNewItemList)
         }
     }
 
-    private fun getItems(callback: (List<Item>) -> Unit) {
+    private fun getItems(callback: (List<Product>) -> Unit) {
         productsRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val items = snapshot.children.mapNotNull {
-                    it.getValue(Item::class.java)?.apply { key = it.key }
+                val products = snapshot.children.mapNotNull {
+                    it.getValue(Product::class.java)?.apply { key = it.key }
                 }
-                callback(items)
+                callback(products)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -153,5 +153,5 @@ class InventoryFragment : Fragment() {
         }
     }
 
-    val setHandleClickItemDetails = { handleClickItemDetails: (Item) -> Unit -> this.handleClickItemDetails = handleClickItemDetails }
+    val setHandleClickItemDetails = { handleClickItemDetails: (Product) -> Unit -> this.handleClickItemDetails = handleClickItemDetails }
 }
