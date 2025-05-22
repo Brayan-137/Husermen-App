@@ -1,9 +1,13 @@
 package com.example.husermenapp.fragments
 
+import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import com.example.husermenapp.databinding.FragmentEditTutorialBinding
 import com.example.husermenapp.dataclasses.Tutorial
@@ -33,27 +37,70 @@ class EditTutorialFragment : BaseEditItemFragment<FragmentEditTutorialBinding>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupSpinnerContentType()
+
         if(!isCreatingNewTutorial) tutorial?.let {
             binding.etName.setText(applyTextViewFormat(it.name.toString()))
             binding.etDescriptionValue.setText(it.description)
             binding.etTopicValue.setText(applyTextViewFormat(it.topic.toString()))
-            binding.etTypeValue.setText(applyTextViewFormat(it.type.toString()))
             binding.etContent.setText(it.content)
+
+            when (it.type) {
+                "Video" -> {
+                    binding.spinnerType.setSelection(0)
+                    binding.etVideoUrl.setText(it.videoUrl)
+                }
+                "Guía" -> {
+                    binding.spinnerType.setSelection(1)
+                    binding.etContent.setText(it.content)
+                }
+            }
         }
 
         binding.btnSaveTutorial.setOnClickListener { handleClickBtnSaveTutorial() }
         binding.btnDeleteTutorial.setOnClickListener { handleClickBtnDeleteTutorial() }
     }
 
+    private fun setupSpinnerContentType() {
+        val contentTypeOptions = listOf("Video", "Guía")
+        val contentTypeSpinner: Spinner = binding.spinnerType
+
+        val adapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_item, contentTypeOptions)
+        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+        contentTypeSpinner.adapter = adapter
+        binding.spinnerType.setSelection(0)
+
+        binding.spinnerType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val selectedItem = parent.getItemAtPosition(position).toString()
+
+                when (selectedItem) {
+                    "Video" -> {
+                        binding.walkthrough.visibility = View.GONE
+                        binding.video.visibility = View.VISIBLE
+                    }
+                    "Guía" -> {
+                        binding.walkthrough.visibility = View.VISIBLE
+                        binding.video.visibility = View.GONE
+                    }
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Puedes dejarlo vacío
+            }
+        }
+    }
+
     private fun handleClickBtnSaveTutorial() {
         if (tutorial == null) return
 
         val currentValues = mapOf(
-            "name" to checkField(binding.etName.text)?.lowercase(),
-            "description" to checkField(binding.etDescriptionValue.text),
-            "topic" to checkField(binding.etTopicValue.text)?.lowercase(),
-            "type" to checkField(binding.etTypeValue.text)?.lowercase(),
-            "content" to checkField(binding.etContent.text)
+            "name" to checkField(binding.etName.text.toString())?.lowercase(),
+            "description" to checkField(binding.etDescriptionValue.text.toString()),
+            "topic" to checkField(binding.etTopicValue.text.toString())?.lowercase(),
+            "type" to checkField(binding.spinnerType.selectedItem.toString())?.lowercase(),
+            "content" to checkField(binding.etContent.text.toString())
         )
 
         for (value in currentValues.values) {

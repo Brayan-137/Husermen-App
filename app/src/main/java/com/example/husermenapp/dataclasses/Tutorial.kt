@@ -9,5 +9,6 @@ data class Tutorial (
     var topic: String? = null,
     var type: String? = null,
     var imageUrl: String? = null,
+    var videoUrl: String? = null,
     var content: String? = null
 ): Serializable

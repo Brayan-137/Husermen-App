@@ -1,7 +1,6 @@
 package com.example.husermenapp.fragments
 
 import android.os.Bundle
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +44,7 @@ abstract class BaseEditItemFragment<VB: ViewBinding> : Fragment() {
         _binding = null
     }
 
-    protected fun checkField(text: Editable?): String? {
-        return if (text.isNullOrBlank()) null else text.toString()
+    protected fun checkField(text: String): String? {
+        return if (text == "") null else text
     }
 }

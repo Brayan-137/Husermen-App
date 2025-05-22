@@ -110,7 +110,7 @@ Aprenderás a interactuar con las funciones principales, completar formularios, 
                 android:layout_height="wrap_content"
                 android:textAlignment="textEnd"
                 android:hint="Instagram"
-                app:layout_constraintBottom_toTopOf="@id/etTypeValue"
+                app:layout_constraintBottom_toTopOf="@id/spinnerType"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/etDescriptionValue"
                 app:layout_constraintTop_toBottomOf="@id/etDescriptionValue"
@@ -121,41 +121,68 @@ Aprenderás a interactuar con las funciones principales, completar formularios, 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tipo:"
-                app:layout_constraintBaseline_toBaselineOf="@id/etTypeValue"
+                app:layout_constraintBaseline_toBaselineOf="@id/spinnerType"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <EditText
-                android:id="@+id/etTypeValue"
+            <Spinner
+                android:id="@+id/spinnerType"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
                 android:textAlignment="textEnd"
-                android:hint="Guía paso a paso"
                 app:layout_constraintBottom_toTopOf="@id/linearLayoutContentContainer"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/etDescriptionValue"
-                app:layout_constraintTop_toBottomOf="@id/etTopicValue" />
-
+                app:layout_constraintTop_toBottomOf="@id/etTopicValue"
+                />
+            
             <LinearLayout
                 android:id="@+id/linearLayoutContentContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/etTypeValue"
+                app:layout_constraintTop_toBottomOf="@id/spinnerType"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Contenido de la guía:"/>
 
-                <EditText
-                    android:id="@+id/etContent"
+                <LinearLayout
+                    android:id="@+id/walkthrough"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:hint="Este tutorial te guiará paso a paso. Asegúrate de leer bien cada instrucción antes de continuar.
+                    android:orientation="vertical"
+                    android:visibility="gone">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Contenido de la guía:"/>
+
+                    <EditText
+                        android:id="@+id/etContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:hint="Este tutorial te guiará paso a paso. Asegúrate de leer bien cada instrucción antes de continuar.
 Si ves un botón resaltado o una sección marcada, probablemente es el siguiente lugar donde debes hacer clic o escribir algo."
-                    />
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/video"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Url del video:"/>
+
+                    <EditText
+                        android:id="@+id/etVideoUrl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:hint="https://www.youtube.com/watch?v=8l6KQCOJBB4"/>
+                </LinearLayout>
+
+
             </LinearLayout>
 
 
