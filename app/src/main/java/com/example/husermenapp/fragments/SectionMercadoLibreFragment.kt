@@ -30,7 +30,7 @@ class SectionMercadoLibreFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val modelRef: String = "mcProducts"
-    private val mercadoLibreProductsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference(modelRef)
+//    private val mercadoLibreProductsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference(modelRef)
     private val categoriesRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("categories")
     //    private lateinit var searchViewFragment: SearchViewFragment
     private lateinit var fullItemsList: List<MCProduct>
@@ -80,10 +80,10 @@ class SectionMercadoLibreFragment : Fragment() {
             adapter = MCProductAdapter(emptyList(), handleClickItemDetails!!)
         }
 
-        getItems {
-            fullItemsList = it
-            updateItemsRecyclerView(fullItemsList)
-        }
+//        getItems {
+//            fullItemsList = it
+//            updateItemsRecyclerView(fullItemsList)
+//        }
     }
 
     private fun updateItemsRecyclerView(newItemList: List<MCProduct>) {
@@ -100,22 +100,22 @@ class SectionMercadoLibreFragment : Fragment() {
             (binding.recyclerItems.adapter as? MCProductAdapter)?.updateItems(tempNewItemList)
         }
     }
-
-    private fun getItems(callback: (List<MCProduct>) -> Unit) {
-         mercadoLibreProductsRef.addValueEventListener(object: ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val mercadoLibreProducts = snapshot.children.mapNotNull {
-                    it.getValue(MCProduct::class.java)?.apply { key = it.key }
-                }
-                callback(mercadoLibreProducts)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.w("Firebase", "Error al consultar los datos.", error.toException())
-            }
-
-        })
-    }
+//
+//    private fun getItems(callback: (List<MCProduct>) -> Unit) {
+//         mercadoLibreProductsRef.addValueEventListener(object: ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                val mercadoLibreProducts = snapshot.children.mapNotNull {
+//                    it.getValue(MCProduct::class.java)?.apply { key = it.key }
+//                }
+//                callback(mercadoLibreProducts)
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                Log.w("Firebase", "Error al consultar los datos.", error.toException())
+//            }
+//
+//        })
+//    }
     
     private fun getMCItems() {
         CoroutineScope(Dispatchers.IO).launch {

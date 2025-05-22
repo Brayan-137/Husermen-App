@@ -61,67 +61,66 @@ class DetailsMCProductFragment : BaseItemDetailsFragment<FragmentDetailsMercadoL
         super.onViewCreated(view, savedInstanceState)
 
         setupTextViews()
-
-        binding.btnMoreInformation.setOnClickListener { handleClickBtnMoreInformation() }
     }
 
-    private fun handleClickBtnMoreInformation() {
-        if (mcProduct?.localProductKey != null) {
-            goToLocalProduct()
-        } else {
-            // Looking for and going to local product
-            val formatedQuery = mcProduct?.name?.lowercase()
-
-            mcProductsRef.orderByChild("name").startAt(formatedQuery).endAt(formatedQuery + "\uf8ff")
-                .addValueEventListener(object: ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        if (snapshot.childrenCount.toInt() == 0) {
-                            Toast.makeText(
-                                requireContext(),
-                                "No se pudo encontrar un producto local que coincida. Por favor, asegurese que el producto local tiene el mismo nombre e intentelo de nuevo.",
-                                Toast.LENGTH_LONG
-                            ).show()
-                            return
-                        }
-
-                        val localProductKey = snapshot.children.first().key
-
-                        Log.d("Busqueda", "Se encontró la coincidencia buscada.")
-                        mcProduct?.key?.let {
-                            mcProductsRef.child(it)
-                                .updateChildren(mapOf("localProductKey" to localProductKey))
-                                .addOnSuccessListener {
-                                    Log.d(
-                                        "Firebase",
-                                        "Información actualizada correctamente."
-                                    )
-
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Producto local referenciado correctamente.",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-
-                                    goToLocalProduct()
-
-                                    // TODO: probar que el anterior código funciona
-                                }
-                                .addOnFailureListener {
-                                    Log.e(
-                                        "Firebase",
-                                        "Ocurrio un problema al actualizar la información."
-                                    )
-                                }
-                        }
-
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-                        Log.w("Firebase", "Error al consultar los datos.", error.toException())
-                    }
-                })
-        }
-    }
+//    USELESS
+//    private fun handleClickBtnMoreInformation() {
+//        if (mcProduct?.localProductKey != null) {
+//            goToLocalProduct()
+//        } else {
+//            // Looking for and going to local product
+//            val formatedQuery = mcProduct?.name?.lowercase()
+//
+//            mcProductsRef.orderByChild("name").startAt(formatedQuery).endAt(formatedQuery + "\uf8ff")
+//                .addValueEventListener(object: ValueEventListener {
+//                    override fun onDataChange(snapshot: DataSnapshot) {
+//                        if (snapshot.childrenCount.toInt() == 0) {
+//                            Toast.makeText(
+//                                requireContext(),
+//                                "No se pudo encontrar un producto local que coincida. Por favor, asegurese que el producto local tiene el mismo nombre e intentelo de nuevo.",
+//                                Toast.LENGTH_LONG
+//                            ).show()
+//                            return
+//                        }
+//
+//                        val localProductKey = snapshot.children.first().key
+//
+//                        Log.d("Busqueda", "Se encontró la coincidencia buscada.")
+//                        mcProduct?.key?.let {
+//                            mcProductsRef.child(it)
+//                                .updateChildren(mapOf("localProductKey" to localProductKey))
+//                                .addOnSuccessListener {
+//                                    Log.d(
+//                                        "Firebase",
+//                                        "Información actualizada correctamente."
+//                                    )
+//
+//                                    Toast.makeText(
+//                                        requireContext(),
+//                                        "Producto local referenciado correctamente.",
+//                                        Toast.LENGTH_SHORT
+//                                    ).show()
+//
+//                                    goToLocalProduct()
+//
+//                                    // TODO: probar que el anterior código funciona
+//                                }
+//                                .addOnFailureListener {
+//                                    Log.e(
+//                                        "Firebase",
+//                                        "Ocurrio un problema al actualizar la información."
+//                                    )
+//                                }
+//                        }
+//
+//                    }
+//
+//                    override fun onCancelled(error: DatabaseError) {
+//                        Log.w("Firebase", "Error al consultar los datos.", error.toException())
+//                    }
+//                })
+//        }
+//    }
 
     private fun goToLocalProduct() {
         val productDetailsIntent = Intent(context, ProductActivity::class.java)
