@@ -12,8 +12,8 @@ import com.example.husermenapp.databinding.ItemMercadolibreBinding
 
 class MCProductAdapter (private var mcProductList: List<MCProduct>, private var handleClickMCProductDetails: (MCProduct) -> Unit): RecyclerView.Adapter<MCProductAdapter.MCProductViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MCProductViewHolder {
-        val tutorialLayout = LayoutInflater.from(parent.context).inflate(R.layout.item_mercadolibre, parent, false)
-        return MCProductViewHolder(tutorialLayout)
+        val itemLayout = LayoutInflater.from(parent.context).inflate(R.layout.item_mercadolibre, parent, false)
+        return MCProductViewHolder(itemLayout)
     }
 
     override fun getItemCount(): Int = mcProductList.size
@@ -28,8 +28,8 @@ class MCProductAdapter (private var mcProductList: List<MCProduct>, private var 
         notifyDataSetChanged()
     }
 
-    inner class MCProductViewHolder(tutorialLayout: View): RecyclerView.ViewHolder(tutorialLayout) {
-        val binding = ItemMercadolibreBinding.bind(tutorialLayout)
+    inner class MCProductViewHolder(itemLayout: View): RecyclerView.ViewHolder(itemLayout) {
+        val binding = ItemMercadolibreBinding.bind(itemLayout)
 
         fun render(mcProduct: MCProduct) {
             binding.apply {

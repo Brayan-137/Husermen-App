@@ -2,7 +2,6 @@ package com.example.husermenapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.husermenapp.fragments.FragmentUtils.replaceFragment
@@ -27,17 +26,18 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.addOnBackStackChangedListener { handleBackStackChanged() }
 
         val sectionInventoryFragment = SectionInventoryFragment().apply { setHandleClickItemDetails(handleClickItemDetails) }
-        val tutorialFragment = SectionTutorialsFragment().apply { setHandleClickItemDetails(handleClickTutorialDetails) }
+        val sectionTutorialFragment = SectionTutorialsFragment().apply { setHandleClickItemDetails(handleClickTutorialDetails) }
         val sectionMercadoLibreFragment = SectionMercadoLibreFragment().apply { setHandleClickItemDetails(handleClickMCProductDetails) }
+        val sectionTopSellsFragment = SectionTopSellsFragment().apply { setHandleClickItemDetails(handleClickMCProductDetails) }
 
         replaceFragment(supportFragmentManager, R.id.sectionsFragmentsContainer, sectionInventoryFragment, false)
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             val nextFragment: Fragment = when (it.itemId) {
                 R.id.inventorySection -> sectionInventoryFragment
-                R.id.topSellsSection -> SectionTopSellsFragment()
+                R.id.topSellsSection -> sectionTopSellsFragment
                 R.id.mercadoLibreSection -> sectionMercadoLibreFragment
-                R.id.tutorialsSection -> tutorialFragment
+                R.id.tutorialsSection -> sectionTutorialFragment
                 R.id.usersOptionsSection -> SectionUserOptionsFragment()
                 else -> SectionInventoryFragment()
             }
