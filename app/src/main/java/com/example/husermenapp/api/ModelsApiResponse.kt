@@ -1,4 +1,4 @@
-package com.example.husermenapp.dataclasses
+package com.example.husermenapp.api
 
 data class ItemSearchResponse(
     val seller_id: String,
@@ -6,16 +6,30 @@ data class ItemSearchResponse(
     val paging: Paging
 )
 
+data class CategorySearchResponse(
+    val id: String,
+    val name: String
+)
+
 data class Paging(
     val total: Int,
     val offset: Int,
     val limit: Int
 )
-data class ProductDetail(
+
+data class MCProductWrapper(
+    val code: Int,
+    val body: MCProductDetail
+)
+
+data class MCProductDetail(
     val id: String,
     val title: String,
     val price: Double,
+    val category_id: String,
+    val available_quantity: Int,
     val currency_id: String,
+    val sold_quantity: Int,
     val thumbnail: String, // Miniatura de la imagen principal
     val pictures: List<Picture> // Lista de URLs de las imágenes
 )
