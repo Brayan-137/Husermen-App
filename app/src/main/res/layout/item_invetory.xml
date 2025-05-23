@@ -22,12 +22,15 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ivPicture"/>
+        app:layout_constraintStart_toEndOf="@id/ivPicture"
+        style="@style/textItemsStyle"
+        />
 
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        style="@style/textItemsStyle"
         app:layout_constraintTop_toBottomOf="@id/tvName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ivPicture"/>
@@ -36,6 +39,7 @@
         android:id="@+id/tvPrice"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        style="@style/textItemsStyle"
         app:layout_constraintTop_toBottomOf="@id/tvDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ivPicture"/>
@@ -44,6 +48,7 @@
         android:id="@+id/tvStock"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        style="@style/textItemsStyle"
         app:layout_constraintTop_toBottomOf="@id/tvPrice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ivPicture"/>

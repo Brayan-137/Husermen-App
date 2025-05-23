@@ -2,7 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="5dp"
+    android:paddingVertical="10dp">
 
     <ImageView
         android:id="@+id/ivPicture"
@@ -19,6 +21,7 @@
         android:id="@+id/tvName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        style="@style/textItemsStyle"
         app:layout_constraintTop_toBottomOf="@id/ivPicture"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tvTopic"/>
@@ -27,6 +30,7 @@
         android:id="@+id/tvTopic"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        style="@style/textItemsStyle"
         app:layout_constraintTop_toBottomOf="@id/ivPicture"
         app:layout_constraintStart_toEndOf="@id/tvName"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -35,6 +39,7 @@
         android:id="@+id/tvDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        style="@style/textItemsStyle"
         app:layout_constraintTop_toBottomOf="@id/tvName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tvType"/>
@@ -44,6 +49,7 @@
         android:id="@+id/tvType"
         android:layout_width="75dp"
         android:layout_height="wrap_content"
+        style="@style/textItemsStyle"
         app:layout_constraintTop_toBottomOf="@id/tvTopic"
         app:layout_constraintStart_toEndOf="@id/tvDescription"
         app:layout_constraintEnd_toEndOf="parent"/>

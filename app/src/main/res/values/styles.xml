@@ -64,10 +64,16 @@
     <style name="saveButtonStyle">
         <item name="android:background">@color/enlace_accion</item>
         <item name="android:color">@color/white</item>
+        <item name="android:padding">5dp</item>
     </style>
 
     <style name="deleteButtonStyle">
         <item name="android:background">@color/error_advertencia</item>
         <item name="android:color">@color/white</item>
+        <item name="android:padding">5dp</item>
+    </style>
+
+    <style name="textItemsStyle" parent="textStyleNormal.Pequeño">
+
     </style>
 </resources>

@@ -14,44 +14,43 @@
         android:id="@+id/btnDeleteTutorial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toStartOf="@id/btnSaveTutorial"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/deleteButtonStyle">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:tint="@color/white"
             android:src="@drawable/ic_delete" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Eliminar"
-            style="@style/textStyleAuxiliar.Details" />
+            android:text="Eliminar" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/btnSaveTutorial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/saveButtonStyle">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:tint="@color/white"
             android:src="@drawable/ic_save"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Guardar"
-            style="@style/textStyleAuxiliar.Details" />
+            android:text="Guardar" />
     </LinearLayout>
 
     <ScrollView
