@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -15,6 +16,13 @@ import com.example.husermenapp.utils.FragmentUtils.applyTextViewFormat
 import com.example.husermenapp.utils.FragmentUtils.replaceFragment
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 class DetailsProductFragment : Fragment() {
     private var _binding: FragmentProductDetailsBinding? = null
@@ -23,6 +31,9 @@ class DetailsProductFragment : Fragment() {
     private val productsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("items")
     private var product: Product? = null
     private var isCreatingNewProduct: Boolean = false
+
+    private val debounceScope = CoroutineScope(Dispatchers.Main)
+    private val stockUpdateFlow = MutableSharedFlow<Map<String, Int>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +64,8 @@ class DetailsProductFragment : Fragment() {
         setupTextViews()
 
         binding.btnEditProduct.setOnClickListener { handleClickBtnEditProduct() }
+        binding.btnAddStock.setOnClickListener { handleClickBtnAddStock() }
+        binding.btnRemoveStock.setOnClickListener { handleClickBtnRemoveStock() }
 
         // Going to previous activity when back is pressed
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
@@ -63,7 +76,59 @@ class DetailsProductFragment : Fragment() {
             }
         }
 
-        // TODO: deshabilitar el botón de información ventas a menos que este vinculado a un producto de mercado libre
+        // Debounce configuration
+        debounceScope.launch {
+            stockUpdateFlow
+                .debounce(500)
+                .onEach { updateData ->
+                    val stockValue = updateData["stock"] ?: 0
+                    updateProduct(product, mapOf("stock" to stockValue))
+                }
+                .launchIn(this)
+        }
+    }
+
+    private fun handleClickBtnAddStock() {
+        val currentStock = binding.tvStockValue.text.toString().toIntOrNull() ?: 0
+        val newStock = currentStock + 1
+
+        binding.tvStockValue.text = newStock.toString()
+
+        debounceScope.launch {
+            stockUpdateFlow.emit(mapOf("stock" to newStock))
+        }
+    }
+
+    private fun handleClickBtnRemoveStock() {
+        val currentStock = binding.tvStockValue.text.toString().toIntOrNull() ?: 0
+        val newStock = currentStock - if (currentStock == 0) 0 else 1
+
+        binding.tvStockValue.text = newStock.toString()
+
+        debounceScope.launch {
+            stockUpdateFlow.emit(mapOf("stock" to newStock))
+        }
+    }
+
+    private fun updateProduct(product: Product?, newInformation: Map<String, Any>) {
+        product?.key?.let {
+            productsRef.child(it).updateChildren(newInformation)
+                .addOnSuccessListener {
+                    Toast.makeText(
+                        requireContext(),
+                        "Información actualizada correctamente.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    parentFragmentManager.popBackStack()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(
+                        requireContext(),
+                        "Ocurrió un problema al actualizar la información. Por favor, verifica tu conexión y vuelve a intentarlo.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+        }
     }
 
     private fun setupTextViews() {
