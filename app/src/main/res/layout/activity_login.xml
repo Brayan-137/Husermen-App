@@ -7,27 +7,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Login"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    style="@style/backgroundStyleNormal">
 
     <!-- Logo -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/name"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        style="@style/textStyleTitle"
+        />
 
     <!-- Information -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ingresa a tu cuenta"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        style="@style/textStyleNormal"
+        android:textStyle="bold"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Escribe tu correo y contraseña para ingresar a la aplicación."
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        style="@style/textStyleNormal"/>
 
     <!-- Email Input  -->
     <EditText
@@ -35,7 +41,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="email@domain.com"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        style="@style/labelStyle" />
 
     <!-- Password Input -->
     <EditText
@@ -43,7 +50,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password123#"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        style="@style/labelStyle"/>
 
     <!-- Login Button -->
     <Button
@@ -62,6 +70,7 @@
         android:layout_height="wrap_content"
         android:text="En caso de que no tengas cuenta regístrate."
         android:background="@android:color/transparent"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        style="@style/textStyleNormal" />
 
 </LinearLayout>
