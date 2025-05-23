@@ -30,8 +30,8 @@ data class MCProductDetail(
     val available_quantity: Int,
     val currency_id: String,
     val sold_quantity: Int,
-    val thumbnail: String, // Miniatura de la imagen principal
-    val pictures: List<Picture> // Lista de URLs de las imágenes
+    val thumbnail: String,
+    val pictures: List<Picture>
 )
 
 data class Picture(

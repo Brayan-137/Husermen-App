@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.example.husermenapp.ProductActivity
 import com.example.husermenapp.databinding.FragmentDetailsMercadoLibreBinding
 import com.example.husermenapp.dataclasses.MCProduct
@@ -32,7 +33,7 @@ class DetailsMCProductFragment : BaseItemDetailsFragment<FragmentDetailsMercadoL
             binding.tvCategoryValue.text = applyTextViewFormat(it.category.toString())
             binding.tvPriceValue.text = it.price.toString()
             binding.tvStockValue.text = it.stock.toString()
-            Log.d("Mensaje", it.stock.toString())
+            if (it.imageUrl != null) Glide.with(requireContext()).load(it.imageUrl).into(binding.ivPicture)
         }
     }
 
@@ -121,32 +122,32 @@ class DetailsMCProductFragment : BaseItemDetailsFragment<FragmentDetailsMercadoL
 //        }
 //    }
 
-    private fun goToLocalProduct() {
-        val productDetailsIntent = Intent(context, ProductActivity::class.java)
-
-        // Looking for and going to local product
-        val formatedQuery = mcProduct?.localProductKey?.lowercase()
-
-        mcProductsRef.orderByChild("key").startAt(formatedQuery).endAt(formatedQuery + "\uf8ff")
-            .addValueEventListener(object: ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val filteredArray = ArrayList<Product>()
-
-                    snapshot.children.forEach{ itemRef ->
-                        val product = itemRef.getValue(Product::class.java)
-                        product?.let { filteredArray.add(it) }
-                    }
-
-                    Log.d("Busqueda", "Se encontró la coincidencia buscada.")
-
-                    productDetailsIntent.putExtra("selectedProduct", filteredArray[0])
-
-                    startActivity(productDetailsIntent)
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    Log.w("Firebase", "Error al consultar los datos.", error.toException())
-                }
-            })
-    }
+//    private fun goToLocalProduct() {
+//        val productDetailsIntent = Intent(context, ProductActivity::class.java)
+//
+//        // Looking for and going to local product
+//        val formatedQuery = mcProduct?.localProductKey?.lowercase()
+//
+//        mcProductsRef.orderByChild("key").startAt(formatedQuery).endAt(formatedQuery + "\uf8ff")
+//            .addValueEventListener(object: ValueEventListener {
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    val filteredArray = ArrayList<Product>()
+//
+//                    snapshot.children.forEach{ itemRef ->
+//                        val product = itemRef.getValue(Product::class.java)
+//                        product?.let { filteredArray.add(it) }
+//                    }
+//
+//                    Log.d("Busqueda", "Se encontró la coincidencia buscada.")
+//
+//                    productDetailsIntent.putExtra("selectedProduct", filteredArray[0])
+//
+//                    startActivity(productDetailsIntent)
+//                }
+//
+//                override fun onCancelled(error: DatabaseError) {
+//                    Log.w("Firebase", "Error al consultar los datos.", error.toException())
+//                }
+//            })
+//    }
 }

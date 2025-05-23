@@ -57,13 +57,14 @@ class MercadoLibre(private var context: Context) {
 
                             val mcProducts = unpackedProducts.map {
                                 MCProduct(
-                                    key = it.id,
+                                    id = it.id,
                                     name = it.title,
                                     price = it.price.toInt(),
                                     stock = it.available_quantity,
                                     status = if (it.available_quantity > 0) "Disponible" else "Agotado",
                                     category = searchCategory(it.category_id),
-                                    topSells = sellsRanking[it.title]
+                                    topSells = sellsRanking[it.title],
+                                    imageUrl = it.thumbnail
                                 )
                             }
 
