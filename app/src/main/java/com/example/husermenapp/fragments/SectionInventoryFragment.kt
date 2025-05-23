@@ -72,15 +72,15 @@ class SectionInventoryFragment : Fragment() {
             val argsCategoryFilterFragment = Bundle()
             argsCategoryFilterFragment.putString("items", modelRef)
 
-            val filterCategoryFragment = FilterCategoryFragment<Product>(Product::class.java)
-            filterCategoryFragment.apply {
+            val tapFiltersFragment = TapFiltersFragment(Product::class.java, "category")
+            tapFiltersFragment.apply {
                 setUpdateItemsRecyclerView(::updateItemsRecyclerView)
                 arguments = argsCategoryFilterFragment
             }
 
             childFragmentManager.beginTransaction().apply {
                 setReorderingAllowed(true)
-                replace(R.id.fragmentContainerFilters, filterCategoryFragment)
+                replace(R.id.fragmentContainerFilters, tapFiltersFragment)
                 commit()
             }
         }

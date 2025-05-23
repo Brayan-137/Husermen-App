@@ -7,6 +7,7 @@ import com.example.husermenapp.api.MCProductDetail
 import com.example.husermenapp.api.RetrofitClient
 import com.example.husermenapp.dataclasses.Category
 import com.example.husermenapp.dataclasses.MCProduct
+import com.example.husermenapp.utils.FragmentUtils.applyTextViewFormat
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -214,5 +215,21 @@ class MercadoLibre(private var context: Context) {
                 }
             }
         }
+    }
+
+    fun getStatus(mcProductList: List<MCProduct>): Set<String> {
+        val status = mutableSetOf<String>()
+        mcProductList.forEach{ applyTextViewFormat(it.status?.let { it1 -> status.add(it1) }.toString()) }
+        return status
+    }
+
+    fun getCategories(mcProductList: List<MCProduct>): Set<String> {
+        val categories = mutableSetOf<String>()
+        mcProductList.forEach{ applyTextViewFormat(it.category?.let { it1 -> categories.add(it1) }.toString()) }
+        return categories
+    }
+
+    fun search(query: String, mcProductList: List<MCProduct>): List<MCProduct> {
+        return mcProductList.filter { it.name?.startsWith(query) ?: false }
     }
 }

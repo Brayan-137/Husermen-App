@@ -56,7 +56,7 @@ class SectionTutorialsFragment : Fragment() {
 
         setupRecyclerView()
         setupSearchView(savedInstanceState)
-//        setupTopicFilter(savedInstanceState)
+        setupTopicFilter(savedInstanceState)
     }
 
     private fun handleClickBtnAddTutorial() {
@@ -124,6 +124,25 @@ class SectionTutorialsFragment : Fragment() {
             childFragmentManager.beginTransaction().apply {
                 setReorderingAllowed(true)
                 replace(R.id.fragmentContainerSearchView, searchViewFragment)
+                commit()
+            }
+        }
+    }
+
+    private fun setupTopicFilter(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            val argsCategoryFilterFragment = Bundle()
+            argsCategoryFilterFragment.putString("items", modelRef)
+
+            val tapFiltersFragment = TapFiltersFragment(Tutorial::class.java, "topic")
+            tapFiltersFragment.apply {
+                setUpdateItemsRecyclerView(::updateItemsRecyclerView)
+                arguments = argsCategoryFilterFragment
+            }
+
+            childFragmentManager.beginTransaction().apply {
+                setReorderingAllowed(true)
+                replace(R.id.fragmentContainerFilters, tapFiltersFragment)
                 commit()
             }
         }
