@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnTopVentas"
         app:layout_constraintEnd_toStartOf="@+id/btnTutorials"
-        android:src="@drawable/ic_add"
+        android:src="@drawable/ic_mercado_libre"
         />
 
     <ImageButton
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnTutorials"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_add"
+        android:src="@drawable/ic_logout"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

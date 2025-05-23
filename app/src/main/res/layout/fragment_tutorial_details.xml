@@ -19,17 +19,20 @@
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="10dp"
+        style="@style/editButtonStyle">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_edit" />
+            android:src="@drawable/ic_edit"
+            app:tint="@color/white"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Editar"
-            style="@style/textStyleNormal.Pequeño" />
+            android:text="Editar"/>
     </LinearLayout>
 
     <ScrollView

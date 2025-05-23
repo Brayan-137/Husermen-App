@@ -73,6 +73,10 @@
         <item name="android:padding">5dp</item>
     </style>
 
+    <style name="editButtonStyle">
+        <item name="android:background">@color/botones_secundarios</item>
+    </style>
+
     <style name="textItemsStyle" parent="textStyleNormal.Pequeño">
 
     </style>
