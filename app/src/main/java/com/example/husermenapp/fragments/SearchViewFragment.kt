@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import com.example.husermenapp.databinding.FragmentSearchViewBinding
+import com.example.husermenapp.dataclasses.Product
 import com.example.husermenapp.fragments.basefragments.BaseFilterFragment
 
-class SearchViewFragment : BaseFilterFragment() {
+class SearchViewFragment<T: Any>(private val modelClass: Class<T>) : BaseFilterFragment<T>(modelClass) {
     private var _binding: FragmentSearchViewBinding? = null
     private val binding get() = _binding!!
     private val property = "name"
@@ -35,7 +36,9 @@ class SearchViewFragment : BaseFilterFragment() {
     private fun handleQuerySearchView(): SearchView.OnQueryTextListener = object:
         SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String): Boolean {
-            firebaseSearch(query, property)
+            firebaseSearch(query, property) {
+                updateItemsRecylerView(it as List<T>)
+            }
             binding.searchViewFragment.clearFocus()
             return true
         }
@@ -46,7 +49,9 @@ class SearchViewFragment : BaseFilterFragment() {
                 updateItemsRecylerView?.let { it(listOf()) }
             } else {
                 isSearching = true
-                firebaseSearch(newText!!, property)
+                firebaseSearch(newText!!, property) {
+                    updateItemsRecylerView(it as List<T>)
+                }
             }
 
             return true

@@ -26,7 +26,7 @@ class SectionInventoryFragment : Fragment() {
 
     private val modelRef: String = "items"
     private val productsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference(modelRef)
-    private lateinit var searchViewFragment: SearchViewFragment
+    private lateinit var searchViewFragment: SearchViewFragment<Product>
     private lateinit var fullItemsList: List<Product>
 
     private var handleClickItemDetails: ((Product) -> Unit)? = null
@@ -72,7 +72,7 @@ class SectionInventoryFragment : Fragment() {
             val argsCategoryFilterFragment = Bundle()
             argsCategoryFilterFragment.putString("items", modelRef)
 
-            val filterCategoryFragment = FilterCategoryFragment()
+            val filterCategoryFragment = FilterCategoryFragment<Product>(Product::class.java)
             filterCategoryFragment.apply {
                 setUpdateItemsRecyclerView(::updateItemsRecyclerView)
                 arguments = argsCategoryFilterFragment
@@ -142,7 +142,7 @@ class SectionInventoryFragment : Fragment() {
             val argsSearchViewFragment = Bundle()
             argsSearchViewFragment.putString("items", modelRef)
 
-            searchViewFragment = SearchViewFragment()
+            searchViewFragment = SearchViewFragment(Product::class.java)
             searchViewFragment.apply {
                 setUpdateItemsRecyclerView(::updateItemsRecyclerView)
                 arguments = argsSearchViewFragment

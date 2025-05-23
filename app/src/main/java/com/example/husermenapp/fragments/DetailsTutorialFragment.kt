@@ -32,13 +32,18 @@ class DetailsTutorialFragment : BaseItemDetailsFragment<FragmentTutorialDetailsB
             binding.tvTopicValue.text = applyTextViewFormat(it.topic.toString())
             binding.tvTypeValue.text = applyTextViewFormat(it.type.toString())
 
+            Log.d("Tutorial", "${it.type.toString()}")
+
             when (it.type.toString()) {
                 "video" -> {
                     binding.viewYoutubePlayer.visibility = View.VISIBLE
+                    binding.tvWalkthrough.visibility = View.GONE
                     playYoutubeVideo(it.videoUrl.toString().takeLast(11))
                 }
                 "guía" -> {
-                    binding.tvWalkthrough.visibility = View.GONE
+                    binding.tvWalkthrough.visibility = View.VISIBLE
+                    binding.viewYoutubePlayer.visibility = View.GONE
+                    binding.tvWalkthrough.text = it.content
                 }
             }
         }

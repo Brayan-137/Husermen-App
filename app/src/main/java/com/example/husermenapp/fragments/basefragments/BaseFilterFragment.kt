@@ -10,10 +10,11 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-open class BaseFilterFragment : Fragment() {
+open class BaseFilterFragment<T: Any>(private val modelClass: Class<T>) : Fragment() {
+    protected lateinit var updateItemsRecylerView: ((newListItems: List<T>) -> Unit)
+    val setUpdateItemsRecyclerView = { updateItemsRecyclerView: (newListItems: List<T>) -> Unit -> this.updateItemsRecylerView = updateItemsRecyclerView }
 
     protected lateinit var modelRef: DatabaseReference
-    protected var updateItemsRecylerView: ((newListProducts: List<Product>) -> Unit)? = null
     var isSearching: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,23 +25,22 @@ open class BaseFilterFragment : Fragment() {
         }
     }
 
-    val setUpdateItemsRecyclerView = { updateItemsRecyclerView: (newListProducts: List<Product>) -> Unit -> this.updateItemsRecylerView = updateItemsRecyclerView }
-
-    fun firebaseSearch(query: String, property: String) {
+    fun firebaseSearch(query: String, property: String, callback: (List<Any>) -> Unit) {
         val formatedQuery = query.lowercase()
 
         modelRef.orderByChild(property).startAt(formatedQuery).endAt(formatedQuery + "\uf8ff")
             .addValueEventListener(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val filteredArray = ArrayList<Product>()
+                    val filteredArray = ArrayList<T>()
 
                     snapshot.children.forEach{ itemRef ->
-                        val product = itemRef.getValue(Product::class.java)
-                        product?.let { filteredArray.add(it) }
+                        val item = itemRef.getValue(modelClass)
+                        item?.let { filteredArray.add(it) }
                     }
 
                     Log.d("Busqueda", "Se encontraron ${filteredArray.size} coincidencias")
-                    updateItemsRecylerView?.let { it(filteredArray) }
+//                    updateItemsRecylerView?.let { it(filteredArray) }
+                    callback(filteredArray)
                 }
 
                 override fun onCancelled(error: DatabaseError) {

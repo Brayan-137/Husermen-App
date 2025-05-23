@@ -13,8 +13,9 @@ import com.google.android.material.tabs.TabLayout
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import kotlin.reflect.KFunction1
 
-class FilterCategoryFragment : BaseFilterFragment() {
+class FilterCategoryFragment<T: Any>(private val modelClass: Class<T>) : BaseFilterFragment<T>(modelClass) {
     private var _binding: FragmentCategoryFilterBinding? = null
     private val binding get() = _binding!!
     private val property = "category"
@@ -52,7 +53,9 @@ class FilterCategoryFragment : BaseFilterFragment() {
                 TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     isSearching = true
-                    firebaseSearch(tab?.text.toString(), property)
+                    firebaseSearch(tab?.text.toString(), property) {
+                        updateItemsRecylerView(it as List<T>)
+                    }
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.husermenapp.R
 import com.example.husermenapp.TutorialActivity
 import com.example.husermenapp.adapters.TutorialAdapter
 import com.example.husermenapp.databinding.FragmentTutorialsBinding
@@ -24,7 +25,7 @@ class SectionTutorialsFragment : Fragment() {
 
     private val modelRef: String = "tutorials"
     private val tutorialsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference(modelRef)
-//    private lateinit var searchViewFragment: SearchViewFragment
+    private lateinit var searchViewFragment: SearchViewFragment<Tutorial>
     private lateinit var fullItemsList: List<Tutorial>
 
     private var handleClickItemDetails: ((Tutorial) -> Unit)? = null
@@ -54,7 +55,7 @@ class SectionTutorialsFragment : Fragment() {
         binding.btnAddItem.setOnClickListener{ handleClickBtnAddTutorial() }
 
         setupRecyclerView()
-//        setupSearchView(savedInstanceState)
+        setupSearchView(savedInstanceState)
 //        setupTopicFilter(savedInstanceState)
     }
 
@@ -80,8 +81,7 @@ class SectionTutorialsFragment : Fragment() {
     }
 
     private fun updateItemsRecyclerView(newItemList: List<Tutorial>) {
-//        if (searchViewFragment.isSearching && newItemList.isEmpty()) { TODO: Reemplazar la línea de abajo por esta cuando se inicialice el searchView
-        if (newItemList.isEmpty()) {
+        if (searchViewFragment.isSearching && newItemList.isEmpty()) {
             binding.tvResultsMessage.visibility = View.VISIBLE
             binding.recyclerItems.visibility = View.GONE
         } else {
@@ -110,24 +110,24 @@ class SectionTutorialsFragment : Fragment() {
         })
     }
 
-//    private fun setupSearchView(savedInstanceState: Bundle?) {
-//        if (savedInstanceState == null) { // Se ejecuta solamente cuando la actividad es nueva
-//            val argsSearchViewFragment = Bundle()
-//            argsSearchViewFragment.putString("items", modelRef)
-//
-//            searchViewFragment = SearchViewFragment()
-//            searchViewFragment.apply {
-//                setUpdateItemsRecyclerView(::updateItemsRecyclerView)
-//                arguments = argsSearchViewFragment
-//            }
-//
-//            childFragmentManager.beginTransaction().apply {
-//                setReorderingAllowed(true)
-//                replace(R.id.fragmentContainerSearchView, searchViewFragment)
-//                commit()
-//            }
-//        }
-//    }
+    private fun setupSearchView(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) { // Se ejecuta solamente cuando la actividad es nueva
+            val argsSearchViewFragment = Bundle()
+            argsSearchViewFragment.putString("items", modelRef)
+
+            searchViewFragment = SearchViewFragment(Tutorial::class.java)
+            searchViewFragment.apply {
+                setUpdateItemsRecyclerView(::updateItemsRecyclerView)
+                arguments = argsSearchViewFragment
+            }
+
+            childFragmentManager.beginTransaction().apply {
+                setReorderingAllowed(true)
+                replace(R.id.fragmentContainerSearchView, searchViewFragment)
+                commit()
+            }
+        }
+    }
 
     val setHandleClickItemDetails = { handleClickItemDetails: (Tutorial) -> Unit -> this.handleClickItemDetails = handleClickItemDetails }
 

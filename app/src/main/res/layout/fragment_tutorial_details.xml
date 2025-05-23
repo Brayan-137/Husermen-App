@@ -123,16 +123,14 @@
                 <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
                     android:id="@+id/viewYoutubePlayer"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:visibility="gone"
-                    tools:visibility="visible"/>
+                    android:layout_height="200dp"/>
 
                 <TextView
                     android:id="@+id/tvWalkthrough"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="@tools:sample/lorem/random"
-                    android:visibility="gone"/>
+                    tools:text="@tools:sample/lorem"
+                    tools:visibility="visible"/>
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
