@@ -7,6 +7,8 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.example.husermenapp.databinding.ActivitySignupFormBinding
 import com.example.husermenapp.dataclasses.User
 import com.google.firebase.auth.FirebaseAuth
@@ -25,6 +27,12 @@ class SignupForm : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupFormBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
         val userTypeOptions = listOf("Normal", "Administrador")
         val userTypeSpinner: Spinner = binding.spinnerUserType

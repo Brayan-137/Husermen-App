@@ -38,15 +38,13 @@ class TapFiltersFragment<T: Any>(
         return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
 //        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        if (_binding == null) return
 
         when (property) {
             "category" -> getCategories { setupTabLayout(it) }
