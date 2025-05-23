@@ -131,13 +131,13 @@ class SectionTutorialsFragment : Fragment() {
 
     private fun setupTopicFilter(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
-            val argsCategoryFilterFragment = Bundle()
-            argsCategoryFilterFragment.putString("items", modelRef)
+            val argsTapFilterFragment = Bundle()
+            argsTapFilterFragment.putString("items", modelRef)
 
             val tapFiltersFragment = TapFiltersFragment(Tutorial::class.java, "topic")
             tapFiltersFragment.apply {
                 setUpdateItemsRecyclerView(::updateItemsRecyclerView)
-                arguments = argsCategoryFilterFragment
+                arguments = argsTapFilterFragment
             }
 
             childFragmentManager.beginTransaction().apply {

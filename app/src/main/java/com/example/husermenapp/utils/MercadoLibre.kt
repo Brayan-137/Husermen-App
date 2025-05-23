@@ -217,7 +217,7 @@ class MercadoLibre(private var context: Context) {
         }
     }
 
-    fun getStatus(mcProductList: List<MCProduct>): Set<String> {
+    fun getStatuses(mcProductList: List<MCProduct>): Set<String> {
         val status = mutableSetOf<String>()
         mcProductList.forEach{ applyTextViewFormat(it.status?.let { it1 -> status.add(it1) }.toString()) }
         return status
@@ -230,6 +230,7 @@ class MercadoLibre(private var context: Context) {
     }
 
     fun search(query: String, mcProductList: List<MCProduct>): List<MCProduct> {
-        return mcProductList.filter { it.name?.startsWith(query) ?: false }
+        Log.d("MercadoLibre", "$query $mcProductList")
+        return mcProductList.filter { it.name?.lowercase()?.startsWith(query.lowercase()) ?: false }
     }
 }

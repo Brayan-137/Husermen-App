@@ -69,13 +69,13 @@ class SectionInventoryFragment : Fragment() {
 
     private fun setupCategoryFilter(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
-            val argsCategoryFilterFragment = Bundle()
-            argsCategoryFilterFragment.putString("items", modelRef)
+            val argsTapFilterFragment = Bundle()
+            argsTapFilterFragment.putString("items", modelRef)
 
             val tapFiltersFragment = TapFiltersFragment(Product::class.java, "category")
             tapFiltersFragment.apply {
                 setUpdateItemsRecyclerView(::updateItemsRecyclerView)
-                arguments = argsCategoryFilterFragment
+                arguments = argsTapFilterFragment
             }
 
             childFragmentManager.beginTransaction().apply {

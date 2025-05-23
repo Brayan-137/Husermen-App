@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.husermenapp.R
 import com.example.husermenapp.adapters.TSProductAdapter
 import com.example.husermenapp.databinding.FragmentTopSellsBinding
 import com.example.husermenapp.dataclasses.MCProduct
@@ -15,8 +16,9 @@ class SectionTopSellsFragment : Fragment() {
     private var _binding: FragmentTopSellsBinding? = null
     private val binding get() = _binding!!
 
-    //    private lateinit var searchViewFragment: SearchViewFragment
+    private lateinit var searchViewFragment: SearchViewFragment<MCProduct>
     private lateinit var fullItemsList: List<MCProduct>
+    private lateinit var mercadoLibre: MercadoLibre
 
     private var handleClickItemDetails: ((MCProduct) -> Unit)? = null
 
@@ -42,15 +44,19 @@ class SectionTopSellsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mercadoLibre = MercadoLibre(requireContext())
+        mercadoLibre = MercadoLibre(requireContext())
 
         setupRecyclerView()
-//        setupSearchView(savedInstanceState)
-//        setupTopicFilter(savedInstanceState)
+        setupSearchView(savedInstanceState)
 
         mercadoLibre.getCategories {
             it.forEach { category -> mercadoLibre.categoriesList.add(category) }
-            mercadoLibre.getMCItems { updateItemsRecyclerView(it) }
+            mercadoLibre.getMCItems {
+                updateItemsRecyclerView(it)
+
+                fullItemsList = it
+                setupMCCategoriesFilter(savedInstanceState)
+            }
         }
     }
 
@@ -76,24 +82,41 @@ class SectionTopSellsFragment : Fragment() {
         }
     }
 
-//    private fun setupSearchView(savedInstanceState: Bundle?) {
-//        if (savedInstanceState == null) { // Se ejecuta solamente cuando la actividad es nueva
-//            val argsSearchViewFragment = Bundle()
-//            argsSearchViewFragment.putString("items", modelRef)
-//
-//            searchViewFragment = SearchViewFragment()
-//            searchViewFragment.apply {
-//                setUpdateItemsRecyclerView(::updateItemsRecyclerView)
-//                arguments = argsSearchViewFragment
-//            }
-//
-//            childFragmentManager.beginTransaction().apply {
-//                setReorderingAllowed(true)
-//                replace(R.id.fragmentContainerSearchView, searchViewFragment)
-//                commit()
-//            }
-//        }
-//    }
+    private fun setupSearchView(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) { // Se ejecuta solamente cuando la actividad es nueva
+            val argsSearchViewFragment = Bundle()
+
+            searchViewFragment = SearchViewFragment(MCProduct::class.java, alternativeSearch = { query, callback ->
+                callback(mercadoLibre.search(query, fullItemsList))
+            })
+            searchViewFragment.apply {
+                setUpdateItemsRecyclerView(::updateItemsRecyclerView)
+                arguments = argsSearchViewFragment
+            }
+
+            childFragmentManager.beginTransaction().apply {
+                setReorderingAllowed(true)
+                replace(R.id.fragmentContainerSearchView, searchViewFragment)
+                commit()
+            }
+        }
+    }
+
+    private fun setupMCCategoriesFilter(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+
+            val tapFiltersFragment = TapFiltersFragment(MCProduct::class.java, "mcCategory", mcCategories = mercadoLibre.getCategories(fullItemsList))
+            tapFiltersFragment.apply {
+                setUpdateItemsRecyclerView(::updateItemsRecyclerView)
+            }
+
+            childFragmentManager.beginTransaction().apply {
+                setReorderingAllowed(true)
+                replace(R.id.fragmentContainerFilters, tapFiltersFragment)
+                commit()
+            }
+        }
+    }
 
     val setHandleClickItemDetails = { handleClickItemDetails: (MCProduct) -> Unit -> this.handleClickItemDetails = handleClickItemDetails }
 

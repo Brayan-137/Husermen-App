@@ -18,8 +18,8 @@ import com.google.firebase.database.ValueEventListener
 class TapFiltersFragment<T: Any>(
     private val modelClass: Class<T>,
     private val property: String,
-    private val status: Set<String>? = null,
-    private val mcCategory: Set<String>? = null
+    private val statuses: Set<String>? = null,
+    private val mcCategories: Set<String>? = null
 ) : BaseFilterFragment<T>(modelClass) {
     private var _binding: FragmentCategoryFilterBinding? = null
     private val binding get() = _binding!!
@@ -49,8 +49,8 @@ class TapFiltersFragment<T: Any>(
         when (property) {
             "category" -> getCategories { setupTabLayout(it) }
             "topic" -> getTopics { setupTabLayout(it) }
-            "status" -> if (status != null) setupTabLayout(status)
-            "mcCategory" -> if (mcCategory != null) setupTabLayout(mcCategory)
+            "status" -> if (statuses != null) setupTabLayout(statuses)
+            "mcCategory" -> if (mcCategories != null) setupTabLayout(mcCategories)
         }
     }
 
