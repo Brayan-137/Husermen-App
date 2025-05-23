@@ -17,7 +17,7 @@
         android:text="@string/name"
         android:textAlignment="center"
         style="@style/textStyleTitle"
-        />
+        android:layout_marginBottom="15dp" />
 
     <!-- Information -->
     <TextView
@@ -26,23 +26,27 @@
         android:text="Ingresa a tu cuenta"
         android:textAlignment="center"
         style="@style/textStyleNormal"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_marginBottom="15dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Escribe tu correo y contraseña para ingresar a la aplicación."
         android:textAlignment="center"
-        style="@style/textStyleNormal"/>
+        style="@style/textStyleNormal"
+        android:layout_marginBottom="15dp" />
 
-    <!-- Email Input  -->
+    <!-- Email Input -->
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="email@domain.com"
         android:inputType="textEmailAddress"
-        style="@style/labelStyle" />
+        style="@style/labelStyle"
+        android:layout_marginBottom="15dp"
+        android:padding="10dp"/>
 
     <!-- Password Input -->
     <EditText
@@ -51,7 +55,9 @@
         android:layout_height="wrap_content"
         android:hint="Password123#"
         android:inputType="textPassword"
-        style="@style/labelStyle"/>
+        style="@style/labelStyle"
+        android:padding="10dp"
+        android:layout_marginBottom="15dp" />
 
     <!-- Login Button -->
     <Button
@@ -59,9 +65,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Continuar"
-        style="@style/styleMainButtons"/>
-
-    <!-- Other Login Options -->
+        style="@style/styleMainButtons"
+        android:layout_marginBottom="15dp" />
 
     <!-- Signup Button -->
     <Button
@@ -70,7 +75,7 @@
         android:layout_height="wrap_content"
         android:text="En caso de que no tengas cuenta regístrate."
         android:background="@android:color/transparent"
-        android:textColor="@color/black"
-        style="@style/textStyleNormal" />
+        android:textColor="#FF5555FF"
+        android:textSize="@dimen/text_size_normal" />
 
 </LinearLayout>

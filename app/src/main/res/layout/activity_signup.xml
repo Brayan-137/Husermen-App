@@ -16,7 +16,8 @@
         android:layout_height="wrap_content"
         android:text="@string/name"
         android:textAlignment="center"
-        style="@style/textStyleTitle" />
+        style="@style/textStyleTitle"
+        android:layout_marginBottom="15dp" />
 
     <!-- Information -->
     <TextView
@@ -25,14 +26,16 @@
         android:text="Registra una cuenta"
         android:textAlignment="center"
         android:textStyle="bold"
-        style="@style/textStyleNormal" />
+        style="@style/textStyleNormal"
+        android:layout_marginBottom="15dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Escribe tu correo para ingresar a la aplicación."
         android:textAlignment="center"
-        style="@style/textStyleNormal" />
+        style="@style/textStyleNormal"
+        android:layout_marginBottom="15dp" />
 
     <!-- Email Input -->
     <EditText
@@ -41,7 +44,9 @@
         android:layout_height="wrap_content"
         android:hint="email@domain.com"
         android:inputType="textEmailAddress"
-        style="@style/labelStyle" />
+        style="@style/labelStyle"
+        android:padding="10dp"
+        android:layout_marginBottom="15dp" />
 
     <!-- SignupForm Button -->
     <Button
@@ -49,11 +54,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Continuar"
-        style="@style/styleMainButtons" />
+        style="@style/styleMainButtons"
+        android:layout_marginBottom="15dp" />
 
-    <!-- Other Signup Options -->
-    <!-- Puedes agregar más opciones aquí si es necesario, como botones para registrarse con Google, etc. -->
-    <!-- Ejemplo: Botón para volver al login -->
+    <!-- Back to Login Button -->
     <Button
         android:id="@+id/btnBackToLogin"
         android:layout_width="match_parent"
@@ -61,6 +65,7 @@
         android:text="¿Ya tienes cuenta? Inicia sesión."
         android:background="@android:color/transparent"
         android:textColor="@color/black"
+        android:textAlignment="center"
         style="@style/textStyleNormal" />
 
 </LinearLayout>
