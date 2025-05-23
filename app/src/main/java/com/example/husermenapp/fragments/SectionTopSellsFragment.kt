@@ -68,8 +68,7 @@ class SectionTopSellsFragment : Fragment() {
     }
 
     private fun updateItemsRecyclerView(newItemList: List<MCProduct>) {
-//        if (searchViewFragment.isSearching && newItemList.isEmpty()) { TODO: Reemplazar la línea de abajo por esta cuando se inicialice el searchView
-        if (newItemList.isEmpty()) {
+        if (searchViewFragment.isSearching && newItemList.isEmpty()) {
             binding.tvResultsMessage.visibility = View.VISIBLE
             binding.recyclerItems.visibility = View.GONE
         } else {
