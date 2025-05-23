@@ -14,6 +14,8 @@ import com.example.husermenapp.fragments.FragmentUtils.replaceFragment
 import com.example.husermenapp.fragments.basefragments.BaseItemDetailsFragment
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 
 class DetailsTutorialFragment : BaseItemDetailsFragment<FragmentTutorialDetailsBinding, Tutorial>() {
     override fun inflateBinding(
@@ -29,7 +31,16 @@ class DetailsTutorialFragment : BaseItemDetailsFragment<FragmentTutorialDetailsB
             binding.tvDescriptionValue.text = it.description
             binding.tvTopicValue.text = applyTextViewFormat(it.topic.toString())
             binding.tvTypeValue.text = applyTextViewFormat(it.type.toString())
-            binding.tvContent.text = it.content
+
+            when (it.type.toString()) {
+                "video" -> {
+                    binding.viewYoutubePlayer.visibility = View.VISIBLE
+                    playYoutubeVideo(it.videoUrl.toString().takeLast(11))
+                }
+                "guía" -> {
+                    binding.tvWalkthrough.visibility = View.GONE
+                }
+            }
         }
     }
 
@@ -54,6 +65,7 @@ class DetailsTutorialFragment : BaseItemDetailsFragment<FragmentTutorialDetailsB
         super.onViewCreated(view, savedInstanceState)
 
         setupTextViews()
+        setupYotubePlayer()
 
         binding.btnEditTutorial.setOnClickListener { handleClickBtnEditTutorial() }
     }
@@ -83,5 +95,20 @@ class DetailsTutorialFragment : BaseItemDetailsFragment<FragmentTutorialDetailsB
         val editTutorialFragment = setupEditItemFragment(tutorial)
         replaceFragment(requireActivity().supportFragmentManager,
             R.id.tutorialFragmentsContainer, editTutorialFragment)
+    }
+
+    private fun setupYotubePlayer() {
+        lifecycle.addObserver(binding.viewYoutubePlayer)
+    }
+
+    private fun playYoutubeVideo(codigoVideo: String) {
+        binding.viewYoutubePlayer.visibility = View.VISIBLE
+
+        binding.viewYoutubePlayer.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                youTubePlayer.cueVideo(codigoVideo, 0f)
+                youTubePlayer.play()
+            }
+        })
     }
 }

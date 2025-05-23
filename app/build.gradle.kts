@@ -61,4 +61,7 @@ dependencies {
 
     // Show images from URL
     implementation("io.coil-kt:coil:2.6.0")
+
+    // Manage Youtube Videos No API
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0")
 }

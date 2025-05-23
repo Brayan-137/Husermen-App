@@ -46,11 +46,11 @@ class EditTutorialFragment : BaseEditItemFragment<FragmentEditTutorialBinding>()
             binding.etContent.setText(it.content)
 
             when (it.type) {
-                "Video" -> {
+                "video" -> {
                     binding.spinnerType.setSelection(0)
                     binding.etVideoUrl.setText(it.videoUrl)
                 }
-                "Guía" -> {
+                "guía" -> {
                     binding.spinnerType.setSelection(1)
                     binding.etContent.setText(it.content)
                 }
@@ -68,7 +68,6 @@ class EditTutorialFragment : BaseEditItemFragment<FragmentEditTutorialBinding>()
         val adapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_item, contentTypeOptions)
         adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
         contentTypeSpinner.adapter = adapter
-        binding.spinnerType.setSelection(0)
 
         binding.spinnerType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -87,7 +86,7 @@ class EditTutorialFragment : BaseEditItemFragment<FragmentEditTutorialBinding>()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                // Puedes dejarlo vacío
+                // Not needed
             }
         }
     }
@@ -100,18 +99,39 @@ class EditTutorialFragment : BaseEditItemFragment<FragmentEditTutorialBinding>()
             "description" to checkField(binding.etDescriptionValue.text.toString()),
             "topic" to checkField(binding.etTopicValue.text.toString())?.lowercase(),
             "type" to checkField(binding.spinnerType.selectedItem.toString())?.lowercase(),
-            "content" to checkField(binding.etContent.text.toString())
+            "content" to checkField(binding.etContent.text.toString()),
+            "videoUrl" to checkField(binding.etVideoUrl.text.toString())
         )
 
-        for (value in currentValues.values) {
+        for ((key, value) in currentValues) {
             if (value == null) {
-                Toast.makeText(
-                    requireContext(),
-                    "Todos los campos deben estar completos.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                when (key) {
+                    "videoUrl" -> if (tutorial?.type == "video") {
+                        Toast.makeText(
+                            requireContext(),
+                            "Todos los campos deben estar completos.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        return
+                    }
+                    "content" -> if (tutorial?.type == "guía") {
+                        Toast.makeText(
+                            requireContext(),
+                            "Todos los campos deben estar completos.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        return
+                    }
+                    else -> {
+                        Toast.makeText(
+                            requireContext(),
+                            "Todos los campos deben estar completos.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        return
+                    }
+                }
             }
-            break
         }
 
         if (isCreatingNewTutorial) {
@@ -142,7 +162,8 @@ class EditTutorialFragment : BaseEditItemFragment<FragmentEditTutorialBinding>()
                     "description" to it.description,
                     "topic" to it.topic,
                     "type" to it.type,
-                    "content" to it.content
+                    "content" to it.content,
+                    "videoUrl" to it.videoUrl
                 )
             }
 
