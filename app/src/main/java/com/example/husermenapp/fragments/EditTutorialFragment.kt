@@ -195,6 +195,23 @@ class EditTutorialFragment : BaseEditItemFragment<FragmentEditTutorialBinding>()
     }
 
     private fun handleClickBtnDeleteTutorial() {
-        TODO("Not yet implemented")
+        tutorial?.key?.let {
+            tutorialsRef.child(it).removeValue()
+                .addOnSuccessListener {
+                    Toast.makeText(
+                        requireContext(),
+                        "Tutorial eliminado correctamente.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    requireActivity().finish()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(
+                        requireContext(),
+                        "Error al eliminar el tutorial: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+        }
     }
 }

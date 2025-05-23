@@ -129,7 +129,24 @@ class EditProductFragment : Fragment() {
     }
 
     private fun handleClickBtnDeleteProduct() {
-        TODO("Not yet implemented")
+        product?.key?.let {
+            productsRef.child(it).removeValue()
+                .addOnSuccessListener {
+                    Toast.makeText(
+                        requireContext(),
+                        "Producto eliminado correctamente.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    requireActivity().finish()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(
+                        requireContext(),
+                        "Error al eliminar el producto: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+        }
     }
 
     private fun handleClickBtnSaveProduct() {
