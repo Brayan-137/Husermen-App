@@ -2,7 +2,11 @@ package com.example.husermenapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.MenuPopupHelper
+import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import com.example.husermenapp.utils.FragmentUtils.replaceFragment
 import com.example.husermenapp.databinding.ActivityMainBinding
@@ -14,6 +18,7 @@ import com.example.husermenapp.fragments.SectionMercadoLibreFragment
 import com.example.husermenapp.fragments.SectionTopSellsFragment
 import com.example.husermenapp.fragments.SectionTutorialsFragment
 import com.example.husermenapp.fragments.SectionUserOptionsFragment
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -25,31 +30,65 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.addOnBackStackChangedListener { handleBackStackChanged() }
 
-        val sectionInventoryFragment = SectionInventoryFragment().apply { setHandleClickItemDetails(handleClickItemDetails) }
-        val sectionTutorialFragment = SectionTutorialsFragment().apply { setHandleClickItemDetails(handleClickTutorialDetails) }
-        val sectionMercadoLibreFragment = SectionMercadoLibreFragment().apply { setHandleClickItemDetails(handleClickMCProductDetails) }
-        val sectionTopSellsFragment = SectionTopSellsFragment().apply { setHandleClickItemDetails(handleClickMCProductDetails) }
+        val sectionInventoryFragment =
+            SectionInventoryFragment().apply { setHandleClickItemDetails(handleClickItemDetails) }
+        val sectionTutorialFragment =
+            SectionTutorialsFragment().apply { setHandleClickItemDetails(handleClickTutorialDetails) }
+        val sectionMercadoLibreFragment = SectionMercadoLibreFragment().apply {
+            setHandleClickItemDetails(handleClickMCProductDetails)
+        }
+        val sectionTopSellsFragment =
+            SectionTopSellsFragment().apply { setHandleClickItemDetails(handleClickMCProductDetails) }
 
-        replaceFragment(supportFragmentManager, R.id.sectionsFragmentsContainer, sectionInventoryFragment, false)
+        replaceFragment(
+            supportFragmentManager,
+            R.id.sectionsFragmentsContainer,
+            sectionInventoryFragment,
+            false
+        )
 
         binding.bottomNavigationView.setOnItemSelectedListener {
-            val nextFragment: Fragment = when (it.itemId) {
+            val nextFragment: Fragment? = when (it.itemId) {
                 R.id.inventorySection -> sectionInventoryFragment
                 R.id.topSellsSection -> sectionTopSellsFragment
                 R.id.mercadoLibreSection -> sectionMercadoLibreFragment
                 R.id.tutorialsSection -> sectionTutorialFragment
-                R.id.usersOptionsSection -> SectionUserOptionsFragment()
+                R.id.usersOptionsSection -> {
+                    confirmLogout()
+                    null
+                }
                 else -> SectionInventoryFragment()
             }
 
-            replaceFragment(
-                supportFragmentManager,
-                R.id.sectionsFragmentsContainer,
-                nextFragment,
-                isAddToBackStack = nextFragment != sectionInventoryFragment
-            )
+            if (nextFragment != null) {
+                replaceFragment(
+                    supportFragmentManager,
+                    R.id.sectionsFragmentsContainer,
+                    nextFragment,
+                    isAddToBackStack = nextFragment != sectionInventoryFragment
+                )
+            }
+
             true
         }
+    }
+
+    private fun confirmLogout() {
+        AlertDialog.Builder(this)
+            .setTitle("Cerrar sesión")
+            .setMessage("¿Estás seguro de que quieres salir?")
+            .setPositiveButton("Sí") { _, _ ->
+                performLogout()
+            }
+            .setNegativeButton("No", null)
+            .show()
+    }
+
+    private fun performLogout() {
+        FirebaseAuth.getInstance().signOut()
+
+        startActivity(Intent(this, Login::class.java))
+        this.finish()
     }
 
     private fun handleBackStackChanged() {

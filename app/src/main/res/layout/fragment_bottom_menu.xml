@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/bottomMenuStyle">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageButton
         android:id="@+id/btnInventory"
@@ -15,7 +14,6 @@
         app:layout_constraintEnd_toStartOf="@id/btnTopVentas"
         app:layout_constraintHorizontal_chainStyle="spread"
         android:src="@drawable/ic_inventory"
-        style="@style/imageButtonsStyle"
         />
 
     <ImageButton
@@ -26,7 +24,6 @@
         app:layout_constraintStart_toEndOf="@+id/btnInventory"
         app:layout_constraintEnd_toStartOf="@id/btnMercadoLibre"
         android:src="@drawable/ic_chart"
-        style="@style/imageButtonsStyle"
         />
 
     <ImageButton
@@ -37,7 +34,6 @@
         app:layout_constraintStart_toEndOf="@+id/btnTopVentas"
         app:layout_constraintEnd_toStartOf="@+id/btnTutorials"
         android:src="@drawable/ic_add"
-        style="@style/imageButtonsStyle"
         />
 
     <ImageButton
@@ -48,7 +44,6 @@
         app:layout_constraintStart_toEndOf="@id/btnMercadoLibre"
         app:layout_constraintEnd_toStartOf="@id/btnUserOptions"
         android:src="@drawable/ic_book"
-        style="@style/imageButtonsStyle"
         />
 
     <!-- USER OPTIONS -->
@@ -60,7 +55,6 @@
         app:layout_constraintStart_toEndOf="@+id/btnTutorials"
         app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/ic_add"
-        style="@style/imageButtonsStyle"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

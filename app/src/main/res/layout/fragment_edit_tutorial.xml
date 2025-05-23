@@ -45,8 +45,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_save"
-            android:contentDescription="@string/save_tutorial" />
+            android:src="@drawable/ic_save"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,7 +97,6 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/ic_add"
-                android:contentDescription="@string/tutorial_image_description"
                 android:scaleType="centerCrop"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
