@@ -1,79 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/backgroundStyleNormal"
     tools:context=".fragments.DetailsTutorialFragment">
 
+    <!-- Edit Button -->
     <LinearLayout
         android:id="@+id/btnEditTutorial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_edit"/>
+            android:contentDescription="@string/edit_tutorial"
+            android:src="@drawable/ic_edit" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Editar"/>
+            android:layout_marginStart="8dp"
+            android:text="Editar"
+            style="@style/textStyleNormal.Pequeño" />
     </LinearLayout>
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@id/btnEditTutorial"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/btnEditTutorial">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!-- Tutorial Name -->
             <TextView
                 android:id="@+id/tvName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/tvDescriptionLabel"
+                android:layout_marginTop="16dp"
+                style="@style/textStyleTitle"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="spread"
                 tools:text="Nombre" />
 
+            <!-- Description -->
             <TextView
                 android:id="@+id/tvDescriptionLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Descripción:"
-                android:textStyle="italic"
+                android:paddingEnd="5dp"
+                style="@style/textStyleNormal.Pequeño"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvDescriptionValue"
-                app:layout_constraintEnd_toStartOf="@id/tvDescriptionValue"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/tvDescriptionValue"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/tvTopicValue"
+                android:layout_marginTop="16dp"
+                style="@style/textStyleNormal.Pequeño"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvDescriptionLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvName"
-                app:layout_constraintWidth_max="320dp"
-                tools:text="Una resistente mesa de roble, símbolo de durabilidad y elegancia. Sus vetas naturales y acabado cálido la convierten en el centro perfecto para cualquier espacio." />
+                tools:text="Este tutorial te enseñará a realizar una tarea paso a paso dentro de la aplicación." />
 
+            <!-- Topic -->
             <TextView
                 android:id="@+id/tvTopicLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="Tema:"
-                android:textStyle="italic"
+                style="@style/textStyleNormal.Pequeño"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvTopicValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -81,19 +96,22 @@
                 android:id="@+id/tvTopicValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:textAlignment="textEnd"
-                app:layout_constraintBottom_toTopOf="@id/tvTypeValue"
+                style="@style/textStyleNormal.Pequeño"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvTopicLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvDescriptionValue"
                 tools:text="@tools:sample/lorem" />
 
+            <!-- Type -->
             <TextView
                 android:id="@+id/tvTypeLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="Tipo:"
-                android:textStyle="italic"
+                style="@style/textStyleNormal.Pequeño"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvTypeValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -101,36 +119,42 @@
                 android:id="@+id/tvTypeValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:textAlignment="textEnd"
-                app:layout_constraintBottom_toTopOf="@id/linearLayoutContentContainer"
+                style="@style/textStyleNormal.Pequeño"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvTypeLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvTopicValue"
                 tools:text="@tools:sample/lorem" />
 
+            <!-- Content Container -->
             <LinearLayout
                 android:id="@+id/linearLayoutContentContainer"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvTypeValue">
 
-                <!-- Youtube Player -->
+                <!-- YouTube Player -->
                 <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
                     android:id="@+id/viewYoutubePlayer"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"/>
+                    android:layout_height="200dp"
+                    android:background="@color/fondos_tarjetas" />
 
                 <TextView
                     android:id="@+id/tvWalkthrough"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    style="@style/textStyleNormal.Pequeño"
                     tools:text="@tools:sample/lorem"
-                    tools:visibility="visible"/>
+                    tools:visibility="visible" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

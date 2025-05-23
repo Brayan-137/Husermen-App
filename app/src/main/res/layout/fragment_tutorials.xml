@@ -30,6 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:gravity="center"
         android:paddingVertical="20dp"
+        style="@style/styleMainButtons"
         >
         <TextView
             android:layout_width="wrap_content"

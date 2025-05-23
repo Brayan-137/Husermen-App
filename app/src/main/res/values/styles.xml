@@ -5,6 +5,10 @@
         <item name="android:textColor">@color/texto_normal</item>
     </style>
 
+    <style name="textStyleNormal.Pequeño">
+        <item name="android:textSize">@dimen/text_size_auxiliar</item>
+    </style>
+
     <style name="textStyleTitle">
         <item name="android:textSize">@dimen/text_size_titulo</item>
         <item name="android:textColor">@color/texto_principal</item>

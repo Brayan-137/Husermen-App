@@ -1,138 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/backgroundStyleNormal"
     tools:context=".fragments.EditTutorialFragment">
 
+    <!-- Action Buttons -->
     <LinearLayout
         android:id="@+id/btnDeleteTutorial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnSaveTutorial"
-        >
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_delete"/>
+            android:src="@drawable/ic_delete" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Eliminar"/>
+            android:layout_marginStart="8dp"
+            android:text="Eliminar"
+            style="@style/textStyleAuxiliar.Details" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/btnSaveTutorial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_save"/>
+            android:src="@drawable/ic_save"
+            android:contentDescription="@string/save_tutorial" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Guardar"/>
+            android:layout_marginStart="8dp"
+            android:text="Guardar"
+            style="@style/textStyleAuxiliar.Details" />
     </LinearLayout>
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@id/btnSaveTutorial"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/btnSaveTutorial">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!-- Tutorial Name -->
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="16dp"
+                android:text="Nombre:"
+                style="@style/textStyleAuxiliar.Details"
                 app:layout_constraintBaseline_toBaselineOf="@id/etName"
-                tools:text="Nombre:" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
                 android:id="@+id/etName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="Como utilizar Instagram para.."
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/ivPicture"
-                app:layout_constraintStart_toStartOf="@id/etDescriptionValue"
+                android:layout_marginTop="16dp"
+                android:hint="Como utilizar Instagram para..."
+                android:inputType="text"
+                style="@style/textStyleNormal.Pequeño"
                 app:layout_constraintEnd_toEndOf="parent"
-                />
+                app:layout_constraintStart_toEndOf="@id/tvName"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <!-- Tutorial Image -->
             <ImageView
                 android:id="@+id/ivPicture"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                app:layout_constraintHeight_max="250dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/ic_add"
+                android:contentDescription="@string/tutorial_image_description"
                 android:scaleType="centerCrop"
-                app:layout_constraintTop_toBottomOf="@+id/etName"
-                app:layout_constraintBottom_toTopOf="@id/etDescriptionValue"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintHeight_max="250dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etName" />
 
+            <!-- Description -->
             <TextView
                 android:id="@+id/tvDescriptionLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Descripción:"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/etDescriptionValue"
-                app:layout_constraintTop_toTopOf="@id/etDescriptionValue"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+                style="@style/textStyleAuxiliar.Details"
+                app:layout_constraintBaseline_toBaselineOf="@id/etDescriptionValue"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
                 android:id="@+id/etDescriptionValue"
                 android:layout_width="0dp"
-                app:layout_constraintWidth_max="320dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:gravity="top"
-                android:hint="Este tutorial te enseñará a realizar una tarea paso a paso dentro de la aplicación.
-Aprenderás a interactuar con las funciones principales, completar formularios, y guardar tus cambios correctamente."
-                app:layout_constraintStart_toEndOf="@id/tvDescriptionLabel"
+                android:hint="Este tutorial te enseñará a realizar una tarea paso a paso dentro de la aplicación."
+                android:inputType="textMultiLine"
+                android:minHeight="100dp"
+                style="@style/textStyleNormal.Pequeño"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/etTopicValue"
-                app:layout_constraintTop_toBottomOf="@id/ivPicture"/>
+                app:layout_constraintStart_toEndOf="@id/tvDescriptionLabel"
+                app:layout_constraintTop_toBottomOf="@id/ivPicture" />
 
+            <!-- Topic -->
             <TextView
                 android:id="@+id/tvTopicLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="Tema:"
+                style="@style/textStyleAuxiliar.Details"
                 app:layout_constraintBaseline_toBaselineOf="@id/etTopicValue"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+                app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
                 android:id="@+id/etTopicValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAlignment="textEnd"
+                android:layout_marginTop="8dp"
                 android:hint="Instagram"
-                app:layout_constraintBottom_toTopOf="@id/spinnerType"
+                android:inputType="text"
+                style="@style/textStyleNormal.Pequeño"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/etDescriptionValue"
-                app:layout_constraintTop_toBottomOf="@id/etDescriptionValue"
-                />
+                app:layout_constraintStart_toEndOf="@id/tvTopicLabel"
+                app:layout_constraintTop_toBottomOf="@id/etDescriptionValue" />
 
+            <!-- Type -->
             <TextView
                 android:id="@+id/tvTypeLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="Tipo:"
+                style="@style/textStyleAuxiliar.Details"
                 app:layout_constraintBaseline_toBaselineOf="@id/spinnerType"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -140,63 +169,70 @@ Aprenderás a interactuar con las funciones principales, completar formularios, 
                 android:id="@+id/spinnerType"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:spinnerMode="dropdown"
-                android:textAlignment="textEnd"
-                app:layout_constraintBottom_toTopOf="@id/linearLayoutContentContainer"
+                style="@style/textStyleNormal.Pequeño"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/etDescriptionValue"
-                app:layout_constraintTop_toBottomOf="@id/etTopicValue"
-                />
-            
+                app:layout_constraintStart_toEndOf="@id/tvTypeLabel"
+                app:layout_constraintTop_toBottomOf="@id/etTopicValue" />
+
+            <!-- Content Container -->
             <LinearLayout
                 android:id="@+id/linearLayoutContentContainer"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/spinnerType"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/spinnerType">
 
                 <LinearLayout
                     android:id="@+id/walkthrough"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:orientation="vertical"
                     android:visibility="gone">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Contenido de la guía:"/>
-
+                        android:text="Contenido de la guía:"
+                        style="@style/textStyleAuxiliar.Details" />
                     <EditText
                         android:id="@+id/etContent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:hint="Este tutorial te guiará paso a paso. Asegúrate de leer bien cada instrucción antes de continuar.
-Si ves un botón resaltado o una sección marcada, probablemente es el siguiente lugar donde debes hacer clic o escribir algo."
-                        />
+                        android:layout_marginTop="8dp"
+                        android:gravity="top"
+                        android:hint="Este tutorial te guiará paso a paso..."
+                        android:inputType="textMultiLine"
+                        android:minHeight="100dp"
+                        style="@style/textStyleNormal.Pequeño" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/video"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Url del video:"/>
-
+                        android:text="URL del video:"
+                        style="@style/textStyleAuxiliar.Details" />
                     <EditText
                         android:id="@+id/etVideoUrl"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:hint="https://www.youtube.com/watch?v=8l6KQCOJBB4"/>
+                        android:layout_marginTop="8dp"
+                        android:hint="https://www.youtube.com/watch?v=8l6KQCOJBB4"
+                        android:inputType="textUri"
+                        style="@style/textStyleNormal.Pequeño" />
                 </LinearLayout>
-
-
             </LinearLayout>
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
