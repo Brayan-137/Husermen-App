@@ -1,7 +1,11 @@
 package com.example.husermenapp.fragments
 
 import android.R
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,11 +13,15 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import com.bumptech.glide.Glide
 import com.example.husermenapp.databinding.FragmentEditTutorialBinding
 import com.example.husermenapp.dataclasses.Tutorial
 import com.example.husermenapp.utils.FragmentUtils.applyTextViewFormat
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.util.UUID
 
 class EditTutorialFragment : BaseEditItemFragment<FragmentEditTutorialBinding>() {
     override fun inflateBinding(
@@ -38,12 +46,25 @@ class EditTutorialFragment : BaseEditItemFragment<FragmentEditTutorialBinding>()
         super.onViewCreated(view, savedInstanceState)
 
         setupSpinnerContentType()
+        setupPickImageLauncher()
+
+        originalValues = tutorial?.let {
+            mapOf<String, Any?>(
+                "name" to it.name,
+                "description" to it.description,
+                "topic" to it.topic,
+                "type" to it.type,
+                "content" to it.content,
+                "videoUrl" to it.videoUrl
+            )
+        } ?: emptyMap()
 
         if(!isCreatingNewTutorial) tutorial?.let {
             binding.etName.setText(applyTextViewFormat(it.name.toString()))
             binding.etDescriptionValue.setText(it.description)
             binding.etTopicValue.setText(applyTextViewFormat(it.topic.toString()))
             binding.etContent.setText(it.content)
+            if (it.imageUrl != null) Glide.with(requireContext()).load(it.imageUrl).into(binding.ivPicture)
 
             when (it.type) {
                 "video" -> {
@@ -59,6 +80,36 @@ class EditTutorialFragment : BaseEditItemFragment<FragmentEditTutorialBinding>()
 
         binding.btnSaveTutorial.setOnClickListener { handleClickBtnSaveTutorial() }
         binding.btnDeleteTutorial.setOnClickListener { handleClickBtnDeleteTutorial() }
+        binding.ivPicture.setOnClickListener { handleClickIvPicture() }
+
+        // TODO: Deshabilitar boton en caso de que no haya cambios.
+    }
+
+    private fun setupPickImageLauncher() {
+        pickImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data = result.data
+                selectedImageUri = data?.data
+                selectedImageUri?.let { uri ->
+                    Glide.with(requireContext()).load(uri).into(binding.ivPicture)
+
+                    val imageRef = storageRef.child("images/${UUID.randomUUID()}.jpg")
+
+                    imageRef.putFile(uri).addOnSuccessListener {
+                        imageRef.downloadUrl.addOnSuccessListener { downloadUrl ->
+                            Log.d("Firebase", "URL: $downloadUrl")
+                            tutorial?.imageUrl = downloadUrl.toString()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun handleClickIvPicture() {
+        pickImageLauncher.launch(Intent(Intent.ACTION_PICK).apply {
+            type = "image/*"
+        })
     }
 
     private fun setupSpinnerContentType() {
@@ -100,7 +151,8 @@ class EditTutorialFragment : BaseEditItemFragment<FragmentEditTutorialBinding>()
             "topic" to checkField(binding.etTopicValue.text.toString())?.lowercase(),
             "type" to checkField(binding.spinnerType.selectedItem.toString())?.lowercase(),
             "content" to checkField(binding.etContent.text.toString()),
-            "videoUrl" to checkField(binding.etVideoUrl.text.toString())
+            "videoUrl" to checkField(binding.etVideoUrl.text.toString()),
+            "imageUrl" to tutorial?.imageUrl
         )
 
         for ((key, value) in currentValues) {
@@ -156,19 +208,8 @@ class EditTutorialFragment : BaseEditItemFragment<FragmentEditTutorialBinding>()
             }
         } else {
             // Updating the tutorial's information
-            val oldValues = tutorial?.let {
-                mapOf(
-                    "name" to it.name,
-                    "description" to it.description,
-                    "topic" to it.topic,
-                    "type" to it.type,
-                    "content" to it.content,
-                    "videoUrl" to it.videoUrl
-                )
-            }
-
             val newInformation = currentValues.filter { (key, currentValue) ->
-                oldValues?.get(key) != currentValue
+                originalValues?.get(key) != currentValue
             }
 
             if (newInformation.isNotEmpty()) {
