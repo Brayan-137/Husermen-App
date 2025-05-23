@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- FONT SIZES -->
+    <dimen name="text_size_titulo">36sp</dimen>
+    <dimen name="text_size_subtitulo">28sp</dimen>
+    <dimen name="text_size_normal">20sp</dimen>
+    <dimen name="text_size_auxiliar">16sp</dimen>
+    <dimen name="text_size_botones">20sp</dimen>
+</resources>

@@ -50,7 +50,8 @@
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Continuar" />
+        android:text="Continuar"
+        style="@style/styleMainButtons"/>
 
     <!-- Other Login Options -->
 

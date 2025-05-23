@@ -2,4 +2,25 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--  GENERAL COLORS  -->
+    <color name="fondo_general">#FFD9B382</color>
+    <color name="bordes_separadores">#FFE5E5E5</color>
+    <color name="botones_principales">#FF2E4A62</color>
+    <color name="botones_secundarios">#FF8D9773</color>
+    <color name="fondos_tarjetas">#FFFAF3E0</color>
+    <color name="textos_fuertes">#FF5C4033</color>
+
+    <!-- TEXT COLORS -->
+    <color name="texto_principal">#FF5C4033</color>
+    <color name="texto_normal">#FF3F3F3F</color>
+    <color name="texto_ayudas">#FF5C4033</color>
+
+    <!-- BUTTONS COLORS -->
+    <color name="boton_primario">#FFFAF3E0</color>
+    <color name="boton_secundario">#FF5C4033</color>
+
+    <!-- STATUS COLORS -->
+    <color name="error_advertencia">#FFB24C4C</color>
+    <color name="enlace_accion">#FF2EAA62</color>
 </resources>
