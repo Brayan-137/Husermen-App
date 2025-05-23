@@ -21,7 +21,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class MercadoLibre(private var context: Context) {
-    private val MELI_ACCESS_TOKEN = "APP_USR-8551929605562168-052222-c9215ee1213ffd10b567ff7b4fee2043-2453143702"
+    private val MELI_ACCESS_TOKEN = "APP_USR-8551929605562168-052307-f817c4ecbbf7fa1c66e7b286a16bd398-2453143702"
     private val MELI_SELLER_TEST_USER_ID = "2453143702"
 
     private val categoriesRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("categories")

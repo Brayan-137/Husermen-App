@@ -61,5 +61,13 @@
         <item name="android:textColorHint">#828282</item>
     </style>
 
+    <style name="saveButtonStyle">
+        <item name="android:background">@color/enlace_accion</item>
+        <item name="android:color">@color/white</item>
+    </style>
 
+    <style name="deleteButtonStyle">
+        <item name="android:background">@color/error_advertencia</item>
+        <item name="android:color">@color/white</item>
+    </style>
 </resources>
