@@ -19,7 +19,7 @@ import com.example.husermenapp.databinding.FragmentEditProductBinding
 import com.example.husermenapp.dataclasses.Product
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.example.husermenapp.fragments.FragmentUtils.applyTextViewFormat
+import com.example.husermenapp.utils.FragmentUtils.applyTextViewFormat
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.util.UUID

@@ -1,13 +1,11 @@
 package com.example.husermenapp
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.husermenapp.databinding.ActivityMcproductBinding
 import com.example.husermenapp.dataclasses.MCProduct
-import com.example.husermenapp.dataclasses.Product
 import com.example.husermenapp.fragments.DetailsMCProductFragment
-import com.example.husermenapp.fragments.FragmentUtils.replaceFragment
+import com.example.husermenapp.utils.FragmentUtils.replaceFragment
 
 class MCProductActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMcproductBinding

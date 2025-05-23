@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.husermenapp.adapters.MCProductAdapter
 import com.example.husermenapp.adapters.TSProductAdapter
 import com.example.husermenapp.databinding.FragmentTopSellsBinding
 import com.example.husermenapp.dataclasses.MCProduct
+import com.example.husermenapp.utils.MercadoLibre
 
 class SectionTopSellsFragment : Fragment() {
     private var _binding: FragmentTopSellsBinding? = null

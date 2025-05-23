@@ -7,12 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.example.husermenapp.ProductActivity
 import com.example.husermenapp.databinding.FragmentDetailsMercadoLibreBinding
 import com.example.husermenapp.dataclasses.MCProduct
 import com.example.husermenapp.dataclasses.Product
-import com.example.husermenapp.fragments.FragmentUtils.applyTextViewFormat
+import com.example.husermenapp.utils.FragmentUtils.applyTextViewFormat
 import com.example.husermenapp.fragments.basefragments.BaseItemDetailsFragment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

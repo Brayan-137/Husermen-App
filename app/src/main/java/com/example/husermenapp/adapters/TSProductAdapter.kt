@@ -5,10 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.husermenapp.fragments.FragmentUtils.applyTextViewFormat
+import com.example.husermenapp.utils.FragmentUtils.applyTextViewFormat
 import com.example.husermenapp.dataclasses.MCProduct
 import com.example.husermenapp.R
-import com.example.husermenapp.databinding.ItemMercadolibreBinding
 import com.example.husermenapp.databinding.ItemTopsellsBinding
 
 class TSProductAdapter (private var tsProductList: List<MCProduct>, private var handleClickMCProductDetails: (MCProduct) -> Unit): RecyclerView.Adapter<TSProductAdapter.TSProductViewHolder>() {

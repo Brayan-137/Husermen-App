@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.example.husermenapp.fragments.FragmentUtils.applyTextViewFormat
+import com.example.husermenapp.utils.FragmentUtils.applyTextViewFormat
 import java.io.Serializable
 
 abstract class BaseItemDetailsFragment<VB: ViewBinding, T: Any> : Fragment() {

@@ -1,4 +1,4 @@
-package com.example.husermenapp.fragments
+package com.example.husermenapp.utils
 
 import android.content.Context
 import android.util.Log
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MercadoLibre(private var context: Context) {
-    private val MELI_ACCESS_TOKEN = "APP_USR-8551929605562168-052214-3c90f4420e6270dcd8f5f24a5ee90e9b-2453143702"
+    private val MELI_ACCESS_TOKEN = "APP_USR-8551929605562168-052222-c9215ee1213ffd10b567ff7b4fee2043-2453143702"
     private val MELI_SELLER_TEST_USER_ID = "2453143702"
 
     private val categoriesRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("categories")

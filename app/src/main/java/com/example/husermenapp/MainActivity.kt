@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.husermenapp.fragments.FragmentUtils.replaceFragment
+import com.example.husermenapp.utils.FragmentUtils.replaceFragment
 import com.example.husermenapp.databinding.ActivityMainBinding
 import com.example.husermenapp.dataclasses.MCProduct
 import com.example.husermenapp.dataclasses.Product

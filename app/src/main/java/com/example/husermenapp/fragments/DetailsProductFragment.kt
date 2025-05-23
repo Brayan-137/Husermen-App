@@ -11,8 +11,8 @@ import com.bumptech.glide.Glide
 import com.example.husermenapp.R
 import com.example.husermenapp.databinding.FragmentProductDetailsBinding
 import com.example.husermenapp.dataclasses.Product
-import com.example.husermenapp.fragments.FragmentUtils.applyTextViewFormat
-import com.example.husermenapp.fragments.FragmentUtils.replaceFragment
+import com.example.husermenapp.utils.FragmentUtils.applyTextViewFormat
+import com.example.husermenapp.utils.FragmentUtils.replaceFragment
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 

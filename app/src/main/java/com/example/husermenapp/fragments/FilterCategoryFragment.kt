@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.husermenapp.databinding.FragmentCategoryFilterBinding
 import com.example.husermenapp.dataclasses.Product
-import com.example.husermenapp.fragments.FragmentUtils.applyTextViewFormat
+import com.example.husermenapp.utils.FragmentUtils.applyTextViewFormat
 import com.example.husermenapp.fragments.basefragments.BaseFilterFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.database.DataSnapshot

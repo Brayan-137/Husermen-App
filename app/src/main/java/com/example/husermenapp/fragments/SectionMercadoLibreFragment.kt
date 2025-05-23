@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.husermenapp.adapters.MCProductAdapter
 import com.example.husermenapp.databinding.FragmentMercadoLibreBinding
 import com.example.husermenapp.dataclasses.MCProduct
+import com.example.husermenapp.utils.MercadoLibre
 
 class SectionMercadoLibreFragment : Fragment() {
     private var _binding: FragmentMercadoLibreBinding? = null

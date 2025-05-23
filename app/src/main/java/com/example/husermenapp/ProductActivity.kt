@@ -2,7 +2,7 @@ package com.example.husermenapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.husermenapp.fragments.FragmentUtils.replaceFragment
+import com.example.husermenapp.utils.FragmentUtils.replaceFragment
 import com.example.husermenapp.databinding.ActivityProductBinding
 import com.example.husermenapp.dataclasses.Product
 import com.example.husermenapp.fragments.DetailsProductFragment
