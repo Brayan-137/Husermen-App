@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.husermenapp.utils.FragmentUtils.applyTextViewFormat
 import com.example.husermenapp.dataclasses.MCProduct
 import com.example.husermenapp.R
@@ -37,6 +38,7 @@ class TSProductAdapter (private var tsProductList: List<MCProduct>, private var 
                 tvName.text = applyTextViewFormat(tsProduct.name.toString())
                 tvPrice.text = tsProduct.price.toString()
                 tvStock.text = tsProduct.stock.toString()
+                if (tsProduct.imageUrl != null) Glide.with(itemView.context).load(tsProduct.imageUrl).into(binding.ivPicture)
             }
 
             itemView.setOnClickListener{ handleClickMCProductDetails(tsProduct) }

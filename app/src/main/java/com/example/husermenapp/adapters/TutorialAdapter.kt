@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.husermenapp.utils.FragmentUtils.applyTextViewFormat
 import com.example.husermenapp.R
 import com.example.husermenapp.dataclasses.Tutorial
@@ -38,6 +39,7 @@ class TutorialAdapter(private var tutorialList: List<Tutorial>, private var hand
                 tvDescription.text = tutorial.description
                 tvTopic.text = tutorial.topic.toString()
                 tvType.text = tutorial.type.toString()
+                if (tutorial.imageUrl != null) Glide.with(itemView.context).load(tutorial.imageUrl).into(binding.ivPicture)
             }
 
             itemView.setOnClickListener{ handleClickItemDetails(tutorial) }

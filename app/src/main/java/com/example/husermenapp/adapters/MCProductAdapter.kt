@@ -4,7 +4,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.husermenapp.utils.FragmentUtils.applyTextViewFormat
 import com.example.husermenapp.dataclasses.MCProduct
 import com.example.husermenapp.R
@@ -37,6 +39,7 @@ class MCProductAdapter (private var mcProductList: List<MCProduct>, private var 
                 tvPrice.text = mcProduct.price.toString()
                 tvStock.text = mcProduct.stock.toString()
                 tvStatus.text = mcProduct.status
+                if (mcProduct.imageUrl != null) Glide.with(itemView.context).load(mcProduct.imageUrl).into(binding.ivPicture)
             }
 
             itemView.setOnClickListener{ handleClickMCProductDetails(mcProduct) }
