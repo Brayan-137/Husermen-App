@@ -75,10 +75,11 @@
 
             <ImageView
                 android:id="@+id/ivPicture"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
                 app:layout_constraintHeight_max="250dp"
-                tools:background="@tools:sample/backgrounds/scenic"
+                android:background="@drawable/ic_add"
+                android:scaleType="centerCrop"
                 app:layout_constraintTop_toBottomOf="@+id/etName"
                 app:layout_constraintBottom_toTopOf="@id/etDescriptionValue"
                 app:layout_constraintEnd_toEndOf="parent"

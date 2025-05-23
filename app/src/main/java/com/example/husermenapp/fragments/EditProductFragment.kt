@@ -1,26 +1,42 @@
 package com.example.husermenapp.fragments
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.husermenapp.databinding.FragmentEditProductBinding
 import com.example.husermenapp.dataclasses.Product
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.example.husermenapp.fragments.FragmentUtils.applyTextViewFormat
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import java.util.UUID
 
 class EditProductFragment : Fragment() {
     private var _binding: FragmentEditProductBinding?= null
     private val binding get() = _binding!!
 
     private val productsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("items")
+    private val storageRef: StorageReference = FirebaseStorage.getInstance().getReference()
     private var product: Product? = null
     private var isCreatingNewProduct: Boolean = false
+
+    private lateinit var originalValues: Map<String, Any?>
+
+    private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
+    private var selectedImageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,18 +72,60 @@ class EditProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupPickImageLauncher()
+
+        originalValues = product?.let {
+            mapOf<String, Any?>(
+                "name" to it.name,
+                "description" to it.description,
+                "category" to it.category,
+                "price" to it.price,
+                "stock" to it.stock,
+                "imageUrl" to it.imageUrl
+            )
+        } ?: emptyMap()
+
         if (!isCreatingNewProduct) product?.let {
             binding.etName.setText(applyTextViewFormat(it.name.toString()))
             binding.etDescriptionValue.setText(it.description)
             binding.etCategoryValue.setText(applyTextViewFormat(it.category.toString()))
             binding.etPriceValue.setText(it.price.toString())
             binding.etStockValue.setText(it.stock.toString())
+            if (it.imageUrl != null) Glide.with(requireContext()).load(it.imageUrl).into(binding.ivPicture)
         }
 
         binding.btnSaveProduct.setOnClickListener { handleClickBtnSaveProduct() }
         binding.btnDeleteProduct.setOnClickListener { handleClickBtnDeleteProduct() }
+        binding.ivPicture.setOnClickListener { handleClickIvPicture() }
 
         // TODO: Deshabilitar boton en caso de que no haya cambios.
+    }
+
+    private fun setupPickImageLauncher() {
+        pickImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data = result.data
+                selectedImageUri = data?.data
+                selectedImageUri?.let { uri ->
+                    Glide.with(requireContext()).load(uri).into(binding.ivPicture)
+
+                    val imageRef = storageRef.child("images/${UUID.randomUUID()}.jpg")
+
+                    imageRef.putFile(uri).addOnSuccessListener {
+                        imageRef.downloadUrl.addOnSuccessListener { downloadUrl ->
+                            Log.d("Firebase", "URL: $downloadUrl")
+                            product?.imageUrl = downloadUrl.toString()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun handleClickIvPicture() {
+        pickImageLauncher.launch(Intent(Intent.ACTION_PICK).apply {
+            type = "image/*"
+        })
     }
 
     private fun handleClickBtnDeleteProduct() {
@@ -82,7 +140,8 @@ class EditProductFragment : Fragment() {
             "description" to checkField(binding.etDescriptionValue.text),
             "category" to checkField(binding.etCategoryValue.text)?.lowercase(),
             "price" to checkField(binding.etPriceValue.text)?.toIntOrNull(),
-            "stock" to checkField(binding.etStockValue.text)?.toIntOrNull()
+            "stock" to checkField(binding.etStockValue.text)?.toIntOrNull(),
+            "imageUrl" to product?.imageUrl
         )
 
         for ((key, value) in currentValues) {
@@ -98,6 +157,9 @@ class EditProductFragment : Fragment() {
                         "El stock debe ser un número. Por favor, verifique el valor e intentelo nuevamente.",
                         Toast.LENGTH_SHORT
                     ).show()
+                    "imageUrl" -> {
+                        // Upload and image is not necesary
+                    }
                     else -> Toast.makeText(
                         requireContext(),
                         "Todos los campos deben estar completos.",
@@ -130,19 +192,11 @@ class EditProductFragment : Fragment() {
             }
         } else {
             // Updating the product's information
-            val oldValues = product?.let {
-                mapOf(
-                    "name" to it.name,
-                    "description" to it.description,
-                    "category" to it.category,
-                    "price" to it.price,
-                    "stock" to it.stock
-                )
+            val newInformation = currentValues.filter { (key, currentValue) ->
+                originalValues?.get(key) != currentValue
             }
 
-            val newInformation = currentValues.filter { (key, currentValue) ->
-                oldValues?.get(key) != currentValue
-            }
+            Log.d("EditProduct", newInformation.toString())
 
             if (newInformation.isNotEmpty()) {
                 product?.key?.let {

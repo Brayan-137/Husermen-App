@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.husermenapp.R
 import com.example.husermenapp.databinding.FragmentProductDetailsBinding
 import com.example.husermenapp.dataclasses.Product
@@ -72,6 +73,7 @@ class DetailsProductFragment : Fragment() {
             binding.tvCategoryValue.text = applyTextViewFormat(it.category.toString())
             binding.tvPriceValue.text = it.price.toString()
             binding.tvStockValue.text = it.stock.toString()
+            if (it.imageUrl != null) Glide.with(requireContext()).load(it.imageUrl).into(binding.ivPicture)
         }
     }
 

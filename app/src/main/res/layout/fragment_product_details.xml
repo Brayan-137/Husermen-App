@@ -51,6 +51,7 @@
                 android:id="@+id/ivPicture"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toTopOf="@id/tvDescriptionValue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_max="250dp"
