@@ -27,4 +27,13 @@ interface MCApiService {
         @Header("Authorization") authorization: String,
         @Path("category_id") categoryId: String
     ): Response<CategorySearchResponse>
+
+    @GET("orders/search")
+    suspend fun getOrders(
+        @Query("seller") sellerId: String,
+        @Query("order.status") status: String = "paid",
+        @Query("sort") sort: String = "date_created",
+        @Query("order") order: String = "desc",
+        @Header("Authorization") token: String
+    ): OrdersResponse
 }

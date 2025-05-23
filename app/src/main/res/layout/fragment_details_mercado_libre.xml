@@ -33,6 +33,7 @@
                 android:id="@+id/ivPicture"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
+                android:background="@drawable/ic_book"
                 app:layout_constraintBottom_toTopOf="@id/tvCategoryValue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_max="250dp"
@@ -92,10 +93,39 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="textEnd"
                 app:layout_constraintTop_toBottomOf="@id/tvPriceValue"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/linearLayoutGraphsContainer"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvStockLabel"
                 tools:text="0" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutGraphsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvStockValue">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/lineChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"/>
+
+                <TextView
+                    android:id="@+id/tvNoDataMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:text="No hay datos de ventas disponibles."
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

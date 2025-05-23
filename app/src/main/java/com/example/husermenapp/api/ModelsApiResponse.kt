@@ -1,5 +1,7 @@
 package com.example.husermenapp.api
 
+import com.google.gson.annotations.SerializedName
+
 data class ItemSearchResponse(
     val seller_id: String,
     val results: List<String>, // Lista de IDs de los items
@@ -41,4 +43,13 @@ data class Picture(
     val size: String,
     val max_size: String,
     val quality: String
+)
+
+data class OrdersResponse(
+    val results: List<Order>
+)
+
+data class Order(
+    val id: Long,
+    @SerializedName("date_created") val dateCreated: String
 )

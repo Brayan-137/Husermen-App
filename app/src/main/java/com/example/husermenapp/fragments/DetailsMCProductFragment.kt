@@ -1,12 +1,14 @@
 package com.example.husermenapp.fragments
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.husermenapp.ProductActivity
 import com.example.husermenapp.databinding.FragmentDetailsMercadoLibreBinding
@@ -14,11 +16,19 @@ import com.example.husermenapp.dataclasses.MCProduct
 import com.example.husermenapp.dataclasses.Product
 import com.example.husermenapp.utils.FragmentUtils.applyTextViewFormat
 import com.example.husermenapp.fragments.basefragments.BaseItemDetailsFragment
+import com.example.husermenapp.utils.MercadoLibre
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.launch
 import java.io.Serializable
 
 class DetailsMCProductFragment : BaseItemDetailsFragment<FragmentDetailsMercadoLibreBinding, MCProduct>() {
@@ -61,6 +71,41 @@ class DetailsMCProductFragment : BaseItemDetailsFragment<FragmentDetailsMercadoL
         super.onViewCreated(view, savedInstanceState)
 
         setupTextViews()
+
+        val mercadoLibre = MercadoLibre(requireContext())
+
+        lifecycleScope.launch {
+            mercadoLibre.fetchSalesData { salesData ->
+                if (salesData.isEmpty()) {
+                    binding.tvNoDataMessage.visibility = View.VISIBLE
+                    binding.lineChart.visibility = View.GONE
+                } else {
+                    binding.tvNoDataMessage.visibility = View.GONE
+                    binding.lineChart.visibility = View.VISIBLE
+
+                    showChart(binding.lineChart, salesData)
+                }
+            }
+        }
+    }
+
+    fun showChart(chart: LineChart, salesData: Map<String, Int>) {
+        val entries = salesData.entries.mapIndexed { index, (date, value) ->
+            Entry(index.toFloat(), value.toFloat())
+        }
+
+        val dataSet = LineDataSet(entries, "Ventas por Día").apply {
+            color = Color.BLUE
+            valueTextColor = Color.BLACK
+            lineWidth = 2f
+            setCircleColor(Color.RED)
+        }
+
+        chart.data = LineData(dataSet)
+        chart.xAxis.valueFormatter = IndexAxisValueFormatter(salesData.keys.toList())
+        chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+        chart.description.isEnabled = false
+        chart.invalidate()
     }
 
 //    USELESS

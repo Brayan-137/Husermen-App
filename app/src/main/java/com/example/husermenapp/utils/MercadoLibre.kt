@@ -16,6 +16,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class MercadoLibre(private var context: Context) {
     private val MELI_ACCESS_TOKEN = "APP_USR-8551929605562168-052222-c9215ee1213ffd10b567ff7b4fee2043-2453143702"
@@ -181,5 +183,36 @@ class MercadoLibre(private var context: Context) {
             }
 
         })
+    }
+
+    fun fetchSalesData(callback: (Map<String, Int>) -> Unit) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = RetrofitClient.mcApiService.getOrders(
+                    sellerId = MELI_SELLER_TEST_USER_ID,
+                    token = "Bearer $MELI_ACCESS_TOKEN"
+                )
+
+                val formatterInput = DateTimeFormatter.ISO_OFFSET_DATE_TIME
+                val formatterOutput = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+
+                val salesData = response.results
+                    .map {
+                        LocalDate.parse(it.dateCreated, formatterInput).format(formatterOutput)
+                    }
+                    .groupingBy { it }
+                    .eachCount()
+                    .toSortedMap()
+
+                withContext(Dispatchers.Main) {
+                    callback(salesData)
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    callback(emptyMap())
+                    Log.e("FetchError", "Error fetching sales data: ${e.message}")
+                }
+            }
+        }
     }
 }
