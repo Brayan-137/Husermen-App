@@ -1,16 +1,17 @@
-package com.example.husermenapp
+package com.example.husermenapp.fragments
 
-import android.R
-import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.husermenapp.databinding.ActivitySignupFormBinding
+import com.example.husermenapp.R
+import com.example.husermenapp.databinding.FragmentAuthenticationSignupFormBinding
 import com.example.husermenapp.dataclasses.User
+import com.example.husermenapp.utils.FragmentUtils.replaceFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
@@ -18,31 +19,45 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class SignupForm : AppCompatActivity() {
-    private lateinit var binding: ActivitySignupFormBinding
+class AuthenticationSignupFormFragment : Fragment() {
+    private var _binding: FragmentAuthenticationSignupFormBinding? = null
+    private val binding get() = _binding!!
+
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val usersRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("users")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySignupFormBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        arguments?.let {
         }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentAuthenticationSignupFormBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val userTypeOptions = listOf("Normal", "Administrador")
         val userTypeSpinner: Spinner = binding.spinnerUserType
 
-        val adapter = ArrayAdapter(this, R.layout.simple_spinner_item, userTypeOptions)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, userTypeOptions)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         userTypeSpinner.adapter = adapter
 
         binding.btnConfirmSignUp.setOnClickListener { handleClickBtnConfirmSignUp() }
     }
+
 
     private fun handleClickBtnConfirmSignUp() {
         val names = binding.etName.text.toString()
@@ -54,9 +69,9 @@ class SignupForm : AppCompatActivity() {
         val userType = binding.spinnerUserType.selectedItem.toString()
 
         if (names.isEmpty() || lastNames.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-            Toast.makeText(this, "Uno o dos campos vacíos. Complete ambos campos e inténtelo de nuevo, por favor.", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "Uno o dos campos vacíos. Complete ambos campos e inténtelo de nuevo, por favor.", Toast.LENGTH_LONG).show()
         } else if (password != confirmPassword) {
-            Toast.makeText(this, "La contraseña no coinciden. Verifiquela e inténtelo de nuevo, por favor.", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "La contraseña no coinciden. Verifiquela e inténtelo de nuevo, por favor.", Toast.LENGTH_LONG).show()
         } else {
             signUpUser(names, lastNames, phone, email, password, userType)
         }
@@ -72,21 +87,25 @@ class SignupForm : AppCompatActivity() {
     ) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener { authResult ->
-                Toast.makeText(this, "Usuario $names creado exitosamente.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Usuario $names creado exitosamente.", Toast.LENGTH_SHORT).show()
 
                 authResult.user?.uid?.let { addUserToDatabase(it, names, lastNames, phone, email, userType) }
-                finish()
-                startActivity(Intent(this, Login::class.java))
+
+                replaceFragment(
+                    requireActivity().supportFragmentManager,
+                    R.id.authFragments,
+                    AuthenticationLoginFragment()
+                )
             }
             .addOnFailureListener { e ->
                 val errorMessage = when (e) {
                     is FirebaseAuthWeakPasswordException -> "La contraseña es muy débil."
                     is FirebaseAuthInvalidCredentialsException -> "El correo electrónico no es válido."
                     is FirebaseAuthUserCollisionException -> "Ya existe una cuenta con este correo."
-                    else -> "Error desconocido: ${e?.localizedMessage}"
+                    else -> "Error desconocido: ${e.localizedMessage}"
                 }
 
-                Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
                 println("Error: $e")
             }
     }

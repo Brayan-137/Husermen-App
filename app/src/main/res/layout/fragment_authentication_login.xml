@@ -1,80 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    style="@style/backgroundStyleNormal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Login"
     android:gravity="center_vertical"
-    style="@style/backgroundStyleNormal">
+    android:orientation="vertical"
+    tools:context=".fragments.AuthenticationLoginFragment">
 
     <!-- Logo -->
     <TextView
+        style="@style/textStyleTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
         android:text="@string/name"
-        android:textAlignment="center"
-        style="@style/textStyleTitle"
-        android:layout_marginBottom="15dp" />
+        android:textAlignment="center" />
 
     <!-- Information -->
     <TextView
+        style="@style/textStyleNormal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
         android:text="Ingresa a tu cuenta"
         android:textAlignment="center"
-        style="@style/textStyleNormal"
-        android:textStyle="bold"
-        android:layout_marginBottom="15dp" />
+        android:textStyle="bold" />
 
     <TextView
+        style="@style/textStyleNormal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
         android:text="Escribe tu correo y contraseña para ingresar a la aplicación."
-        android:textAlignment="center"
-        style="@style/textStyleNormal"
-        android:layout_marginBottom="15dp" />
+        android:textAlignment="center" />
 
     <!-- Email Input -->
     <EditText
         android:id="@+id/etEmail"
+        style="@style/labelStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
         android:hint="email@domain.com"
         android:inputType="textEmailAddress"
-        style="@style/labelStyle"
-        android:layout_marginBottom="15dp"
-        android:padding="10dp"/>
+        android:padding="10dp" />
 
     <!-- Password Input -->
     <EditText
         android:id="@+id/etPassword"
+        style="@style/labelStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
         android:hint="Password123#"
         android:inputType="textPassword"
-        style="@style/labelStyle"
-        android:padding="10dp"
-        android:layout_marginBottom="15dp" />
+        android:padding="10dp" />
 
     <!-- Login Button -->
     <Button
         android:id="@+id/btnLogin"
+        style="@style/styleMainButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Continuar"
-        style="@style/styleMainButtons"
-        android:layout_marginBottom="15dp" />
+        android:layout_marginBottom="15dp"
+        android:text="Continuar" />
 
     <!-- Signup Button -->
     <Button
         android:id="@+id/btnSignup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="En caso de que no tengas cuenta regístrate."
         android:background="@android:color/transparent"
+        android:text="En caso de que no tengas cuenta regístrate."
         android:textColor="#FF5555FF"
         android:textSize="@dimen/text_size_normal" />
 

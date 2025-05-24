@@ -2,11 +2,9 @@ package com.example.husermenapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.view.menu.MenuPopupHelper
-import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
@@ -19,7 +17,6 @@ import com.example.husermenapp.fragments.SectionInventoryFragment
 import com.example.husermenapp.fragments.SectionMercadoLibreFragment
 import com.example.husermenapp.fragments.SectionTopSellsFragment
 import com.example.husermenapp.fragments.SectionTutorialsFragment
-import com.example.husermenapp.fragments.SectionUserOptionsFragment
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
@@ -95,7 +92,13 @@ class MainActivity : AppCompatActivity() {
     private fun performLogout() {
         FirebaseAuth.getInstance().signOut()
 
-        startActivity(Intent(this, Login::class.java))
+        Toast.makeText(
+            this,
+            "Se ha cerrado sesión exitosamente.",
+            Toast.LENGTH_SHORT
+        ).show()
+
+        startActivity(Intent(this, AuthenticationActivity::class.java))
         this.finish()
     }
 
