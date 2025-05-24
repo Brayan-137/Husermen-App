@@ -51,24 +51,26 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation ("androidx.fragment:fragment-ktx:1.8.6")
+    implementation (libs.androidx.fragment.ktx)
 
     // API calls
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0") // Convertidor de JSON con Gson
+    implementation(libs.retrofit)
+    implementation(libs.retrofit2.converter.gson) // Convertidor de JSON con Gson
+    implementation (libs.okhttp)
+    implementation (libs.logging.interceptor)
 
     // Parse JSON
-    implementation("com.google.code.gson:gson:2.10.1")
+    implementation(libs.gson)
 
     // Show images from URL
-    implementation("io.coil-kt:coil:2.6.0")
+    implementation(libs.coil)
 
     // Manage Youtube Videos No API
-    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0")
+    implementation (libs.core)
 
     // Glide
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation (libs.glide)
 
     // MPAndroidChart
-    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation (libs.mpandroidchart)
 }
