@@ -45,10 +45,12 @@ class AuthenticationSignupFragment : Fragment() {
         if (email.isEmpty()) {
             Toast.makeText(requireContext(), "Correo electrónico vacío. Complete el campo e inténtelo de nuevo, por favor.", Toast.LENGTH_LONG).show()
         } else {
+            val argsSignupFormFragment = Bundle().apply { putString("email", email) }
+
             replaceFragment(
                 requireActivity().supportFragmentManager,
                 R.id.authFragments,
-                AuthenticationSignupFormFragment()
+                AuthenticationSignupFormFragment().apply { arguments = argsSignupFormFragment }
             )
         }
     }

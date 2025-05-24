@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:queryHint="Buscar..."
         android:iconifiedByDefault="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

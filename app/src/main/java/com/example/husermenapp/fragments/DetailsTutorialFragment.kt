@@ -98,8 +98,11 @@ class DetailsTutorialFragment : BaseItemDetailsFragment<FragmentTutorialDetailsB
 
     private fun handleClickBtnEditTutorial() {
         val editTutorialFragment = setupEditItemFragment(tutorial)
-        replaceFragment(requireActivity().supportFragmentManager,
-            R.id.tutorialFragmentsContainer, editTutorialFragment)
+        replaceFragment(
+            requireActivity().supportFragmentManager,
+            R.id.tutorialFragmentsContainer,
+            editTutorialFragment
+        )
     }
 
     private fun setupYotubePlayer() {

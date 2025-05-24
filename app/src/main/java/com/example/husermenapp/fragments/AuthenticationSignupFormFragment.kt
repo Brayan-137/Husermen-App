@@ -25,10 +25,12 @@ class AuthenticationSignupFormFragment : Fragment() {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val usersRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("users")
+    private var userEmail: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+            userEmail = it.getString("email")
         }
     }
 
@@ -54,6 +56,8 @@ class AuthenticationSignupFormFragment : Fragment() {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, userTypeOptions)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         userTypeSpinner.adapter = adapter
+
+        binding.etEmail.setText(userEmail)
 
         binding.btnConfirmSignUp.setOnClickListener { handleClickBtnConfirmSignUp() }
     }
