@@ -63,7 +63,7 @@ class DetailsMCProductFragment : BaseItemDetailsFragment<FragmentDetailsMercadoL
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            mcProduct = it.getSerializable("selectedMCProduct", MCProduct::class.java)
+            mcProduct = it.getSerializable("selectedMCProduct") as? MCProduct
         }
     }
 

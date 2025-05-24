@@ -35,7 +35,7 @@ class ProductActivity : AppCompatActivity() {
         val detailsProductFragment = DetailsProductFragment()
         val argsProductDetailsFragment = Bundle()
 
-        val selectedProduct = intent.getSerializableExtra("selectedProduct", Product::class.java)
+        val selectedProduct = intent.getSerializableExtra("selectedProduct") as? Product
         val isCreatingNewProduct = intent.getBooleanExtra("isCreatingNewProduct", false)
 
         argsProductDetailsFragment.putSerializable("selectedProduct", selectedProduct)

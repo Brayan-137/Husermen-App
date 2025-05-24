@@ -38,7 +38,7 @@ class DetailsProductFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            product = it.getSerializable("selectedProduct", Product::class.java)
+            product = it.getSerializable("selectedProduct") as? Product
             isCreatingNewProduct = it.getBoolean("isCreatingNewProduct", false)
 
             if (isCreatingNewProduct) handleClickBtnEditProduct()

@@ -59,7 +59,7 @@ class DetailsTutorialFragment : BaseItemDetailsFragment<FragmentTutorialDetailsB
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            tutorial = it.getSerializable("selectedTutorial", Tutorial::class.java)
+            tutorial = it.getSerializable("selectedTutorial") as? Tutorial
             isCreatingNewItem = it.getBoolean("isCreatingNewTutorial", false)
 
             if (isCreatingNewItem) handleClickBtnEditTutorial()

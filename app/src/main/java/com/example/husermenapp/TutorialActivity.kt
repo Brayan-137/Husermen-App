@@ -35,7 +35,7 @@ class TutorialActivity : AppCompatActivity() {
         val detailsTutorialFragment = DetailsTutorialFragment()
         val argsTutorialDetailsFragment = Bundle()
 
-        val selectedTutorial = intent.getSerializableExtra("selectedTutorial", Tutorial::class.java)
+        val selectedTutorial = intent.getSerializableExtra("selectedTutorial") as? Tutorial
         val isCreatingNewTutorial = intent.getBooleanExtra("isCreatingNewTutorial", false)
 
         argsTutorialDetailsFragment.putSerializable("selectedTutorial", selectedTutorial)

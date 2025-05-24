@@ -32,7 +32,7 @@ class MCProductActivity : AppCompatActivity() {
         val detailsMCProductFragment = DetailsMCProductFragment()
         val argsMCProductDetailsFragment = Bundle()
 
-        val selectedMCProduct = intent.getSerializableExtra("selectedMCProduct", MCProduct::class.java)
+        val selectedMCProduct = intent.getSerializableExtra("selectedMCProduct") as? MCProduct
 
         argsMCProductDetailsFragment.putSerializable("selectedMCProduct", selectedMCProduct)
         detailsMCProductFragment.arguments = argsMCProductDetailsFragment

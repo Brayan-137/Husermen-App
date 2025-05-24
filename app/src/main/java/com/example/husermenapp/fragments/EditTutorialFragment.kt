@@ -37,7 +37,7 @@ class EditTutorialFragment : BaseEditItemFragment<FragmentEditTutorialBinding>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            tutorial = it.getSerializable("selectedTutorial", Tutorial::class.java)
+            tutorial = it.getSerializable("selectedTutorial") as? Tutorial
             isCreatingNewTutorial = it.getBoolean("isCreatingNewTutorial", false)
         }
     }
