@@ -41,7 +41,7 @@ class ProductAdapter(private var productList: List<Product>, private var handleC
                 tvDescription.text = product.description
                 tvCategory.text = applyTextViewFormat(product.category.toString())
                 tvPrice.text = "$ " + product.price.toString()
-                tvStock.text = product.stock.toString() + " Productos Disponibles"
+                tvStock.text = product.stock.toString() + " Producto/s Disponible/s"
                 if (product.imageUrl != null) Glide.with(itemView.context)
                     .load(product.imageUrl)
                     .transform(

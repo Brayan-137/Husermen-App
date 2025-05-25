@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.husermenapp.utils.FragmentUtils.applyTextViewFormat
 import com.example.husermenapp.dataclasses.MCProduct
 import com.example.husermenapp.R
@@ -36,10 +39,18 @@ class MCProductAdapter (private var mcProductList: List<MCProduct>, private var 
         fun render(mcProduct: MCProduct) {
             binding.apply {
                 tvName.text = applyTextViewFormat(mcProduct.name.toString())
-                tvPrice.text = mcProduct.price.toString()
-                tvStock.text = mcProduct.stock.toString()
+                tvPrice.text = "$ " + mcProduct.price.toString()
+                tvStock.text = mcProduct.stock.toString() + " Producto/s Diponible/s"
                 tvStatus.text = mcProduct.status
-                if (mcProduct.imageUrl != null) Glide.with(itemView.context).load(mcProduct.imageUrl).into(binding.ivPicture)
+                if (mcProduct.imageUrl != null) Glide.with(itemView.context)
+                    .load(mcProduct.imageUrl)
+                    .transform(
+                        MultiTransformation(
+                            CenterCrop(),
+                            RoundedCorners(16)
+                        )
+                    )
+                    .into(binding.ivPicture)
             }
 
             itemView.setOnClickListener{ handleClickMCProductDetails(mcProduct) }

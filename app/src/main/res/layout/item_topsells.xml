@@ -3,12 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="5dp">
+    android:paddingVertical="8dp">
 
     <TextView
         android:id="@+id/tvRanking"
-        android:layout_width="50dp"
+        android:layout_width="75dp"
         android:layout_height="0dp"
+        android:textSize="@dimen/text_size_titulo"
+        android:textColor="@color/texto_normal"
+        android:gravity="center_vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/ivPicture"
@@ -16,11 +19,10 @@
 
     <ImageView
         android:id="@+id/ivPicture"
-        android:layout_width="100dp"
-        android:layout_height="0dp"
+        android:layout_width="150dp"
+        android:layout_height="90dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_book"
-        style="@style/auxiliarTextStyle"
+        android:background="@drawable/background_image_view_items"
         app:layout_constraintStart_toEndOf="@id/tvRanking"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,8 +32,21 @@
         android:id="@+id/tvName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/auxiliarTextStyle"
+        style="@style/textViewTopSellsStyle"
+        android:textColor="@color/texto_normal"
+        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvCategory"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivPicture"/>
+
+    <TextView
+        android:id="@+id/tvCategory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/textViewTopSellsStyle"
+        app:layout_constraintTop_toBottomOf="@id/tvName"
+        app:layout_constraintBottom_toTopOf="@id/tvPrice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ivPicture"/>
 
@@ -39,8 +54,9 @@
         android:id="@+id/tvPrice"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/auxiliarTextStyle"
-        app:layout_constraintTop_toBottomOf="@id/tvName"
+        style="@style/textViewTopSellsStyle"
+        app:layout_constraintTop_toBottomOf="@id/tvCategory"
+        app:layout_constraintBottom_toTopOf="@id/tvStock"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ivPicture"/>
 
@@ -48,8 +64,10 @@
         android:id="@+id/tvStock"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/auxiliarTextStyle"
+        style="@style/textViewTopSellsStyle"
+        android:singleLine="true"
         app:layout_constraintTop_toBottomOf="@id/tvPrice"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ivPicture"/>
 

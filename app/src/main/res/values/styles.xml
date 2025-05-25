@@ -91,13 +91,26 @@
     </style>
 
     <!-- LAYOUT ELEMENTS -->
-    <style name="textViewItemsStyle" parent="auxiliarTextStyle">
+    <style name="textViewProductStyle" parent="auxiliarTextStyle">
         <item name="android:layout_marginStart">12dp</item>
         <item name="android:textColor">@color/texto_ayudas</item>
         <item name="android:textSize">@dimen/text_size_auxiliar</item>
     </style>
 
     <style name="textViewTutorialStyle" parent="auxiliarTextStyle">
+        <item name="android:textColor">@color/texto_ayudas</item>
+        <item name="android:textSize">@dimen/text_size_auxiliar</item>
+    </style>
+
+    <style name="textViewMCProductStyle" parent="auxiliarTextStyle">
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:layout_marginEnd">12dp</item>
+        <item name="android:textColor">@color/texto_ayudas</item>
+        <item name="android:textSize">@dimen/text_size_auxiliar</item>
+    </style>
+
+    <style name="textViewTopSellsStyle" parent="auxiliarTextStyle">
+        <item name="android:layout_marginStart">12dp</item>
         <item name="android:textColor">@color/texto_ayudas</item>
         <item name="android:textSize">@dimen/text_size_auxiliar</item>
     </style>

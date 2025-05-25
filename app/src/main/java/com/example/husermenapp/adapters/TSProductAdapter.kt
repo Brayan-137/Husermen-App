@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.husermenapp.utils.FragmentUtils.applyTextViewFormat
 import com.example.husermenapp.dataclasses.MCProduct
 import com.example.husermenapp.R
@@ -34,11 +37,20 @@ class TSProductAdapter (private var tsProductList: List<MCProduct>, private var 
 
         fun render(tsProduct: MCProduct) {
             binding.apply {
-                tvRanking.text = tsProduct.topSells.toString()
+                tvRanking.text = "# " + tsProduct.topSells.toString()
                 tvName.text = applyTextViewFormat(tsProduct.name.toString())
-                tvPrice.text = tsProduct.price.toString()
-                tvStock.text = tsProduct.stock.toString()
-                if (tsProduct.imageUrl != null) Glide.with(itemView.context).load(tsProduct.imageUrl).into(binding.ivPicture)
+                tvCategory.text = applyTextViewFormat(tsProduct.category.toString())
+                tvPrice.text = "$ " + tsProduct.price.toString()
+                tvStock.text = tsProduct.stock.toString() + " Producto/s Disponible/s"
+                if (tsProduct.imageUrl != null) Glide.with(itemView.context)
+                    .load(tsProduct.imageUrl)
+                    .transform(
+                        MultiTransformation(
+                            CenterCrop(),
+                            RoundedCorners(16)
+                        )
+                    )
+                    .into(binding.ivPicture)
             }
 
             itemView.setOnClickListener{ handleClickMCProductDetails(tsProduct) }
