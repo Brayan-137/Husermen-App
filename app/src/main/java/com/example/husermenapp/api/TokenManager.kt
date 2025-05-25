@@ -1,16 +1,16 @@
 import com.example.husermenapp.api.await
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
 import java.io.IOException
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 class TokenManager() {
     private val database = FirebaseDatabase.getInstance()
 
-    // Guardar tokens en Firebase
     fun saveTokens(accessToken: String, refreshToken: String, expiresIn: Long) {
         val expiresAt = System.currentTimeMillis() + (expiresIn * 1000)
 
@@ -25,7 +25,6 @@ class TokenManager() {
             .setValue(tokenData)
     }
 
-    // Obtener token con verificación de expiración
     fun getToken(callback: (String?, Boolean) -> Unit) {
         database.reference.child("tokens").child("mercadolibre")
             .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -48,10 +47,18 @@ class TokenManager() {
             })
     }
 
-    // Renovación sincrónica del token
+    suspend fun getTokenSuspend(): String? = suspendCoroutine { continuation ->
+        getToken { token, isExpired ->
+            if (!isExpired && token != null) {
+                continuation.resume(token)
+            } else {
+                continuation.resume(null)
+            }
+        }
+    }
+
     @Throws(IOException::class)
-    suspend fun refreshTokenSync(): Pair<String, String>? {
-        // Primero obtenemos el refresh token actual
+    fun refreshTokenSync(): Pair<String, String>? {
         val currentRefreshToken = getRefreshTokenSync() ?: return null
 
         val client = OkHttpClient()
@@ -88,9 +95,8 @@ class TokenManager() {
         }
     }
 
-    // Método auxiliar para obtener refresh token sincrónicamente
     @Throws(IOException::class)
-    private suspend fun getRefreshTokenSync(): String? {
+    private fun getRefreshTokenSync(): String? {
         try {
             val snapshot = database.reference.child("tokens")
                 .child("mercadolibre")

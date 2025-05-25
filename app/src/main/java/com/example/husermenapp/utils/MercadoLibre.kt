@@ -1,5 +1,6 @@
 package com.example.husermenapp.utils
 
+import TokenManager
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
@@ -17,12 +18,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class MercadoLibre(private var context: Context) {
-    private val MELI_ACCESS_TOKEN = "APP_USR-8551929605562168-052307-f817c4ecbbf7fa1c66e7b286a16bd398-2453143702"
     private val MELI_SELLER_TEST_USER_ID = "2453143702"
+    private val tokenManager = TokenManager()
 
     private val categoriesRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("categories")
     var categoriesList: MutableList<Category> = mutableListOf()
@@ -34,7 +37,7 @@ class MercadoLibre(private var context: Context) {
     fun getMCItems(callback: (List<MCProduct>) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val authHeader = "Bearer $MELI_ACCESS_TOKEN"
+                val authHeader = "Bearer ${getAccessToken()}"
 
                 val itemIdsResponse = RetrofitClient().mcApiService.getUserItems(
                     userId = MELI_SELLER_TEST_USER_ID,
@@ -139,7 +142,7 @@ class MercadoLibre(private var context: Context) {
         } else {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val authHeader = "Bearer $MELI_ACCESS_TOKEN"
+                    val authHeader = "Bearer ${getAccessToken()}"
 
                     val categoriesResponse = RetrofitClient().mcApiService.getCategoryDetailsByIds(
                         authorization = authHeader,
@@ -195,15 +198,21 @@ class MercadoLibre(private var context: Context) {
             try {
                 val response = RetrofitClient().mcApiService.getOrders(
                     sellerId = MELI_SELLER_TEST_USER_ID,
-                    token = "Bearer $MELI_ACCESS_TOKEN"
+                    token = "Bearer ${getAccessToken()}",
+                    sort = "date_desc"
                 )
 
-                val formatterInput = DateTimeFormatter.ISO_OFFSET_DATE_TIME
-                val formatterOutput = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                val formatterInput = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.getDefault())
+                val formatterOutput = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
                 val salesData = response.results
-                    .map {
-                        LocalDate.parse(it.dateCreated, formatterInput).format(formatterOutput)
+                    .mapNotNull {
+                        try {
+                            formatterOutput.format(formatterInput.parse(it.dateCreated) as Date)
+                        } catch (e: Exception) {
+                            Log.w("DateParse", "Error parsing date ${it.dateCreated}")
+                            null
+                        }
                     }
                     .groupingBy { it }
                     .eachCount()
@@ -236,5 +245,20 @@ class MercadoLibre(private var context: Context) {
     fun search(query: String, mcProductList: List<MCProduct>): List<MCProduct> {
         Log.d("MercadoLibre", "$query $mcProductList")
         return mcProductList.filter { it.name?.lowercase()?.startsWith(query.lowercase()) ?: false }
+    }
+
+    suspend fun getAccessToken(): String {
+        var token = tokenManager.getTokenSuspend()
+
+        if (token == null) {
+            val newToken = tokenManager.refreshTokenSync()?.first
+            if (newToken == null) {
+                throw IOException("No se pudo obtener token válido")
+            }
+
+            token = newToken
+        }
+
+        return token
     }
 }

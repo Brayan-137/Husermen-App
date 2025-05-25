@@ -1,11 +1,8 @@
 package com.example.husermenapp.api
 
 import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
-import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -34,9 +31,9 @@ interface MCApiService {
     @GET("orders/search")
     suspend fun getOrders(
         @Query("seller") sellerId: String,
+        @Header("Authorization") token: String,
         @Query("order.status") status: String = "paid",
-        @Query("sort") sort: String = "date_created",
-        @Query("order") order: String = "desc",
-        @Header("Authorization") token: String
+        @Query("sort") sort: String = "date_desc",
+        @Query("order") order: String = "desc"
     ): OrdersResponse
 }
