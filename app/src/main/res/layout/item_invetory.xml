@@ -3,14 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="5dp">
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="8dp">
 
     <ImageView
         android:id="@+id/ivPicture"
-        android:layout_width="100dp"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_book"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:background="@drawable/background_image_view_items"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,36 +21,56 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvDescription"
+        app:layout_constraintEnd_toStartOf="@id/tvCategory"
         app:layout_constraintStart_toEndOf="@id/ivPicture"
-        style="@style/textItemsStyle"
+        android:textStyle="bold"
+        style="@style/textViewItemsStyle"
+        android:textColor="@color/texto_normal"
+        app:layout_constraintVertical_chainStyle="spread"
+        />
+
+    <TextView
+        android:id="@+id/tvCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/textViewItemsStyle"
+        app:layout_constraintStart_toEndOf="@id/tvName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         />
 
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/textItemsStyle"
+        style="@style/textViewItemsStyle"
+        app:layout_constraintBottom_toTopOf="@id/tvPrice"
         app:layout_constraintTop_toBottomOf="@id/tvName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ivPicture"/>
+        app:layout_constraintStart_toEndOf="@id/ivPicture"
+        />
 
     <TextView
         android:id="@+id/tvPrice"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/textItemsStyle"
+        style="@style/textViewItemsStyle"
+        app:layout_constraintBottom_toTopOf="@id/tvStock"
         app:layout_constraintTop_toBottomOf="@id/tvDescription"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ivPicture"/>
+        app:layout_constraintStart_toEndOf="@id/ivPicture"
+        />
 
     <TextView
         android:id="@+id/tvStock"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/textItemsStyle"
+        style="@style/textViewItemsStyle"
         app:layout_constraintTop_toBottomOf="@id/tvPrice"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ivPicture"/>
+        app:layout_constraintStart_toEndOf="@id/ivPicture"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

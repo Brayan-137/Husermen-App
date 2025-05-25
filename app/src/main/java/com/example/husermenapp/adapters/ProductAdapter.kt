@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.husermenapp.utils.FragmentUtils.applyTextViewFormat
 import com.example.husermenapp.dataclasses.Product
 import com.example.husermenapp.R
@@ -36,9 +39,18 @@ class ProductAdapter(private var productList: List<Product>, private var handleC
             binding.apply {
                 tvName.text = applyTextViewFormat(product.name.toString())
                 tvDescription.text = product.description
-                tvPrice.text = product.price.toString()
-                tvStock.text = product.stock.toString()
-                if (product.imageUrl != null) Glide.with(itemView.context).load(product.imageUrl).into(binding.ivPicture)
+                tvCategory.text = applyTextViewFormat(product.category.toString())
+                tvPrice.text = "$ " + product.price.toString()
+                tvStock.text = product.stock.toString() + " Productos Disponibles"
+                if (product.imageUrl != null) Glide.with(itemView.context)
+                    .load(product.imageUrl)
+                    .transform(
+                        MultiTransformation(
+                            CenterCrop(),
+                            RoundedCorners(16)
+                        )
+                    )
+                    .into(binding.ivPicture)
             }
 
             itemView.setOnClickListener{ handleClickItemDetails(product) }

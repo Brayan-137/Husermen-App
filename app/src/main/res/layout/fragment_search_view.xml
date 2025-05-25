@@ -9,15 +9,16 @@
     <SearchView
         android:id="@+id/searchViewFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:queryHint="Buscar..."
-        android:iconifiedByDefault="false"
+        android:layout_height="60dp"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        app:layout_constraintTop_toTopOf="parent"
+        android:iconifiedByDefault="false"
+        android:queryHint="Buscar..."
+        style="@style/searchViewStyle"
+        android:theme="@style/searchViewStyle"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

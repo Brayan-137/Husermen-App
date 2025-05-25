@@ -82,7 +82,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Descripción:"
                 android:paddingEnd="5dp"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvDescriptionValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -91,7 +91,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvDescriptionLabel"
                 app:layout_constraintTop_toBottomOf="@id/ivPicture"
@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Categoría:"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvCategoryValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textAlignment="textEnd"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvCategoryLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvDescriptionValue"
@@ -127,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Precio:"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvPriceValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -137,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textAlignment="textEnd"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvPriceLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvCategoryValue"
@@ -150,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Stock Físico:"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvStockValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -169,7 +169,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/btnRemoveStock"
                 app:layout_constraintEnd_toStartOf="@id/btnAddStock"
                 tools:text="0" />

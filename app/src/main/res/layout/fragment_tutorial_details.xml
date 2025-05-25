@@ -68,7 +68,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Descripción:"
                 android:paddingEnd="5dp"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvDescriptionValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -77,7 +77,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvDescriptionLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvName"
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Tema:"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvTopicValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textAlignment="textEnd"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvTopicLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvDescriptionValue"
@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Tipo:"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvTypeValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -123,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textAlignment="textEnd"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvTypeLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvTopicValue"
@@ -154,7 +154,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    style="@style/textStyleNormal.Pequeño"
+                    style="@style/auxiliarTextStyle"
                     tools:text="@tools:sample/lorem"
                     tools:visibility="visible" />
             </LinearLayout>

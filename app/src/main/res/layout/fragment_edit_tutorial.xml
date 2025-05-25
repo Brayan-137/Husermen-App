@@ -84,7 +84,7 @@
                 android:layout_marginTop="16dp"
                 android:hint="Como utilizar Instagram para..."
                 android:inputType="text"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvName"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -123,7 +123,7 @@
                 android:hint="Este tutorial te enseñará a realizar una tarea paso a paso dentro de la aplicación."
                 android:inputType="textMultiLine"
                 android:minHeight="100dp"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvDescriptionLabel"
                 app:layout_constraintTop_toBottomOf="@id/ivPicture" />
@@ -146,7 +146,7 @@
                 android:layout_marginTop="8dp"
                 android:hint="Instagram"
                 android:inputType="text"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvTopicLabel"
                 app:layout_constraintTop_toBottomOf="@id/etDescriptionValue" />
@@ -168,7 +168,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:spinnerMode="dropdown"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvTypeLabel"
                 app:layout_constraintTop_toBottomOf="@id/etTopicValue" />
@@ -206,7 +206,7 @@
                         android:hint="Este tutorial te guiará paso a paso..."
                         android:inputType="textMultiLine"
                         android:minHeight="100dp"
-                        style="@style/textStyleNormal.Pequeño" />
+                        style="@style/auxiliarTextStyle" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -227,7 +227,7 @@
                         android:layout_marginTop="8dp"
                         android:hint="https://www.youtube.com/watch?v=8l6KQCOJBB4"
                         android:inputType="textUri"
-                        style="@style/textStyleNormal.Pequeño" />
+                        style="@style/auxiliarTextStyle" />
                 </LinearLayout>
             </LinearLayout>
 

@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Categoría:"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvCategoryValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:textAlignment="textEnd"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvCategoryLabel"
                 app:layout_constraintTop_toBottomOf="@id/ivPicture"
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Precio:"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvPriceValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textAlignment="textEnd"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvPriceLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvCategoryValue"
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Stock Online:"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvStockValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textAlignment="textEnd"
-                style="@style/textStyleNormal.Pequeño"
+                style="@style/auxiliarTextStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvStockLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvPriceValue"
@@ -142,7 +142,7 @@
                     android:text="No hay datos de ventas disponibles."
                     android:textAlignment="center"
                     android:visibility="gone"
-                    style="@style/textStyleNormal.Pequeño" />
+                    style="@style/auxiliarTextStyle" />
 
             </LinearLayout>
 

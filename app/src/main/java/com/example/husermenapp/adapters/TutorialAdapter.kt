@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.husermenapp.utils.FragmentUtils.applyTextViewFormat
 import com.example.husermenapp.R
 import com.example.husermenapp.dataclasses.Tutorial
@@ -37,9 +40,17 @@ class TutorialAdapter(private var tutorialList: List<Tutorial>, private var hand
             binding.apply {
                 tvName.text = applyTextViewFormat(tutorial.name.toString())
                 tvDescription.text = tutorial.description
-                tvTopic.text = tutorial.topic.toString()
-                tvType.text = tutorial.type.toString()
-                if (tutorial.imageUrl != null) Glide.with(itemView.context).load(tutorial.imageUrl).into(binding.ivPicture)
+                tvTopic.text = "(${applyTextViewFormat(tutorial.topic.toString())})"
+                tvType.text = applyTextViewFormat(tutorial.type.toString())
+                if (tutorial.imageUrl != null) Glide.with(itemView.context)
+                    .load(tutorial.imageUrl)
+                    .transform(
+                        MultiTransformation(
+                            CenterCrop(),
+                            RoundedCorners(16)
+                        )
+                    )
+                    .into(binding.ivPicture)
             }
 
             itemView.setOnClickListener{ handleClickItemDetails(tutorial) }

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:id="@+id/main"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".fragments.SectionInventoryFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.SectionInventoryFragment">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerSearchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerFilters"
@@ -20,6 +20,7 @@ tools:context=".fragments.SectionInventoryFragment">
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/fragmentContainerSearchView"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
         />
 
     <LinearLayout
@@ -29,20 +30,19 @@ tools:context=".fragments.SectionInventoryFragment">
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/fragmentContainerFilters"
         app:layout_constraintStart_toStartOf="parent"
-        android:gravity="center"
-        android:layout_marginBottom="20dp"
-        android:paddingVertical="20dp"
         style="@style/styleMainButtons"
+        android:layout_marginTop="8dp"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Registrar nuevo producto"
+            style="@style/textButtonsStyle"
             android:background="@android:color/transparent"
             />
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
             android:src="@drawable/ic_add"
             app:tint="@color/white" />
     </LinearLayout>
@@ -55,12 +55,14 @@ tools:context=".fragments.SectionInventoryFragment">
         app:layout_constraintTop_toBottomOf="@id/btnAddItem"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerItems"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            />
 
     </FrameLayout>
 

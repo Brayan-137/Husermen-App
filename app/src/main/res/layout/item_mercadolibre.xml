@@ -20,7 +20,7 @@
         android:id="@+id/tvName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/textItemsStyle"
+        style="@style/auxiliarTextStyle"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tvStatus"
         app:layout_constraintStart_toEndOf="@id/ivPicture"/>
@@ -29,7 +29,7 @@
         android:id="@+id/tvPrice"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/textItemsStyle"
+        style="@style/auxiliarTextStyle"
         app:layout_constraintTop_toBottomOf="@id/tvName"
         app:layout_constraintEnd_toStartOf="@id/tvStatus"
         app:layout_constraintStart_toEndOf="@id/ivPicture"/>
@@ -38,7 +38,7 @@
         android:id="@+id/tvStock"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/textItemsStyle"
+        style="@style/auxiliarTextStyle"
         app:layout_constraintTop_toBottomOf="@id/tvPrice"
         app:layout_constraintEnd_toStartOf="@id/tvStatus"
         app:layout_constraintStart_toEndOf="@id/ivPicture"/>
@@ -47,7 +47,7 @@
         android:id="@+id/tvStatus"
         android:layout_width="75dp"
         android:layout_height="wrap_content"
-        style="@style/textItemsStyle"
+        style="@style/auxiliarTextStyle"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
