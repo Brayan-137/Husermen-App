@@ -27,12 +27,16 @@ class MercadoLibre(private var context: Context) {
     private val categoriesRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("categories")
     var categoriesList: MutableList<Category> = mutableListOf()
 
+    init {
+
+    }
+
     fun getMCItems(callback: (List<MCProduct>) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val authHeader = "Bearer $MELI_ACCESS_TOKEN"
 
-                val itemIdsResponse = RetrofitClient.mcApiService.getUserItems(
+                val itemIdsResponse = RetrofitClient().mcApiService.getUserItems(
                     userId = MELI_SELLER_TEST_USER_ID,
                     authorization = authHeader,
                     offset = 0,
@@ -45,7 +49,7 @@ class MercadoLibre(private var context: Context) {
                     if (itemIds.isNotEmpty()) {
                         val itemIdsCommaSeparated = itemIds.joinToString(",")
 
-                        val productDetailsResponse = RetrofitClient.mcApiService.getProductDetailsByIds(
+                        val productDetailsResponse = RetrofitClient().mcApiService.getProductDetailsByIds(
                             authorization = authHeader,
                             itemIds = itemIdsCommaSeparated
                         )
@@ -137,7 +141,7 @@ class MercadoLibre(private var context: Context) {
                 try {
                     val authHeader = "Bearer $MELI_ACCESS_TOKEN"
 
-                    val categoriesResponse = RetrofitClient.mcApiService.getCategoryDetailsByIds(
+                    val categoriesResponse = RetrofitClient().mcApiService.getCategoryDetailsByIds(
                         authorization = authHeader,
                         categoryId = categoryId
                     )
@@ -189,7 +193,7 @@ class MercadoLibre(private var context: Context) {
     fun fetchSalesData(callback: (Map<String, Int>) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = RetrofitClient.mcApiService.getOrders(
+                val response = RetrofitClient().mcApiService.getOrders(
                     sellerId = MELI_SELLER_TEST_USER_ID,
                     token = "Bearer $MELI_ACCESS_TOKEN"
                 )

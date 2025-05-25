@@ -53,3 +53,11 @@ data class Order(
     val id: Long,
     @SerializedName("date_created") val dateCreated: String
 )
+
+data class TokenResponse(
+    @SerializedName("access_token") val accessToken: String,
+    @SerializedName("refresh_token") val refreshToken: String,
+    @SerializedName("token_type") val tokenType: String,
+    @SerializedName("expires_in") val expiresIn: Long,
+    @SerializedName("user_id") val userId: Long
+)
