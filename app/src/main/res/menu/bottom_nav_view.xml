@@ -9,11 +9,11 @@
         android:icon="@drawable/ic_chart"/>
     <item android:title="Mercado Libre"
         android:id="@+id/mercadoLibreSection"
-        android:icon="@drawable/ic_add"/>
+        android:icon="@drawable/ic_shopping_car"/>
     <item android:title="Tutoriales"
         android:id="@+id/tutorialsSection"
         android:icon="@drawable/ic_book"/>
     <item android:title="Usuario"
         android:id="@+id/usersOptionsSection"
-        android:icon="@drawable/ic_add"/>
+        android:icon="@drawable/ic_logout"/>
 </menu>
