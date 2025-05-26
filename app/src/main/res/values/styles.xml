@@ -7,10 +7,6 @@
         <item name="android:textColor">@color/texto_normal</item>
     </style>
 
-    <style name="auxiliarTextStyle">
-        <item name="android:textSize">@dimen/text_size_auxiliar</item>
-    </style>
-
     <style name="textStyleTitle">
         <item name="android:textSize">@dimen/text_size_titulo</item>
         <item name="android:textColor">@color/texto_principal</item>
@@ -45,10 +41,13 @@
         <item name="borderRound">200dp</item>
     </style>
 
-    <style name="deleteButtonStyle">
-        <item name="android:background">@color/error_advertencia</item>
+    <style name="saveButtonStyle">
         <item name="android:color">@color/white</item>
-        <item name="android:padding">5dp</item>
+    </style>
+
+    <style name="deleteButtonStyle">
+        <item name="android:color">@color/white</item>
+        <item name="android:layout_marginEnd">20dp</item>
     </style>
 
     <style name="editButtonStyle">
@@ -77,12 +76,6 @@
         <item name="android:textColorHint">#828282</item>
     </style>
 
-    <style name="saveButtonStyle">
-        <item name="android:background">@color/enlace_accion</item>
-        <item name="android:color">@color/white</item>
-        <item name="android:padding">5dp</item>
-    </style>
-
     <style name="searchViewStyle" parent="Widget.AppCompat.SearchView">
         <item name="android:background">@drawable/background_search_view</item>
         <item name="android:textColorHint">@color/texto_normal</item>
@@ -91,28 +84,49 @@
     </style>
 
     <!-- LAYOUT ELEMENTS -->
-    <style name="textViewProductStyle" parent="auxiliarTextStyle">
+    <style name="textViewProductStyle">
         <item name="android:layout_marginStart">12dp</item>
         <item name="android:textColor">@color/texto_ayudas</item>
         <item name="android:textSize">@dimen/text_size_auxiliar</item>
     </style>
 
-    <style name="textViewTutorialStyle" parent="auxiliarTextStyle">
+    <style name="textViewTutorialStyle">
         <item name="android:textColor">@color/texto_ayudas</item>
         <item name="android:textSize">@dimen/text_size_auxiliar</item>
     </style>
 
-    <style name="textViewMCProductStyle" parent="auxiliarTextStyle">
+    <style name="textViewMCProductStyle">
         <item name="android:layout_marginStart">12dp</item>
         <item name="android:layout_marginEnd">12dp</item>
         <item name="android:textColor">@color/texto_ayudas</item>
         <item name="android:textSize">@dimen/text_size_auxiliar</item>
     </style>
 
-    <style name="textViewTopSellsStyle" parent="auxiliarTextStyle">
+    <style name="textViewTopSellsStyle">
         <item name="android:layout_marginStart">12dp</item>
         <item name="android:textColor">@color/texto_ayudas</item>
         <item name="android:textSize">@dimen/text_size_auxiliar</item>
     </style>
-    
+
+    <style name="textViewLabelDetailsStyle">
+        <item name="android:textColor">@color/texto_normal</item>
+        <item name="android:textSize">@dimen/text_size_auxiliar</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="textViewValueDetailsStyle">
+        <item name="android:textColor">@color/texto_normal</item>
+        <item name="android:textSize">@dimen/text_size_auxiliar</item>
+    </style>
+
+    <style name="editTextValueStyle" >
+        <item name="android:textColor">@color/texto_normal</item>
+        <item name="android:textSize">@dimen/text_size_auxiliar</item>
+        <item name="android:textColorHint">@color/texto_normal</item>
+    </style>
+
+    <style name="spinnerStyle">
+        <item name="android:textColor">@color/texto_normal</item>
+    </style>
+
 </resources>

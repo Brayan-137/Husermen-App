@@ -10,6 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.husermenapp.ProductActivity
 import com.example.husermenapp.databinding.FragmentDetailsMercadoLibreBinding
 import com.example.husermenapp.dataclasses.MCProduct
@@ -41,9 +44,17 @@ class DetailsMCProductFragment : BaseItemDetailsFragment<FragmentDetailsMercadoL
         mcProduct?.let {
             binding.tvName.text = applyTextViewFormat(it.name.toString())
             binding.tvCategoryValue.text = applyTextViewFormat(it.category.toString())
-            binding.tvPriceValue.text = it.price.toString()
-            binding.tvStockValue.text = it.stock.toString()
-            if (it.imageUrl != null) Glide.with(requireContext()).load(it.imageUrl).into(binding.ivPicture)
+            binding.tvPriceValue.text = "$ " + it.price.toString()
+            binding.tvStockValue.text = it.stock.toString() + " Producto/s Disponible/s"
+            if (it.imageUrl != null) Glide.with(requireContext())
+                .load(it.imageUrl)
+                .transform(
+                    MultiTransformation(
+                        CenterCrop(),
+                        RoundedCorners(16)
+                    )
+                )
+                .into(binding.ivPicture)
         }
     }
 

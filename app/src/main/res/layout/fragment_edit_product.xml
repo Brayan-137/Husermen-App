@@ -11,12 +11,14 @@
     <LinearLayout
         android:id="@+id/btnDeleteProduct"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnSaveProduct"
-        android:paddingEnd="20dp"
         style="@style/deleteButtonStyle"
-        >
+        android:background="@drawable/background_delete_button"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="10dp">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,11 +33,14 @@
     <LinearLayout
         android:id="@+id/btnSaveProduct"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         style="@style/saveButtonStyle"
-        >
+        android:background="@drawable/background_save_button"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="10dp">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,8 +71,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBaseline_toBaselineOf="@id/etName"
-                tools:text="Nombre:"
-                style="@style/textStyleAuxiliar.Details"
+                android:text="Nombre:"
+                style="@style/textViewLabelDetailsStyle"
                 />
 
             <EditText
@@ -75,12 +80,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="Mesa de noche #25"
-                style="@style/auxiliarTextStyle"
+                style="@style/editTextValueStyle"
                 tools:text="Hola"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/ivPicture"
                 app:layout_constraintStart_toStartOf="@id/etDescriptionValue"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintVertical_chainStyle="spread"
                 />
 
             <ImageView
@@ -88,7 +94,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 app:layout_constraintHeight_max="250dp"
-                android:background="@drawable/ic_add"
+                android:background="@drawable/background_image_view_items"
+                android:src="@drawable/img_upload_image"
+                android:clipToOutline="true"
                 android:scaleType="centerCrop"
                 app:layout_constraintTop_toBottomOf="@+id/etName"
                 app:layout_constraintBottom_toTopOf="@id/etDescriptionValue"
@@ -100,11 +108,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Descripción:"
-                style="@style/textStyleAuxiliar.Details"
+                style="@style/textViewLabelDetailsStyle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/etDescriptionValue"
-                app:layout_constraintBaseline_toBaselineOf="@id/etDescriptionValue"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintTop_toTopOf="@id/etDescriptionValue"
+                app:layout_constraintBottom_toBottomOf="@id/etDescriptionValue"/>
 
             <EditText
                 android:id="@+id/etDescriptionValue"
@@ -112,7 +121,7 @@
                 app:layout_constraintWidth_max="320dp"
                 android:layout_height="wrap_content"
                 android:gravity="top"
-                style="@style/auxiliarTextStyle"
+                style="@style/editTextValueStyle"
                 android:hint="Una resistente mesa de roble, símbolo de durabilidad y elegancia. Sus vetas naturales y acabado cálido la convierten en el centro perfecto para cualquier espacio."
                 app:layout_constraintStart_toEndOf="@id/tvDescriptionLabel"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -124,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Categoría:"
-                style="@style/textStyleAuxiliar.Details"
+                style="@style/textViewLabelDetailsStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/etCategoryValue"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"/>
@@ -134,7 +143,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAlignment="textEnd"
-                style="@style/auxiliarTextStyle"
+                style="@style/editTextValueStyle"
                 android:hint="Mesa de noche"
                 app:layout_constraintBottom_toTopOf="@id/etPriceValue"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -147,7 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Precio:"
-                style="@style/textStyleAuxiliar.Details"
+                style="@style/textViewLabelDetailsStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/etPriceValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -156,7 +165,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAlignment="textEnd"
-                style="@style/auxiliarTextStyle"
+                style="@style/editTextValueStyle"
                 android:hint="$100.000"
                 app:layout_constraintBottom_toTopOf="@id/etStockValue"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -168,7 +177,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Stock Físico:"
-                style="@style/textStyleAuxiliar.Details"
+                style="@style/textViewLabelDetailsStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/etStockValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -177,7 +186,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAlignment="textEnd"
-                style="@style/auxiliarTextStyle"
+                style="@style/editTextValueStyle"
                 tools:hint="10"
                 app:layout_constraintTop_toBottomOf="@id/etPriceValue"
                 app:layout_constraintBottom_toBottomOf="parent"

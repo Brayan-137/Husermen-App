@@ -16,6 +16,9 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.husermenapp.databinding.FragmentEditTutorialBinding
 import com.example.husermenapp.dataclasses.Tutorial
 import com.example.husermenapp.utils.FragmentUtils.applyTextViewFormat
@@ -64,7 +67,15 @@ class EditTutorialFragment : BaseEditItemFragment<FragmentEditTutorialBinding>()
             binding.etDescriptionValue.setText(it.description)
             binding.etTopicValue.setText(applyTextViewFormat(it.topic.toString()))
             binding.etContent.setText(it.content)
-            if (it.imageUrl != null) Glide.with(requireContext()).load(it.imageUrl).into(binding.ivPicture)
+            if (it.imageUrl != null) Glide.with(requireContext())
+                .load(it.imageUrl)
+                .transform(
+                    MultiTransformation(
+                        CenterCrop(),
+                        RoundedCorners(16)
+                    )
+                )
+                .into(binding.ivPicture)
 
             when (it.type) {
                 "video" -> {

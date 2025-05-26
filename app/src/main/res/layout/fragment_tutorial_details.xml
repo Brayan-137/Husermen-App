@@ -13,16 +13,15 @@
     <LinearLayout
         android:id="@+id/btnEditTutorial"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_height="40dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:paddingVertical="5dp"
         android:paddingHorizontal="10dp"
-        style="@style/editButtonStyle">
+        style="@style/editButtonStyle"
+        android:background="@drawable/background_secondary_buttons">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,6 +57,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tvDescriptionValue"
                 tools:text="Nombre" />
 
             <!-- Description -->
@@ -68,8 +68,9 @@
                 android:layout_marginTop="16dp"
                 android:text="Descripción:"
                 android:paddingEnd="5dp"
-                style="@style/auxiliarTextStyle"
-                app:layout_constraintBaseline_toBaselineOf="@id/tvDescriptionValue"
+                style="@style/textViewLabelDetailsStyle"
+                app:layout_constraintTop_toTopOf="@id/tvDescriptionValue"
+                app:layout_constraintBottom_toBottomOf="@id/tvDescriptionValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
@@ -77,10 +78,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                style="@style/auxiliarTextStyle"
+                style="@style/textViewValueDetailsStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvDescriptionLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvName"
+                app:layout_constraintBottom_toTopOf="@id/tvTopicValue"
                 tools:text="Este tutorial te enseñará a realizar una tarea paso a paso dentro de la aplicación." />
 
             <!-- Topic -->
@@ -90,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Tema:"
-                style="@style/auxiliarTextStyle"
+                style="@style/textViewLabelDetailsStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvTopicValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -100,10 +102,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textAlignment="textEnd"
-                style="@style/auxiliarTextStyle"
+                style="@style/textViewValueDetailsStyle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tvTopicLabel"
+                app:layout_constraintStart_toStartOf="@id/tvDescriptionValue"
                 app:layout_constraintTop_toBottomOf="@id/tvDescriptionValue"
+                app:layout_constraintBottom_toTopOf="@id/tvTypeValue"
                 tools:text="@tools:sample/lorem" />
 
             <!-- Type -->
@@ -113,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Tipo:"
-                style="@style/auxiliarTextStyle"
+                style="@style/textViewLabelDetailsStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvTypeValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -123,10 +126,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textAlignment="textEnd"
-                style="@style/auxiliarTextStyle"
+                style="@style/textViewValueDetailsStyle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tvTypeLabel"
+                app:layout_constraintStart_toStartOf="@id/tvDescriptionValue"
                 app:layout_constraintTop_toBottomOf="@id/tvTopicValue"
+                app:layout_constraintBottom_toTopOf="@id/linearLayoutContentContainer"
                 tools:text="@tools:sample/lorem" />
 
             <!-- Content Container -->
@@ -154,7 +158,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    style="@style/auxiliarTextStyle"
+                    style="@style/textViewValueDetailsStyle"
                     tools:text="@tools:sample/lorem"
                     tools:visibility="visible" />
             </LinearLayout>

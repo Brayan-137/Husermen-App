@@ -9,6 +9,9 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.husermenapp.R
 import com.example.husermenapp.databinding.FragmentProductDetailsBinding
 import com.example.husermenapp.dataclasses.Product
@@ -138,7 +141,15 @@ class DetailsProductFragment : Fragment() {
             binding.tvCategoryValue.text = applyTextViewFormat(it.category.toString())
             binding.tvPriceValue.text = it.price.toString()
             binding.tvStockValue.text = it.stock.toString()
-            if (it.imageUrl != null) Glide.with(requireContext()).load(it.imageUrl).into(binding.ivPicture)
+            if (it.imageUrl != null) Glide.with(requireContext())
+                .load(it.imageUrl)
+                .transform(
+                    MultiTransformation(
+                        CenterCrop(),
+                        RoundedCorners(16)
+                    )
+                )
+                .into(binding.ivPicture)
         }
     }
 

@@ -15,6 +15,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.husermenapp.databinding.FragmentEditProductBinding
 import com.example.husermenapp.dataclasses.Product
 import com.google.firebase.database.DatabaseReference
@@ -91,7 +94,15 @@ class EditProductFragment : Fragment() {
             binding.etCategoryValue.setText(applyTextViewFormat(it.category.toString()))
             binding.etPriceValue.setText(it.price.toString())
             binding.etStockValue.setText(it.stock.toString())
-            if (it.imageUrl != null) Glide.with(requireContext()).load(it.imageUrl).into(binding.ivPicture)
+            if (it.imageUrl != null) Glide.with(requireContext())
+                .load(it.imageUrl)
+                .transform(
+                    MultiTransformation(
+                        CenterCrop(),
+                        RoundedCorners(16)
+                    )
+                )
+                .into(binding.ivPicture)
         }
 
         binding.btnSaveProduct.setOnClickListener { handleClickBtnSaveProduct() }

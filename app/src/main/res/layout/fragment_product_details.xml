@@ -13,14 +13,13 @@
     <LinearLayout
         android:id="@+id/btnEditProduct"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_height="40dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         style="@style/editButtonStyle"
+        android:background="@drawable/background_secondary_buttons"
         android:paddingVertical="5dp"
         android:paddingHorizontal="10dp">
         <ImageView
@@ -53,48 +52,51 @@
                 android:id="@+id/tvName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 style="@style/textStyleTitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/ivPicture"
                 tools:text="Nombre" />
 
             <!-- Product Image -->
             <ImageView
                 android:id="@+id/ivPicture"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
                 android:layout_marginTop="8dp"
                 android:scaleType="centerCrop"
-                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_max="250dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvName"
-                tools:background="@tools:sample/backgrounds/scenic" />
+                app:layout_constraintBottom_toTopOf="@id/tvDescriptionValue"
+                android:background="@drawable/background_image_view_items" />
 
             <!-- Description -->
             <TextView
                 android:id="@+id/tvDescriptionLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:text="Descripción:"
                 android:paddingEnd="5dp"
-                style="@style/auxiliarTextStyle"
-                app:layout_constraintBaseline_toBaselineOf="@id/tvDescriptionValue"
-                app:layout_constraintStart_toStartOf="parent" />
+                style="@style/textViewLabelDetailsStyle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvDescriptionValue"
+                app:layout_constraintBottom_toBottomOf="@id/tvDescriptionValue"
+                />
 
             <TextView
                 android:id="@+id/tvDescriptionValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                style="@style/auxiliarTextStyle"
+                android:layout_marginStart="4dp"
+                style="@style/textViewValueDetailsStyle"
+                android:gravity="center_vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvDescriptionLabel"
                 app:layout_constraintTop_toBottomOf="@id/ivPicture"
+                app:layout_constraintBottom_toTopOf="@id/tvCategoryValue"
                 tools:text="Una resistente mesa de roble, símbolo de durabilidad y elegancia." />
 
             <!-- Category -->
@@ -104,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Categoría:"
-                style="@style/auxiliarTextStyle"
+                style="@style/textViewLabelDetailsStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvCategoryValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -114,10 +116,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textAlignment="textEnd"
-                style="@style/auxiliarTextStyle"
+                style="@style/textViewValueDetailsStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvCategoryLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvDescriptionValue"
+                app:layout_constraintBottom_toTopOf="@id/tvPriceValue"
                 tools:text="@tools:sample/lorem" />
 
             <!-- Price -->
@@ -127,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Precio:"
-                style="@style/auxiliarTextStyle"
+                style="@style/textViewLabelDetailsStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvPriceValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -137,10 +140,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textAlignment="textEnd"
-                style="@style/auxiliarTextStyle"
+                style="@style/textViewValueDetailsStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvPriceLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvCategoryValue"
+                app:layout_constraintBottom_toTopOf="@id/btnRemoveStock"
                 tools:text="@tools:sample/lorem" />
 
             <!-- Stock -->
@@ -150,38 +154,60 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Stock Físico:"
-                style="@style/auxiliarTextStyle"
-                app:layout_constraintBaseline_toBaselineOf="@id/tvStockValue"
+                style="@style/textViewLabelDetailsStyle"
+                app:layout_constraintTop_toTopOf="@id/linearLayoutStockContainer"
+                app:layout_constraintBottom_toBottomOf="@id/linearLayoutStockContainer"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnRemoveStock"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="-"
-                app:layout_constraintEnd_toStartOf="@id/tvStockValue"
-                app:layout_constraintTop_toBottomOf="@id/tvPriceValue" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_remove"
+                android:background="@drawable/background_stock_buttons"
+                app:layout_constraintStart_toEndOf="@id/tvStockLabel"
+                app:layout_constraintEnd_toStartOf="@id/linearLayoutStockContainer"
+                app:layout_constraintTop_toBottomOf="@id/tvPriceValue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:tint="@color/white" />
 
-            <TextView
-                android:id="@+id/tvStockValue"
+            <LinearLayout
+                android:id="@+id/linearLayoutStockContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                style="@style/auxiliarTextStyle"
-                app:layout_constraintBaseline_toBaselineOf="@id/btnRemoveStock"
+
                 app:layout_constraintEnd_toStartOf="@id/btnAddStock"
-                tools:text="0" />
+                app:layout_constraintStart_toEndOf="@id/btnRemoveStock"
+                app:layout_constraintTop_toTopOf="@id/btnRemoveStock"
+                app:layout_constraintBottom_toBottomOf="@id/btnRemoveStock">
+                <TextView
+                    android:id="@+id/tvStockValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    style="@style/textViewValueDetailsStyle"
+                    tools:text="0" />
 
-            <Button
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="8dp"
+                    android:text="Unidades"
+                    style="@style/textViewValueDetailsStyle" />
+
+            </LinearLayout>
+
+            <ImageButton
                 android:id="@+id/btnAddStock"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="+"
-                app:layout_constraintBaseline_toBaselineOf="@id/tvStockValue"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_add"
+                android:background="@drawable/background_stock_buttons"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/btnRemoveStock"
+                app:layout_constraintBottom_toBottomOf="@id/btnRemoveStock"
+                app:tint="@color/white"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

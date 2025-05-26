@@ -29,22 +29,23 @@
                 style="@style/textStyleTitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/ivPicture"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread"
                 tools:text="Nombre" />
 
             <!-- Product Image -->
             <ImageView
                 android:id="@+id/ivPicture"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/ic_book"
-                app:layout_constraintDimensionRatio="1:1"
+                android:background="@drawable/background_image_view_items"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_max="250dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvName"
-                tools:background="@tools:sample/backgrounds/scenic" />
+                app:layout_constraintBottom_toTopOf="@id/tvCategoryValue"
+                app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
             <!-- Category -->
             <TextView
@@ -53,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Categoría:"
-                style="@style/auxiliarTextStyle"
+                style="@style/textViewLabelDetailsStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvCategoryValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -63,10 +64,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:textAlignment="textEnd"
-                style="@style/auxiliarTextStyle"
+                style="@style/textViewValueDetailsStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvCategoryLabel"
                 app:layout_constraintTop_toBottomOf="@id/ivPicture"
+                app:layout_constraintBottom_toTopOf="@id/tvPriceValue"
                 tools:text="@tools:sample/lorem" />
 
             <!-- Price -->
@@ -76,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Precio:"
-                style="@style/auxiliarTextStyle"
+                style="@style/textViewLabelDetailsStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvPriceValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -86,10 +88,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textAlignment="textEnd"
-                style="@style/auxiliarTextStyle"
+                style="@style/textViewValueDetailsStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvPriceLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvCategoryValue"
+                app:layout_constraintBottom_toTopOf="@id/tvStockValue"
                 tools:text="@tools:sample/lorem" />
 
             <!-- Stock -->
@@ -99,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Stock Online:"
-                style="@style/auxiliarTextStyle"
+                style="@style/textViewLabelDetailsStyle"
                 app:layout_constraintBaseline_toBaselineOf="@id/tvStockValue"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -109,10 +112,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textAlignment="textEnd"
-                style="@style/auxiliarTextStyle"
+                style="@style/textViewValueDetailsStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvStockLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvPriceValue"
+                app:layout_constraintBottom_toTopOf="@id/linearLayoutGraphsContainer"
                 tools:text="0" />
 
             <!-- Graphs Container -->
@@ -124,15 +128,15 @@
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvStockValue">
+                app:layout_constraintTop_toBottomOf="@id/tvStockValue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@color/fondos_tarjetas">
 
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/lineChart"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    android:layout_marginHorizontal="4dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/fondos_tarjetas"/>
+                    android:layout_marginHorizontal="4dp"/>
 
                 <TextView
                     android:id="@+id/tvNoDataMessage"
@@ -142,7 +146,7 @@
                     android:text="No hay datos de ventas disponibles."
                     android:textAlignment="center"
                     android:visibility="gone"
-                    style="@style/auxiliarTextStyle" />
+                    style="@style/textViewLabelDetailsStyle" />
 
             </LinearLayout>
 
