@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import com.example.husermenapp.R
 import com.example.husermenapp.databinding.FragmentTutorialDetailsBinding
@@ -31,8 +32,6 @@ class DetailsTutorialFragment : BaseItemDetailsFragment<FragmentTutorialDetailsB
             binding.tvDescriptionValue.text = it.description
             binding.tvTopicValue.text = applyTextViewFormat(it.topic.toString())
             binding.tvTypeValue.text = applyTextViewFormat(it.type.toString())
-
-            Log.d("Tutorial", "${it.type.toString()}")
 
             when (it.type.toString()) {
                 "video" -> {

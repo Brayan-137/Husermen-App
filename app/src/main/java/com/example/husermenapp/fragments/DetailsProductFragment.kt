@@ -176,8 +176,11 @@ class DetailsProductFragment : Fragment() {
 
     private fun handleClickBtnEditProduct() {
         val editProductFragment = setupEditProductFragment(product)
-        replaceFragment(requireActivity().supportFragmentManager,
-            R.id.productFragmentsContainer, editProductFragment)
+        replaceFragment(
+            requireActivity().supportFragmentManager,
+            R.id.productFragmentsContainer,
+            editProductFragment
+        )
     }
 
     private fun setupEditProductFragment(selectedProduct: Product?): Fragment {

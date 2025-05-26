@@ -21,7 +21,7 @@ abstract class BaseEditItemFragment<VB: ViewBinding> : Fragment() {
 
     protected val storageRef: StorageReference = FirebaseStorage.getInstance().getReference()
 
-    private var isCreatingANewItem: Boolean = false
+    protected var isCreatingANewItem: Boolean = false
 
     protected lateinit var originalValues: Map<String, Any?>
 
@@ -39,6 +39,7 @@ abstract class BaseEditItemFragment<VB: ViewBinding> : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = inflateBinding(inflater, container)
+
         // When onBack is pressed product is not created and user is redirect to mainActivity
         if (isCreatingANewItem) {
             requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {

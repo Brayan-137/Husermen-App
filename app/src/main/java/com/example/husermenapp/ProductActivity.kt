@@ -27,7 +27,12 @@ class ProductActivity : AppCompatActivity() {
 
         detailsProductFragment = setupProductDetailsFragment()
 
-        replaceFragment(supportFragmentManager, R.id.productFragmentsContainer, detailsProductFragment, false) // Por qué el ID es diferente según use R.id o binding
+        replaceFragment(
+            supportFragmentManager,
+            R.id.productFragmentsContainer,
+            detailsProductFragment,
+            false
+        ) // Por qué el ID es diferente según use R.id o binding
 
     }
 

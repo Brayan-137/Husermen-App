@@ -35,13 +35,12 @@ class EditTutorialFragment : BaseEditItemFragment<FragmentEditTutorialBinding>()
     private val modelRef: String = "tutorials"
     private val tutorialsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference(modelRef)
     private var tutorial: Tutorial? = null
-    private var isCreatingNewTutorial: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             tutorial = it.getSerializable("selectedTutorial") as? Tutorial
-            isCreatingNewTutorial = it.getBoolean("isCreatingNewTutorial", false)
+            isCreatingANewItem = it.getBoolean("isCreatingNewTutorial", false)
         }
     }
 
@@ -62,7 +61,7 @@ class EditTutorialFragment : BaseEditItemFragment<FragmentEditTutorialBinding>()
             )
         } ?: emptyMap()
 
-        if(!isCreatingNewTutorial) tutorial?.let {
+        if(!isCreatingANewItem) tutorial?.let {
             binding.etName.setText(applyTextViewFormat(it.name.toString()))
             binding.etDescriptionValue.setText(it.description)
             binding.etTopicValue.setText(applyTextViewFormat(it.topic.toString()))
@@ -197,7 +196,7 @@ class EditTutorialFragment : BaseEditItemFragment<FragmentEditTutorialBinding>()
             }
         }
 
-        if (isCreatingNewTutorial) {
+        if (isCreatingANewItem) {
             // Creating a new tutorial
             tutorial?.key?.let {
                 tutorialsRef.child(it).updateChildren(currentValues)

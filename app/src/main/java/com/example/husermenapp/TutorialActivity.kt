@@ -27,7 +27,12 @@ class TutorialActivity : AppCompatActivity() {
 
         detailsTutorialFragment = setupTutorialDetailsFragment()
 
-        replaceFragment(supportFragmentManager, R.id.tutorialFragmentsContainer, detailsTutorialFragment, false) // Por qué el ID es diferente según use R.id o binding
+        replaceFragment(
+            supportFragmentManager,
+            R.id.tutorialFragmentsContainer,
+            detailsTutorialFragment,
+            false
+        ) // Por qué el ID es diferente según use R.id o binding
 
     }
 
