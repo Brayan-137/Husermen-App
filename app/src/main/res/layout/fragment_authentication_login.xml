@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     style="@style/backgroundStyleNormal"
     android:layout_width="match_parent"
@@ -9,75 +10,113 @@
     android:orientation="vertical"
     tools:context=".fragments.AuthenticationLoginFragment">
 
-    <!-- Logo -->
-    <TextView
-        style="@style/textStyleTitle"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:text="@string/name"
-        android:textAlignment="center" />
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <!-- Information -->
-    <TextView
-        style="@style/textStyleNormal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:text="Ingresa a tu cuenta"
-        android:textAlignment="center"
-        android:textStyle="bold" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="120dp">
 
-    <TextView
-        style="@style/textStyleNormal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:text="Escribe tu correo y contraseña para ingresar a la aplicación."
-        android:textAlignment="center" />
+            <!-- Logo -->
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/textStyleTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textAlignment="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tvInfo1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintVertical_chainStyle="spread"/>
 
-    <!-- Email Input -->
-    <EditText
-        android:id="@+id/etEmail"
-        style="@style/labelStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:hint="email@domain.com"
-        android:inputType="textEmailAddress"
-        android:padding="10dp" />
+            <!-- Information 1 -->
+            <TextView
+                android:id="@+id/tvInfo1"
+                style="@style/textStyleNormal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Ingresa a tu cuenta"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                app:layout_constraintBottom_toTopOf="@id/tvInfo2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Password Input -->
-    <EditText
-        android:id="@+id/etPassword"
-        style="@style/labelStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:hint="Password123#"
-        android:inputType="textPassword"
-        android:padding="10dp" />
+            <!-- Information 2 -->
+            <TextView
+                android:id="@+id/tvInfo2"
+                style="@style/textStyleNormal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Escribe tu correo y contraseña para ingresar a la aplicación."
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@id/tvInfo1"
+                app:layout_constraintBottom_toTopOf="@id/etEmail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Login Button -->
-    <Button
-        android:id="@+id/btnLogin"
-        style="@style/styleMainButtons"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginBottom="15dp"
-        android:text="Continuar"
-        android:textSize="@dimen/text_size_botones"
-        />
+            <!-- Email Input -->
+            <EditText
+                android:id="@+id/etEmail"
+                style="@style/labelStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="email@domain.com"
+                android:inputType="textEmailAddress"
+                android:padding="10dp"
+                app:layout_constraintTop_toBottomOf="@id/tvInfo2"
+                app:layout_constraintBottom_toTopOf="@id/etPassword"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Signup Button -->
-    <Button
-        android:id="@+id/btnSignup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:text="En caso de que no tengas cuenta regístrate."
-        android:textColor="#FF5555FF"
-        android:textAlignment="center"
-        android:textSize="@dimen/text_size_normal" />
+            <!-- Password Input -->
+            <EditText
+                android:id="@+id/etPassword"
+                style="@style/labelStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Password123#"
+                android:inputType="textPassword"
+                android:padding="10dp"
+                app:layout_constraintTop_toBottomOf="@id/etEmail"
+                app:layout_constraintBottom_toTopOf="@id/btnLogin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
+            <!-- Login Button -->
+            <Button
+                android:id="@+id/btnLogin"
+                style="@style/styleMainButtons"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:text="Continuar"
+                android:textSize="@dimen/text_size_botones"
+                app:layout_constraintTop_toBottomOf="@id/etPassword"
+                app:layout_constraintBottom_toTopOf="@id/btnSignup"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Signup Button -->
+            <Button
+                android:id="@+id/btnSignup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="En caso de que no tengas cuenta regístrate."
+                android:textColor="#FF5555FF"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size_normal"
+                app:layout_constraintTop_toBottomOf="@id/btnLogin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </LinearLayout>

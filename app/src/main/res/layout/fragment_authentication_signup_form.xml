@@ -1,77 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:id="@+id/main"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-style="@style/backgroundStyleNormal"
-tools:context=".fragments.AuthenticationSignupFormFragment">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/backgroundStyleNormal"
+    tools:context=".fragments.AuthenticationSignupFormFragment">
 
+    <!-- Scroll container -->
     <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_height="wrap_content">
 
             <!-- Logo -->
             <TextView
                 android:id="@+id/tvLogo"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
-                android:layout_marginBottom="15dp"
                 android:text="@string/name"
                 android:textAlignment="center"
                 style="@style/textStyleTitle"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tvSubtitle"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintVertical_chainStyle="spread"/>
 
-            <!-- Information -->
+            <!-- Subtitle -->
             <TextView
                 android:id="@+id/tvSubtitle"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_marginBottom="15dp"
                 android:text="Registra una cuenta"
                 android:textAlignment="center"
                 android:textStyle="bold"
                 style="@style/textStyleNormal"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvLogo"
+                app:layout_constraintBottom_toTopOf="@id/tvDescription"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvLogo" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
+            <!-- Description -->
             <TextView
                 android:id="@+id/tvDescription"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_marginBottom="15dp"
+                android:layout_height="wrap_content"
                 android:text="Escribe tus datos para crear una cuenta en la aplicación."
                 android:textAlignment="center"
                 style="@style/textStyleNormal"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
+                app:layout_constraintBottom_toTopOf="@id/tvName"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvSubtitle" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Form's Fields -->
-
-            <!-- Names -->
+            <!-- Nombre -->
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="120dp"
                 android:layout_height="40dp"
-                android:layout_marginBottom="15dp"
+                android:gravity="center_vertical"
                 android:text="Nombre:"
                 style="@style/textStyleNormal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvDescription" />
+                app:layout_constraintTop_toBottomOf="@id/tvDescription"
+                app:layout_constraintBottom_toTopOf="@id/tvLastName"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
                 android:id="@+id/etName"
@@ -82,20 +82,22 @@ tools:context=".fragments.AuthenticationSignupFormFragment">
                 android:paddingVertical="5dp"
                 android:paddingLeft="5dp"
                 style="@style/labelStyle"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tvName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvName" />
+                app:layout_constraintTop_toTopOf="@id/tvName"
+                app:layout_constraintBottom_toBottomOf="@id/tvName"
+                app:layout_constraintStart_toEndOf="@id/tvName"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Last Names -->
+            <!-- Apellidos -->
             <TextView
                 android:id="@+id/tvLastName"
                 android:layout_width="120dp"
                 android:layout_height="40dp"
-                android:layout_marginBottom="15dp"
+                android:gravity="center_vertical"
                 android:text="Apellidos:"
                 style="@style/textStyleNormal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvName" />
+                app:layout_constraintTop_toBottomOf="@id/tvName"
+                app:layout_constraintBottom_toTopOf="@id/tvPhone"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
                 android:id="@+id/etLastName"
@@ -105,20 +107,22 @@ tools:context=".fragments.AuthenticationSignupFormFragment">
                 android:inputType="textPersonName"
                 android:padding="5dp"
                 style="@style/labelStyle"
-                app:layout_constraintBaseline_toBaselineOf="@id/tvLastName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tvLastName" />
+                app:layout_constraintTop_toTopOf="@id/tvLastName"
+                app:layout_constraintBottom_toBottomOf="@id/tvLastName"
+                app:layout_constraintStart_toEndOf="@id/tvLastName"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Phone -->
+            <!-- Teléfono -->
             <TextView
                 android:id="@+id/tvPhone"
                 android:layout_width="120dp"
                 android:layout_height="40dp"
-                android:layout_marginBottom="15dp"
+                android:gravity="center_vertical"
                 android:text="Teléfono:"
                 style="@style/textStyleNormal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvLastName" />
+                app:layout_constraintTop_toBottomOf="@id/tvLastName"
+                app:layout_constraintBottom_toTopOf="@id/tvEmail"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
                 android:id="@+id/etPhone"
@@ -128,20 +132,21 @@ tools:context=".fragments.AuthenticationSignupFormFragment">
                 android:inputType="phone"
                 android:padding="5dp"
                 style="@style/labelStyle"
-                app:layout_constraintBaseline_toBaselineOf="@id/tvPhone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tvPhone" />
+                app:layout_constraintTop_toTopOf="@id/tvPhone"
+                app:layout_constraintBottom_toBottomOf="@id/tvPhone"
+                app:layout_constraintStart_toEndOf="@id/tvPhone"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Email -->
+            <!-- Correo -->
             <TextView
                 android:id="@+id/tvEmail"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
                 android:text="Correo Electrónico:"
                 style="@style/textStyleNormal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvPhone" />
+                app:layout_constraintTop_toBottomOf="@id/tvPhone"
+                app:layout_constraintBottom_toTopOf="@id/tvPassword"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
                 android:id="@+id/etEmail"
@@ -151,66 +156,70 @@ tools:context=".fragments.AuthenticationSignupFormFragment">
                 android:padding="5dp"
                 android:inputType="textEmailAddress"
                 style="@style/labelStyle"
-                app:layout_constraintBaseline_toBaselineOf="@id/tvEmail"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tvEmail" />
+                app:layout_constraintTop_toTopOf="@id/tvEmail"
+                app:layout_constraintBottom_toBottomOf="@id/tvEmail"
+                app:layout_constraintStart_toEndOf="@id/tvEmail"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Password -->
+            <!-- Contraseña -->
             <TextView
                 android:id="@+id/tvPassword"
                 android:layout_width="120dp"
                 android:layout_height="40dp"
-                android:layout_marginBottom="15dp"
+                android:gravity="center_vertical"
                 android:text="Contraseña:"
                 style="@style/textStyleNormal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvEmail" />
+                app:layout_constraintTop_toBottomOf="@id/tvEmail"
+                app:layout_constraintBottom_toTopOf="@id/tvConfirmPassword"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
                 android:id="@+id/etPassword"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="Contraseña123#"
-                android:padding="5dp"
                 android:inputType="textPassword"
+                android:padding="5dp"
                 style="@style/labelStyle"
-                app:layout_constraintBaseline_toBaselineOf="@id/tvPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tvPassword" />
+                app:layout_constraintTop_toTopOf="@id/tvPassword"
+                app:layout_constraintBottom_toBottomOf="@id/tvPassword"
+                app:layout_constraintStart_toEndOf="@id/tvPassword"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Confirm Password -->
+            <!-- Confirmar Contraseña -->
             <TextView
                 android:id="@+id/tvConfirmPassword"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
                 android:text="Confirmar Contraseña:"
                 style="@style/textStyleNormal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvPassword" />
+                app:layout_constraintTop_toBottomOf="@id/tvPassword"
+                app:layout_constraintBottom_toTopOf="@id/tvUserType"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
                 android:id="@+id/etConfirmPassword"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
                 android:hint="Contraseña123#"
                 android:inputType="textPassword"
+                android:padding="5dp"
                 style="@style/labelStyle"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tvConfirmPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvConfirmPassword" />
+                app:layout_constraintTop_toTopOf="@id/tvConfirmPassword"
+                app:layout_constraintBottom_toBottomOf="@id/tvConfirmPassword"
+                app:layout_constraintStart_toEndOf="@id/tvConfirmPassword"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- User Type -->
+            <!-- Tipo de Usuario -->
             <TextView
                 android:id="@+id/tvUserType"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
                 android:text="Tipo de Usuario:"
                 style="@style/textStyleNormal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvConfirmPassword" />
+                app:layout_constraintTop_toBottomOf="@id/tvConfirmPassword"
+                app:layout_constraintBottom_toTopOf="@id/btnConfirmSignUp"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Spinner
                 android:id="@+id/spinnerUserType"
@@ -219,39 +228,40 @@ tools:context=".fragments.AuthenticationSignupFormFragment">
                 android:spinnerMode="dropdown"
                 android:padding="10dp"
                 style="@style/labelStyle"
-                app:layout_constraintBaseline_toBaselineOf="@id/tvUserType"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tvUserType" />
+                app:layout_constraintTop_toTopOf="@id/tvUserType"
+                app:layout_constraintBottom_toBottomOf="@id/tvUserType"
+                app:layout_constraintStart_toEndOf="@id/tvUserType"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Signup Button -->
+            <!-- Botón Continuar -->
             <Button
                 android:id="@+id/btnConfirmSignUp"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
                 android:text="Continuar"
                 android:textSize="@dimen/text_size_botones"
                 style="@style/styleMainButtons"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvUserType"
+                app:layout_constraintBottom_toTopOf="@id/btnBackToLogin"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvUserType" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Back to Login Button -->
+            <!-- Volver al Login -->
             <Button
                 android:id="@+id/btnBackToLogin"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:background="@android:color/transparent"
                 android:text="¿Ya tienes cuenta? Inicia sesión."
+                android:background="@android:color/transparent"
                 android:textColor="@color/black"
                 android:textAlignment="center"
                 android:gravity="center"
                 style="@style/textStyleNormal"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnConfirmSignUp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnConfirmSignUp" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
