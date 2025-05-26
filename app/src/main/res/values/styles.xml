@@ -71,7 +71,7 @@
 
     <style name="labelStyle">
         <item name="android:textSize">@dimen/text_size_normal</item>
-        <item name="android:background">@color/fondos_tarjetas</item>
+        <item name="android:background">@drawable/background_image_view_items</item>
         <item name="android:textColor">@color/texto_normal</item>
         <item name="android:textColorHint">#828282</item>
     </style>
