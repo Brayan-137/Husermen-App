@@ -1,14 +1,13 @@
 {
   "project_info": {
-    "project_number": "1058702826220",
-    "firebase_url": "https://prueba-firebase-64034-default-rtdb.firebaseio.com",
-    "project_id": "prueba-firebase-64034",
-    "storage_bucket": "prueba-firebase-64034.firebasestorage.app"
+    "project_number": "172295113704",
+    "project_id": "husermen-app",
+    "storage_bucket": "husermen-app.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1058702826220:android:e58830942bd0fbc8df23c9",
+        "mobilesdk_app_id": "1:172295113704:android:763bd8d17371afac6f325d",
         "android_client_info": {
           "package_name": "com.example.husermenapp"
         }
@@ -16,26 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC4GoQQrdlvqKRYgZoiAmSqXgNmuwI1THo"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1058702826220:android:f6d3cf9f301ce91ddf23c9",
-        "android_client_info": {
-          "package_name": "com.example.pruebas"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC4GoQQrdlvqKRYgZoiAmSqXgNmuwI1THo"
+          "current_key": "AIzaSyCm1rjQ1tq--QcKcBKez_qP-V_Lb446550"
         }
       ],
       "services": {
